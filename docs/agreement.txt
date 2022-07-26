@@ -1,0 +1,18 @@
+Names:
+- Andre Fong (Scrum Master)
+- Matthew Snelgrove
+- Victor Hurst
+- Jiakai Sun
+- Xing Yu (Joe) Zhou
+
+Communication:
+- Discord
+
+Meeting times:
+- 5:30pm for 15-30 minutes 
+
+Where the project will be Version Controlled:
+- GitHub
+
+Anything Else Relevant to Group and Project
+- Flexible with time for sprints

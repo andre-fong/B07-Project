@@ -1,0 +1,67 @@
+Name: Xing Yu (Joe) Zhou
+
+What have you done since yesterday?
+	- Made a blueprint of a possible application layout and shared it.
+	- Created a Jira account and familiarized myself with Jira..
+
+What are you planning on doing today?
+	- Finalize the agreement.
+	- Add user stories on Jira and decide the relatively difficulty of each user story.
+
+Any impediments or stumbling blocks?
+	- There were issues with the Jira project, since the utoronto account did not work
+
+
+Name: Andre Fong
+
+What have you done since yesterday?
+	- Created standup and agreement doc.
+	- Created Jira and GitHub projects
+
+What are you planning on doing today?
+- Finalizing agreement.txt
+- Put user stories on Jira
+	- Initial planning of sprints
+
+Any impediments or stumbling blocks?
+	- Someone deleted my project three times
+
+
+Name: Victor Hurst
+
+What have you done since yesterday?
+	- Familiarized myself with the project
+
+What are you planning on doing today?
+	- Configuring Java and Github
+
+Any impediments or stumbling blocks?
+	-  Jira project was deleted multiple times when we used utoronto accounts
+
+
+Name: Matthew Snelgrove
+
+What have you done since yesterday?
+    - Configure Jira and Github
+    - Familiarize myself with Jira
+    - Made folder of standup doc
+    - Configure Android Studio with Git
+
+What are you planning on doing today?
+    - Continue configuring Jira and Github
+    - Continue familiarizing myself with Jira
+
+Any impediments or stumbling blocks?
+	- Our Jira project was repeatedly deleted when we used utoronto accounts.
+
+Name: Jiakai Sun
+
+What have you done since yesterday?
+	- Created Jira account and read the project requirements.
+
+What are you planning on doing today?
+	- Connect group members via Jira and Githhub.
+	- Finalizing the agreement on the project.
+
+Any impediments or stumbling blocks?
+	- Jira account creation and joining the group.
