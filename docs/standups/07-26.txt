@@ -2,7 +2,7 @@ Name: Xing Yu (Joe) Zhou
 
 What have you done since yesterday?
 	- Made a blueprint of a possible application layout and shared it.
-	- Created a Jira account and familiarized myself with Jira..
+	- Created a Jira account and familiarized myself with Jira.
 
 What are you planning on doing today?
 	- Finalize the agreement.
