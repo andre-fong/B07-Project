@@ -1,0 +1,72 @@
+Name: Xing Yu (Joe) Zhou
+
+What have you done since yesterday?
+	- Finalized the agreement.
+	- Added the user stories onto Jira and decided on a relative difficulty for each of them.
+	- Configured GitHub and Android Studio and familiarized myself with GitHub.
+
+What are you planning on doing today?
+	- Familiarize myself with Firebase.
+	- Finish the details on the design for Admin login task (locally).
+
+Any impediments or stumbling blocks?
+	- Firebase configurations.
+
+
+Name: Andre Fong
+
+What have you done since yesterday?
+- Finalized agreement
+- Reviewed SOLID and design patterns
+- Familiarized with GitHub
+- Created first sprint (user signup & login, admin login)
+
+What are you planning on doing today?
+- Familiarize with Firebase
+- Review design patterns
+- Create initial class design for signup/login
+
+Any impediments or stumbling blocks?
+- None
+
+
+Name: Victor Hurst
+
+What have you done since yesterday?
+Reviewed Android programming
+
+What are you planning on doing today?
+	- Setting up Firebase database
+
+Any impediments or stumbling blocks?
+	- Implementing Git into android studio
+
+
+
+Matthew Snelgrove: 
+
+What have you done since yesterday?
+- Finalized agreement
+- Looked at Firebase docs
+
+What are you planning on doing today?
+- Created Firebase database
+- Configured Firebase, connected Firebase to app
+
+Any impediments or stumbling blocks?
+ - Firebase docs for connecting to app were outdated. New version of Gradle?
+
+
+Name: Jiakai Sun
+
+What have you done since yesterday?
+	-Finalized agreement
+	-Finished configuring Github and Android Studio
+ 	-Get task on Jira
+
+What are you planning on doing today?
+	-Connecting Firebase database to the project on Android Studio
+	-Get the details on task of customer story of sign up
+
+Any impediments or stumbling blocks?
+	- Building up database on Firebase
