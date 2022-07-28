@@ -1,1 +1,68 @@
+Name: Xing Yu (Joe) Zhou
 
+What have you done since yesterday?
+	- Tested writing to the Firebase Realtime Database.
+	- Designed the User Interface format for Admin Login (on paper).
+
+What are you planning on doing today?
+	- Communicate the User Interface format for Admin Login with other team members.
+	- Begin the Admin Login class design, pseudocode, and coding.
+
+Any impediments or stumbling blocks?
+	- The Android Studio program takes a long time to run when writing to Firebase.
+
+
+Name: Andre Fong
+
+What have you done since yesterday?
+Tested using Firebase
+Familiarized with Firebase and Android app creation
+
+What are you planning on doing today?
+Create class design for first two user stories
+Write pseudocode for first two user stories
+
+Any impediments or stumbling blocks?
+None
+
+
+
+Name: Victor Hurst
+
+What have you done since yesterday?
+	- Familirized myself with android studio
+
+What are you planning on doing today?
+Writing pseudocode for first 2 user stories
+
+Any impediments or stumbling blocks?
+	- None
+
+
+
+Matthew Snelgrove: 
+
+What have you done since yesterday?
+- read Firebase docs on rules
+
+What are you planning on doing today?
+- work on implementing rules in firebase
+- create class design for first two user stories
+- write pseudocode for first two user stories
+
+Any impediments or stumbling blocks?
+- first time using Firebase
+
+
+Name: Jiakai Sun
+
+What have you done since yesterday?
+-Configured Firebase realtime database and updated local project with changes made on the database.
+-Get familiar with the usage of reading and writing from Firebase database
+
+What are you planning on doing today?
+	- Design the UI for Admin login
+	- Get started with implementing java code for Admin login.
+
+Any impediments or stumbling blocks?
+	- None
