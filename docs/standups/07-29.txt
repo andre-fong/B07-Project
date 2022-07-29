@@ -6,7 +6,7 @@ What have you done since yesterday?
 	- Finalized most of the functions for Admin Login (Design).
 
 What are you planning on doing today?
-	- Setting up the Admin Login branch and make sure I am able to pull and commit onto           that specific branch.
+	- Setting up the Admin Login branch and make sure I am able to pull and commit onto that specific branch.
 	- Begin coding some of the functions related to Admin Login.
 
 Any impediments or stumbling blocks?
