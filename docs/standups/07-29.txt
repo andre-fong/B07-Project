@@ -1,0 +1,70 @@
+Name: Xing Yu (Joe) Zhou
+
+What have you done since yesterday?
+	- Communicated the Admin Login Design (UI and functions) and pseudocode with members.
+	- Designed Admins on Firebase and set a few test Admins.
+	- Finalized most of the functions for Admin Login (Design).
+
+What are you planning on doing today?
+	- Setting up the Admin Login branch and make sure I am able to pull and commit onto           that specific branch.
+	- Begin coding some of the functions related to Admin Login.
+
+Any impediments or stumbling blocks?
+	- There were some changes to the original design for the interface, and Admins on Firebase, but they were resolved.
+
+
+Name: Andre Fong
+
+What have you done since yesterday?
+Created activity design layout for signup/login (MainActivity, SignupActivity, AdminLoginActivity)
+Created activity feature layout (how it looks on phone screen)
+Branched to signup-login
+
+What are you planning on doing today?
+Implement customer signup page on Android Studio
+
+Any impediments or stumbling blocks?
+None
+
+
+
+Name: Victor Hurst
+
+What have you done since yesterday?
+Created class uml diagrams for specific sessions (when the user is on our app)
+Created layout for signup activity, admin login activity, login activity
+Learned more about how to use android studio
+
+What are you planning on doing today?
+	- Continue developing the login/sign up form
+
+
+Any impediments or stumbling blocks?
+	- Confusing parts about android studio (mainly committing and how it works) 
+
+
+
+Matthew Snelgrove: 
+
+What have you done since yesterday?
+- Read firebase docs on rules, authentication
+
+What are you planning on doing today?
+- Try to implement rules and custom authentication on Firebase for login
+
+Any impediments or stumbling blocks?
+- Creating custom authentication with JWTs instead of using firebase defaults 
+
+
+Name: Jiakai Sun
+
+What have you done since yesterday?
+Sketch the main concept of the UI design and interaction between interfaces
+Write the pseudocode and step to take to implement interfaces
+
+What are you planning on doing today?
+	- Start the UI design for the Admin login 
+	- Implement code to link the interface to be interacted
+
+Any impediments or stumbling blocks?
+	- Update new version of project from Github to local computer
