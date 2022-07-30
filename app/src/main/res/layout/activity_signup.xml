@@ -7,7 +7,7 @@
     tools:context=".SignupActivity">
 
     <TextView
-        android:id="@+id/Signup"
+        android:id="@+id/ctrSignupText"
         android:layout_width="113dp"
         android:layout_height="40dp"
         android:layout_marginStart="40dp"
@@ -19,7 +19,7 @@
         tools:text="@string/signup_string" />
 
     <EditText
-        android:id="@+id/EmailText"
+        android:id="@+id/ctrEmailSignup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
@@ -28,10 +28,10 @@
         android:hint="@string/email_string"
         android:inputType="textPersonName"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Signup" />
+        app:layout_constraintTop_toBottomOf="@+id/ctrSignupText" />
 
     <EditText
-        android:id="@+id/UsernameText"
+        android:id="@+id/ctrUsernameSignup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
@@ -40,10 +40,10 @@
         android:hint="@string/username_string"
         android:inputType="textPersonName"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/EmailText" />
+        app:layout_constraintTop_toBottomOf="@+id/ctrEmailSignup" />
 
     <EditText
-        android:id="@+id/PasswordText"
+        android:id="@+id/ctrPasswordSignup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
@@ -52,16 +52,16 @@
         android:hint="@string/password_string"
         android:inputType="textPersonName"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/UsernameText" />
+        app:layout_constraintTop_toBottomOf="@+id/ctrUsernameSignup" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/ctrSignupButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
         android:layout_marginTop="60dp"
         android:text="@string/signup_string"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/PasswordText" />
+        app:layout_constraintTop_toBottomOf="@+id/ctrPasswordSignup" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
