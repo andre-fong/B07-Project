@@ -7,7 +7,7 @@
     tools:context=".MainActivity">
 
     <EditText
-        android:id="@+id/ctrPasswordText"
+        android:id="@+id/ctrPasswordField"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
@@ -15,7 +15,7 @@
         android:ems="10"
         android:hint="@string/password_string"
         android:inputType="textPersonName"
-        android:textSize="14sp"
+        android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ctrEmailField" />
 
@@ -28,7 +28,7 @@
         android:ems="10"
         android:hint="@string/email_string"
         android:inputType="textPersonName"
-        android:textSize="14sp"
+        android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ctrLoginText" />
 
@@ -49,9 +49,10 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
         android:layout_marginTop="60dp"
+        android:onClick="submitReq"
         android:text="@string/submit_string"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ctrPasswordText" />
+        app:layout_constraintTop_toBottomOf="@+id/ctrPasswordField" />
 
     <TextView
         android:id="@+id/textView2"
@@ -79,22 +80,26 @@
 
     <Button
         android:id="@+id/ctrAdminLink"
-        android:layout_width="93dp"
-        android:layout_height="21dp"
+        android:layout_width="95dp"
+        android:layout_height="31dp"
+        android:layout_marginStart="40dp"
         android:layout_marginTop="80dp"
-        android:onClick="admin_login"
-        android:visibility="invisible"
-        app:layout_constraintTop_toBottomOf="@+id/ctr_submitLogin"
-        tools:layout_editor_absoluteX="40dp" />
+        android:background="@android:color/transparent"
+        android:onClick="adminLogin"
+        android:visibility="visible"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ctr_submitLogin" />
 
     <Button
         android:id="@+id/ctrCreateAccount"
-        android:layout_width="154dp"
-        android:layout_height="22dp"
+        android:layout_width="156dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="40dp"
         android:layout_marginTop="124dp"
-        android:onClick="create_acc"
-        android:visibility="invisible"
-        app:layout_constraintTop_toBottomOf="@+id/ctr_submitLogin"
-        tools:layout_editor_absoluteX="40dp" />
+        android:background="@android:color/transparent"
+        android:onClick="createAcc"
+        android:visibility="visible"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ctr_submitLogin" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

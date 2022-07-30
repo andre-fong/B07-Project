@@ -12,11 +12,10 @@
         android:layout_height="40dp"
         android:layout_marginStart="40dp"
         android:layout_marginTop="72dp"
-        android:text="Signup"
+        android:text="@string/signup_string"
         android:textSize="30sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="@string/signup_string" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/ctrEmailSignup"
@@ -27,6 +26,7 @@
         android:ems="10"
         android:hint="@string/email_string"
         android:inputType="textPersonName"
+        android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ctrSignupText" />
 
@@ -39,6 +39,7 @@
         android:ems="10"
         android:hint="@string/username_string"
         android:inputType="textPersonName"
+        android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ctrEmailSignup" />
 
@@ -51,6 +52,7 @@
         android:ems="10"
         android:hint="@string/password_string"
         android:inputType="textPersonName"
+        android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ctrUsernameSignup" />
 
