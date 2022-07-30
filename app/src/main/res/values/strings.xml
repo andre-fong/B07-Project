@@ -6,4 +6,7 @@
     <string name="username_string">Username</string>
     <string name="signup_string">Signup</string>
     <string name="submit_string">Submit</string>
+    <string name="welcome_string">Welcome to App!</string>
+    <string name="link_to_admin_login"><u>I\'m an admin</u></string>
+    <string name="create_account_string"><u>Create a new account</u></string>
 </resources>
