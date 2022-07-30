@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">B07Project</string>
+    <string name="login_string">Login</string>
+    <string name="password_string">Password</string>
+    <string name="email_string">Email</string>
+    <string name="username_string">Username</string>
+    <string name="signup_string">Signup</string>
+    <string name="submit_string">Submit</string>
 </resources>
