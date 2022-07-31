@@ -54,12 +54,23 @@ public class MainActivity extends AppCompatActivity {
         signin(email, pwd);
         // TODO: Firebase pros only
 
+        //For testing purposes:
+//        goToVenuePage();
+
         // If email and pwd valid:
             // Create new Customer obj
             // Start MainAppActivity
         // Else
             // Toast.alert Invalid login credentials
+
     }
+
+    //For testing purposes:
+//    public void goToVenuePage(){
+//        Intent intent = new Intent(this, VenueActivity.class);
+//        startActivity(intent);
+//    }
+
     public void signin(String email, String pwd){
         mAuth.signInWithEmailAndPassword(email, pwd)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {

@@ -9,4 +9,11 @@
     <string name="welcome_string">Welcome to App!</string>
     <string name="link_to_admin_login"><u>I\'m an admin</u></string>
     <string name="create_account_string"><u>Create a new account</u></string>
+
+    <string name="venue_string">Venues</string>
+    <string name="venue_spinner_description">Available Venues:</string>
+    <string-array name="venues">
+        <item>Sample_Sport1</item>
+        <item>Sample_Sport2</item>
+    </string-array>
 </resources>
