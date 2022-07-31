@@ -17,6 +17,11 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class MainActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
@@ -32,11 +37,6 @@ public class MainActivity extends AppCompatActivity {
         Button signupButton = (Button)findViewById(R.id.ctrCreateAccount);
         adminButton.setBackgroundColor(Color.TRANSPARENT);
         signupButton.setBackgroundColor(Color.TRANSPARENT);
-    }
-
-    // Start AdminLoginActivity
-    public void adminLogin(View v) {
-        // TODO: Intent to AdminLoginActivity
     }
 
     // Start SignupActivity
@@ -69,6 +69,26 @@ public class MainActivity extends AppCompatActivity {
                             //Success
                             FirebaseUser user = mAuth.getCurrentUser();
                             Log.d("signin", "signin successful. uid: " + mAuth.getCurrentUser().getUid());
+                            FirebaseDatabase db = FirebaseDatabase.getInstance();
+                            DatabaseReference admins = db.getReference("admins");
+                            admins.addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(DataSnapshot dataSnapshot) {
+                                    if(dataSnapshot.child(user.getUid()).exists()){
+                                        Log.d("signin", "isadmin. uid: " + user.getUid());
+                                        adminLogin();
+                                    }
+                                    else{
+                                        Log.d("signin", "isnotadmin. uid: " + user.getUid());
+                                        customerLogin();
+                                    }
+                                }
+
+                                @Override
+                                public void onCancelled(DatabaseError databaseError) {
+                                    System.out.println("The read failed: " + databaseError.getCode());
+                                }
+                            });
                             //updateUI(user)
                         } else {
                             //Failure: display error message
@@ -80,5 +100,13 @@ public class MainActivity extends AppCompatActivity {
                         }
                     }
                 });
+    }
+    public void customerLogin(){
+        Log.d("signin", "isCustomer. uid: " + FirebaseAuth.getInstance().getCurrentUser().getUid());
+        //TODO nav to user dashboard
+    }
+    public void adminLogin(){
+        Log.d("signin", "isAdmin. uid: " + FirebaseAuth.getInstance().getCurrentUser().getUid());
+        //TODO nav to admin dashboard
     }
 }
