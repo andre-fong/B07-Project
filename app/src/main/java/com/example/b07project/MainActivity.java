@@ -65,12 +65,6 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    //For testing purposes:
-//    public void goToVenuePage(){
-//        Intent intent = new Intent(this, VenueActivity.class);
-//        startActivity(intent);
-//    }
-
     public void signin(String email, String pwd){
         mAuth.signInWithEmailAndPassword(email, pwd)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -115,9 +109,16 @@ public class MainActivity extends AppCompatActivity {
     public void customerLogin(){
         Log.d("signin", "isCustomer. uid: " + FirebaseAuth.getInstance().getCurrentUser().getUid());
         //TODO nav to user dashboard
+        goToVenuePage();
     }
     public void adminLogin(){
         Log.d("signin", "isAdmin. uid: " + FirebaseAuth.getInstance().getCurrentUser().getUid());
         //TODO nav to admin dashboard
+    }
+
+    //For testing purposes:
+    public void goToVenuePage(){
+        Intent intent = new Intent(this, VenueActivity.class);
+        startActivity(intent);
     }
 }
