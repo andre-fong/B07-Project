@@ -67,7 +67,7 @@ public class SignupActivity extends AppCompatActivity {
                             Log.d("signup", "signup successful. uid: " + mAuth.getCurrentUser().getUid());
                             //updateUI(user)
                         } else {
-                            //Failure: displa error message
+                            //Failure: display error message
                             Log.w("signup", "signup failed", task.getException());
                             String exceptionString = task.getException().toString();
                             String errMsg = "signup failed:" + exceptionString.substring(exceptionString.indexOf(":"));
