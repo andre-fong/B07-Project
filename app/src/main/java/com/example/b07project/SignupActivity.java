@@ -50,6 +50,7 @@ public class SignupActivity extends AppCompatActivity {
         String email = ((TextView)findViewById(R.id.ctrEmailSignup)).getText().toString();
         String pwd = ((TextView)findViewById(R.id.ctrPasswordSignup)).getText().toString();
         signup(email, pwd);
+        //Cannot assume user is logged in here
     }
 
     public void signup(String email, String pwd) {
@@ -65,14 +66,13 @@ public class SignupActivity extends AppCompatActivity {
                             DatabaseReference customers = db.getReference("customers");
                             customers.child(mAuth.getCurrentUser().getUid()).setValue(new Customer(email));
                             Log.d("signup", "signup successful. uid: " + mAuth.getCurrentUser().getUid());
-                            //updateUI(user)
+                            //go to customer dashboard
                         } else {
                             //Failure: display error message
                             Log.w("signup", "signup failed", task.getException());
                             String exceptionString = task.getException().toString();
                             String errMsg = "signup failed:" + exceptionString.substring(exceptionString.indexOf(":"));
                             Toast.makeText(SignupActivity.this, errMsg, Toast.LENGTH_SHORT).show();
-                            //updateUI(null);
                         }
                     }
                 });

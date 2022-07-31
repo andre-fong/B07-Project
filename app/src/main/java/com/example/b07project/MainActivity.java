@@ -75,12 +75,12 @@ public class MainActivity extends AppCompatActivity {
                                 @Override
                                 public void onDataChange(DataSnapshot dataSnapshot) {
                                     if(dataSnapshot.child(user.getUid()).exists()){
-                                        Log.d("signin", "dataChanged0. isadmin. uid: " + user.getUid());
+                                        Log.d("signin", "isadmin. uid: " + user.getUid());
                                         adminLogin();
                                     }
                                     else{
-                                        Log.d("signin", "dataChanged1. isadmin. uid: " + user.getUid());
-                                        userLogin();
+                                        Log.d("signin", "isnotadmin. uid: " + user.getUid());
+                                        customerLogin();
                                     }
                                 }
 
@@ -101,8 +101,8 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
     }
-    public void userLogin(){
-        Log.d("signin", "isUser. uid: " + FirebaseAuth.getInstance().getCurrentUser().getUid());
+    public void customerLogin(){
+        Log.d("signin", "isCustomer. uid: " + FirebaseAuth.getInstance().getCurrentUser().getUid());
         //TODO nav to user dashboard
     }
     public void adminLogin(){
