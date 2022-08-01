@@ -1,0 +1,71 @@
+Name: Xing Yu (Joe) Zhou
+
+What have you done since yesterday?
+	- I have finished some of the Admin Login functions (discarded for new design).
+	- I reviewed Firebase Authentication and the Java code required to implement it.
+	- I reviewed git branching commands.
+	- I pulled and tested the current (new) login and signup system.
+
+What are you planning on doing today?
+	- I plan on designing a simple UI for the customer homepage (a spinner for the list of venues)
+	- I plan to design a simple UI for the sports page after a venue is selected (a spinner for the list of sports)
+
+Any impediments or stumbling blocks?
+	- The design for User Login/Sign-up was suddenly changed so most of my previous work for Admin Login had to be discarded
+	- I had some trouble with Firebase Authentication and git commands (resolved).
+
+
+Name: Andre Fong
+
+What have you done since yesterday?
+Created skeleton of MainActivity
+Added functionality to editText fields and button
+
+What are you planning on doing today?
+Push updates to button size
+Create unit tests for first sprint
+
+Any impediments or stumbling blocks?
+None
+
+
+
+Name: Victor Hurst
+
+What have you done since yesterday?
+Created the signup activity page with functionality (i.e the buttons on the activity)
+
+What are you planning on doing today?
+	- Design various uml diagrams that is used for functionality within the 2nd sprint
+
+Any impediments or stumbling blocks?
+Getting use to the command line in git 
+had trouble with pushing and pulling with multiple branches
+
+
+
+
+
+Matthew Snelgrove: 
+
+What have you done since yesterday?
+ - Connect app to Firebase for user login and signup
+ - Route customers and admins to separate callbacks
+
+What are you planning on doing today?
+ -  Class design 
+
+Any impediments or stumbling blocks?
+ - Never used Firebase 
+
+
+Name: Jiakai Sun
+
+What have you done since yesterday?
+Sketched UI Via Android Studio
+
+What are you planning on doing today?
+	- Creating second UI for Admin login
+
+Any impediments or stumbling blocks?
+	- None
