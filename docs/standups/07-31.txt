@@ -1,0 +1,70 @@
+Name: Xing Yu (Joe) Zhou
+
+What have you done since yesterday?
+	- I created a UI for Venues page (Customer Home Page Prototype) and linked it to the customer login
+	- I fully tested the link between the Venues page and the customer login page and committed and pushed my changes to the signup-login branch once I fixed the issues
+
+What are you planning on doing today?
+	- I plan to make a design for the Customer Homepage (google docs or by paper)
+	- I plan to make the Sport Object and commit and push that to GitHub
+
+Any impediments or stumbling blocks?
+	- The spinner and UI took some time to review
+	- The application kept on crashing during user Authentication (resolved)
+	- The Venues page opened regardless if the correct password was entered (resolved)
+
+
+Name: Andre Fong
+
+What have you done since yesterday?
+Created unit test cases for first sprint
+Managed GitHub branches and cleanliness
+
+What are you planning on doing today?
+Implement unit tests for first user story
+Handle any failed tests or errors that pop up
+
+Any impediments or stumbling blocks?
+None
+
+
+
+Name: Victor Hurst
+
+What have you done since yesterday?
+Added and functionality UI for the SignupActivity
+
+What are you planning on doing today?
+Planning out UI Class diagrams for the next sprint
+Writing unit test cases for firebase code
+
+Any impediments or stumbling blocks?
+	- None
+
+
+
+Matthew Snelgrove: 
+
+What have you done since yesterday?
+ - Class and database design
+ - Reading and writing objects to/from database
+
+What are you planning on doing today?
+ - Class and database design 
+
+Any impediments or stumbling blocks?
+- No experience using Firebase
+
+
+Name: Jiakai Sun
+
+What have you done since yesterday?
+	- Finished linking between home page and admin login page
+	- Created method that receives user information
+
+What are you planning on doing today?
+	- Modify linkage between UIs
+	-Test capability of Ui and functionality
+
+Any impediments or stumbling blocks?
+	- Commit changes to branches to Github
