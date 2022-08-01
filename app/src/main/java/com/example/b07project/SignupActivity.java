@@ -19,27 +19,18 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.util.List;
-
-class Customer{
-    public List<String> joinedEvents;
-    public List<String> hostedEvents;
-    public String email;
-    public Customer (){
-        // Default constructor required for calls to DataSnapshot.getValue(User.class)
-    }
-    public Customer(String email) {
-        this.email = email;
-    }
-}
 
 public class SignupActivity extends AppCompatActivity {
-    private FirebaseAuth mAuth;
+    private FirebaseDatabase db;
+    private FirebaseAuth auth;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
-        mAuth = FirebaseAuth.getInstance();
+        //Get database and authentication instances
+        db = FirebaseDatabase.getInstance();
+        auth = FirebaseAuth.getInstance();
         // Get username data from MainActivity
         Intent i = getIntent();
         EditText t = (EditText)findViewById(R.id.ctrEmailSignup);
@@ -50,22 +41,22 @@ public class SignupActivity extends AppCompatActivity {
         String email = ((TextView)findViewById(R.id.ctrEmailSignup)).getText().toString();
         String pwd = ((TextView)findViewById(R.id.ctrPasswordSignup)).getText().toString();
         signup(email, pwd);
-        //Cannot assume user is logged in here
+        //CANNOT ASSUME USER IS LOGGED IN HERE
     }
 
     public void signup(String email, String pwd) {
         Log.d("test", "attempting signup");
-        mAuth.createUserWithEmailAndPassword(email, pwd)
+        auth.createUserWithEmailAndPassword(email, pwd)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             //Success: create new customer
-                            FirebaseUser user = mAuth.getCurrentUser();
-                            FirebaseDatabase db = FirebaseDatabase.getInstance();
+                            FirebaseUser user = auth.getCurrentUser();
                             DatabaseReference customers = db.getReference("customers");
-                            customers.child(mAuth.getCurrentUser().getUid()).setValue(new Customer(email));
-                            Log.d("signup", "signup successful. uid: " + mAuth.getCurrentUser().getUid());
+                            customers.child(user.getUid()).setValue(new Customer(email, user.getUid()));
+                            Log.d("signup", "signup successful. uid: " + user.getUid());
+                            customerLogin();
                             //go to customer dashboard
                         } else {
                             //Failure: display error message
@@ -76,5 +67,11 @@ public class SignupActivity extends AppCompatActivity {
                         }
                     }
                 });
+    }
+    public void customerLogin(){
+        Log.d("signin", "isCustomer. uid: " + auth.getCurrentUser().getUid());
+        //navigate to user dashboard
+        Intent intent = new Intent(this, VenueActivity.class);
+        startActivity(intent);
     }
 }

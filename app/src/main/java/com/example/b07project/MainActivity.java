@@ -24,13 +24,16 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 public class MainActivity extends AppCompatActivity {
-    private FirebaseAuth mAuth;
+    private FirebaseDatabase db;
+    private FirebaseAuth auth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         this.setTitle("Welcome to App!");
-        mAuth = FirebaseAuth.getInstance();
+        //Get database and authentication instances
+        db = FirebaseDatabase.getInstance();
+        auth = FirebaseAuth.getInstance();
 
         // Create invisible clickable buttons
         Button adminButton = (Button)findViewById(R.id.ctrAdminLink);
@@ -52,29 +55,17 @@ public class MainActivity extends AppCompatActivity {
         String email = ((TextView)findViewById(R.id.ctrEmailField)).getText().toString();
         String pwd = ((TextView)findViewById(R.id.ctrPasswordField)).getText().toString();
         signin(email, pwd);
-        // TODO: Firebase pros only
-
-        //For testing purposes:
-//        goToVenuePage();
-
-        // If email and pwd valid:
-            // Create new Customer obj
-            // Start MainAppActivity
-        // Else
-            // Toast.alert Invalid login credentials
-
     }
 
     public void signin(String email, String pwd){
-        mAuth.signInWithEmailAndPassword(email, pwd)
+        auth.signInWithEmailAndPassword(email, pwd)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             //Success
-                            FirebaseUser user = mAuth.getCurrentUser();
-                            Log.d("signin", "signin successful. uid: " + mAuth.getCurrentUser().getUid());
-                            FirebaseDatabase db = FirebaseDatabase.getInstance();
+                            FirebaseUser user = auth.getCurrentUser();
+                            Log.d("signin", "signin successful. uid: " + user.getUid());
                             DatabaseReference admins = db.getReference("admins");
                             admins.addListenerForSingleValueEvent(new ValueEventListener() {
                                 @Override
@@ -88,7 +79,6 @@ public class MainActivity extends AppCompatActivity {
                                         customerLogin();
                                     }
                                 }
-
                                 @Override
                                 public void onCancelled(DatabaseError databaseError) {
                                     System.out.println("The read failed: " + databaseError.getCode());
@@ -107,18 +97,15 @@ public class MainActivity extends AppCompatActivity {
                 });
     }
     public void customerLogin(){
-        Log.d("signin", "isCustomer. uid: " + FirebaseAuth.getInstance().getCurrentUser().getUid());
-        //TODO nav to user dashboard
-        goToVenuePage();
-    }
-    public void adminLogin(){
-        Log.d("signin", "isAdmin. uid: " + FirebaseAuth.getInstance().getCurrentUser().getUid());
-        //TODO nav to admin dashboard
-    }
-
-    //For testing purposes:
-    public void goToVenuePage(){
+        Log.d("signin", "isCustomer. uid: " + auth.getCurrentUser().getUid());
+        //navigate to customer dashboard
         Intent intent = new Intent(this, VenueActivity.class);
         startActivity(intent);
+    }
+    public void adminLogin(){
+        Log.d("signin", "isAdmin. uid: " + auth.getCurrentUser().getUid());
+        //navigate to admin dashboard
+//        Intent intent = new Intent(this, AdminDashbaordActivity.class);
+//        startActivity(intent);
     }
 }
