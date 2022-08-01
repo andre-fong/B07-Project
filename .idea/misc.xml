@@ -1,5 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Joe/Android/B07-Project/app/src/main/res/layout/activity_main.xml" value="0.33" />
+        <entry key="..\:/Joe/Android/B07-Project/app/src/main/res/layout/activity_signup.xml" value="0.33" />
+        <entry key="..\:/Joe/Android/B07-Project/app/src/main/res/layout/activity_venue.xml" value="0.5" />
+        <entry key="..\:/Users/matth/AndroidStudioProjects/B07-Project/app/src/main/res/layout/activity_signup.xml" value="0.3872053872053872" />
+        <entry key="..\:/Users/victo/Desktop/School-Folders/B07/Assignments/Group Project/app/src/main/res/layout/activity_signup.xml" value="0.16666666666666666" />
+      </map>
+    </option>
+  </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
