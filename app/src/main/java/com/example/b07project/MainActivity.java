@@ -36,9 +36,7 @@ public class MainActivity extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
 
         // Create invisible clickable buttons
-        Button adminButton = (Button)findViewById(R.id.ctrAdminLink);
         Button signupButton = (Button)findViewById(R.id.ctrCreateAccount);
-        adminButton.setBackgroundColor(Color.TRANSPARENT);
         signupButton.setBackgroundColor(Color.TRANSPARENT);
     }
 
