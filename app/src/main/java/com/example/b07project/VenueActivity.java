@@ -7,7 +7,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 public class VenueActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
@@ -17,7 +16,7 @@ public class VenueActivity extends AppCompatActivity implements AdapterView.OnIt
         setContentView(R.layout.activity_venue);
 
         Spinner venue_spinner = findViewById(R.id.venue_spinner);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.venues, android.R.layout.simple_spinner_item);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.events, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         venue_spinner.setAdapter(adapter);
         venue_spinner.setOnItemSelectedListener(this);
