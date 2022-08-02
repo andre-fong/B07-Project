@@ -1,14 +1,40 @@
 package com.example.b07project;
 
+import java.util.List;
 import java.util.Objects;
 
 public class Venue {
-    public String name;
-    // Need to implement Event List<Event> events;
+    private String name;
+    private List<Event> events;
 
-    public Venue(String name){ //, List<Event> events) {
+    public Venue(String name, List<Event> events) {
         this.name = name;
-        //this.events = events;
+        this.events = events;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public List<Event> getEvents() {
+        return events;
+    }
+
+    public boolean addEvent(Event event){
+        if(this.events.contains(event)){
+            System.out.println("Event already exists");
+            return false;
+        }
+        return this.events.add(event);
+    }
+
+    public boolean removeEvent(Event event){
+        if(this.events.contains(event)){
+            return this.events.remove(event);
+        }
+
+        System.out.println("Event does not exist");
+        return false;
     }
 
     @Override
