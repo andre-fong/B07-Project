@@ -1,0 +1,93 @@
+﻿Name: Xing Yu (Joe) Zhou
+
+
+What have you done since yesterday?
+        - Implemented the Venue Class and committed and pushed to the signup-login branch
+        - Created pull request and merged changes to the main branch
+        - Designed the interface for customer UI (on google slides)
+
+
+What are you planning on doing today?
+        - Designing the CustomerHomepage UI with the new design
+        - Start working on the Event Class
+
+
+Any impediments or stumbling blocks?
+        - The design changed so the Sport Object is now the Event Class (resolved)
+
+
+
+
+Name: Andre Fong
+
+
+What have you done since yesterday?
+* Create class diagram for Venues and Events
+* Create layout design for activities
+
+
+What are you planning on doing today?
+* Plan out class design for Venues and Events
+
+
+Any impediments or stumbling blocks?
+* Disorganization
+
+
+
+
+
+
+Name: Victor Hurst
+
+
+What have you done since yesterday?
+* Wrote unit tests for firebase functions
+* Starting making class diagrams for client
+
+
+What are you planning on doing today?
+* Making Activity Diagrams for 2nd sprints
+* Making class diagrams for database and client 
+
+
+Any impediments or stumbling blocks?
+        - None
+
+
+
+
+
+
+Matthew Snelgrove: 
+
+
+What have you done since yesterday?
+ - clean/reformat code, remove some debugging from prod
+
+
+What are you planning on doing today?
+- class design, add classes to project, add database reading writing apis to project 
+
+
+Any impediments or stumbling blocks?
+- no
+
+
+
+
+Name: Jiakai Sun
+
+
+What have you done since yesterday?
+        - Renewed classes implementation onto Github
+        - Finished linking between login interface and previous page
+
+
+What are you planning on doing today?
+        - Designing venue structures and class related
+        - Making UI scheme for venue and their interaction with each other and function
+
+
+Any impediments or stumbling blocks?
+        - None
