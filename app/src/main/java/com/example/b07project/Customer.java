@@ -7,7 +7,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-class Customer {
+public class Customer {
 //    public Map<String, Event> joinedEvents;
 //    public Map<String, Event> hostedEvents;
     public String email;
