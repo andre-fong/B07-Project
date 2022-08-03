@@ -3,12 +3,18 @@ package com.example.b07project;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
-public class VenueActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+import com.google.android.gms.common.data.DataBufferObserverSet;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.HashMap;
+
+public class VenueActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, UpdatesUI {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,6 +26,7 @@ public class VenueActivity extends AppCompatActivity implements AdapterView.OnIt
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         venue_spinner.setAdapter(adapter);
         venue_spinner.setOnItemSelectedListener(this);
+        DatabaseFunctions.readAllVenuesFromDatabase(FirebaseDatabase.getInstance(), new HashMap<String, Venue>(), this);
     }
 
     // Copy the following code onto the previous page to open Venues Page
@@ -36,5 +43,10 @@ public class VenueActivity extends AppCompatActivity implements AdapterView.OnIt
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {
 
+    }
+
+    //Called by DatabaseFunctions
+    public void updateUI(){
+        //TODO update ui
     }
 }

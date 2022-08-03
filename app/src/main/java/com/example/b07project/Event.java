@@ -65,4 +65,13 @@ public class Event {
     public int hashCode() {
         return Objects.hash(name, venue);
     }
+
+    //For Customers created by reading from database
+    public boolean addName(String name){
+        if(this.name == null){
+            this.name = name;
+            return true;
+        }
+        return false;
+    }
 }
