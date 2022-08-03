@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.customtabs.ICustomTabsCallback;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -23,6 +24,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.function.Function;
+
 public class MainActivity extends AppCompatActivity {
     private FirebaseDatabase db;
     private FirebaseAuth auth;
@@ -34,7 +39,6 @@ public class MainActivity extends AppCompatActivity {
         //Get database and authentication instances
         db = FirebaseDatabase.getInstance();
         auth = FirebaseAuth.getInstance();
-
         // Create invisible clickable buttons
         Button signupButton = (Button)findViewById(R.id.ctrCreateAccount);
         signupButton.setBackgroundColor(Color.TRANSPARENT);
@@ -46,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
         Intent i = new Intent(this, SignupActivity.class);
         i.putExtra("Email", email);
         startActivity(i);
+        Map<String, Customer> customer1 = new HashMap<String, Customer>();
     }
 
     // Authentication
@@ -71,6 +76,7 @@ public class MainActivity extends AppCompatActivity {
                                     if(dataSnapshot.child(user.getUid()).exists()){
                                         Log.d("signin", "isadmin. uid: " + user.getUid());
                                         adminLogin();
+                                        Function<String, Boolean> f = s -> s.equals(user.getUid());
                                     }
                                     else{
                                         Log.d("signin", "isnotadmin. uid: " + user.getUid());

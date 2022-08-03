@@ -16,6 +16,8 @@ Any impediments or stumbling blocks?
         - The design changed so the Sport Object is now the Event Class (resolved)
 
 
+
+
 Name: Andre Fong
 
 
@@ -30,6 +32,10 @@ What are you planning on doing today?
 
 Any impediments or stumbling blocks?
 * Disorganization
+
+
+
+
 
 
 Name: Victor Hurst
@@ -49,6 +55,10 @@ Any impediments or stumbling blocks?
         - None
 
 
+
+
+
+
 Matthew Snelgrove: 
 
 
@@ -62,6 +72,8 @@ What are you planning on doing today?
 
 Any impediments or stumbling blocks?
 - no
+
+
 
 
 Name: Jiakai Sun
