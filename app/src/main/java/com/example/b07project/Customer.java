@@ -8,11 +8,11 @@ import java.util.List;
 import java.util.Map;
 
 class Customer {
-//    public Map<String, Event> joinedEvents;
-//    public Map<String, Event> hostedEvents;
-    public String email;
+    public Map<String, Event> joinedEvents;
+    public Map<String, Event> hostedEvents;
+    private String email;
     @Exclude
-    public String uid;
+    private String uid;
 
     public Customer() {
         // Default constructor required for calls to DataSnapshot.getValue(User.class)
@@ -33,10 +33,23 @@ class Customer {
     public String getEmail() {
         return email;
     }
-//    public void joinEvent(String name, Event event){
+
+    public String getUid() {
+        return uid;
+    }
+    //    public void joinEvent(String name, Event event){
 //        this.joinedEvents.put(name, event);
 //    }
 //    public void leaveEvent(Event event){
 //        joinedEvents.remove(event);
 //    }
+
+    //For Customers created by reading from database
+    public boolean addUid(String uid){
+        if(this.uid == null){
+            this.uid = uid;
+            return true;
+        }
+        return false;
+    }
 }
