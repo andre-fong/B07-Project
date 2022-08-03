@@ -28,6 +28,6 @@ public class MyEventsActivity extends AppCompatActivity implements UpdatesUI {
     @Override
     public void updateUI() {
         Customer c = CustomerMap.get(auth.getCurrentUser().getUid());
-        
+
     }
 }

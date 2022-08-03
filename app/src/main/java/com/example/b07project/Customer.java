@@ -7,10 +7,11 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-class Customer {
+public class Customer {
     public Map<String, Event> joinedEvents;
     public Map<String, Event> hostedEvents;
     private String email;
+
     @Exclude
     private String uid;
 
@@ -37,7 +38,7 @@ class Customer {
     public String getUid() {
         return uid;
     }
-    //    public void joinEvent(String name, Event event){
+//    public void joinEvent(String name, Event event){
 //        this.joinedEvents.put(name, event);
 //    }
 //    public void leaveEvent(Event event){
