@@ -8,13 +8,13 @@
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="113dp"
+        android:layout_width="0dp"
         android:layout_height="40dp"
         android:layout_marginStart="40dp"
         android:layout_marginTop="72dp"
         android:contentDescription="@string/venue_string"
         android:text="@string/venue_string"
-        android:textSize="18sp"
+        android:textSize="30sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -39,6 +39,7 @@
         android:layout_marginStart="109dp"
         android:layout_marginTop="69dp"
         android:layout_marginEnd="109dp"
+        android:onClick="goToScheduleEventPage"
         android:text="@string/schedule_string"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

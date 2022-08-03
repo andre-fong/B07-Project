@@ -2,6 +2,7 @@ package com.example.b07project;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -27,6 +28,11 @@ public class VenueActivity extends AppCompatActivity implements AdapterView.OnIt
 //        Intent intent = new Intent(this, VenueActivity.class);
 //        startActivity(intent);
 //    }
+
+    public void goToScheduleEventPage(View v){
+        Intent intent = new Intent(this, ScheduleEventActivity.class);
+        startActivity(intent);
+    }
 
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
