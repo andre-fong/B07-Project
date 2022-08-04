@@ -1,11 +1,13 @@
 package com.example.b07project;
 
+import com.google.firebase.database.Exclude;
+
 import java.util.List;
 import java.util.Objects;
 
 public class Event {
     private String name;
-    private Venue venue;
+    private String venue;
     private Customer host;
     private int maxParticipants;
     private List<Customer> participants;
@@ -14,7 +16,7 @@ public class Event {
     public Event(){
     }
     //for writing to the database
-    public Event(String name, Venue v, Customer c, int maxParticipants, List<Customer> participants) {
+    public Event(String name, String v, Customer c, int maxParticipants, List<Customer> participants) {
         this.name = name;
         this.venue = v;
         this.maxParticipants = maxParticipants;
@@ -22,11 +24,12 @@ public class Event {
         this.participants = participants;
     }
 
+    @Exclude
     public String getName() {
         return this.name;
     }
 
-    public Venue getVenue() {
+    public String getVenue() {
         return venue;
     }
 

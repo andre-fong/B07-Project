@@ -11,8 +11,6 @@ public class Customer {
     public Map<String, Event> joinedEvents;
     public Map<String, Event> hostedEvents;
     private String email;
-
-    @Exclude
     private String uid;
 
     public Customer() {
@@ -24,17 +22,19 @@ public class Customer {
         this.uid = uid;
     }
 
+    public Map<String, Event> getJoinedEvents() {
+        return joinedEvents;
+    }
 
-//    public Map<String, Event> getJoinedEvents() {
-//        return joinedEvents;
-//    }
-//    public Map<String, Event> getHostedEvents() {
-//        return hostedEvents;
-//    }
+    public Map<String, Event> getHostedEvents() {
+        return hostedEvents;
+    }
+
     public String getEmail() {
         return email;
     }
 
+    @Exclude
     public String getUid() {
         return uid;
     }

@@ -254,7 +254,7 @@ public abstract class DatabaseFunctions {
      */
     public static void readAllEventsFromDatabase(FirebaseDatabase db, Map<String, Event> eventsMap, UpdatesUI activity){
         //Reference to events
-        DatabaseReference eventsRef = db.getReference("/venues/events");
+        DatabaseReference eventsRef = db.getReference("/events/");
         eventsRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
