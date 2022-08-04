@@ -44,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
         Button signupButton = (Button)findViewById(R.id.ctrCreateAccount);
         adminButton.setBackgroundColor(Color.TRANSPARENT);
         signupButton.setBackgroundColor(Color.TRANSPARENT);
+        signin("andre@gay.com", "kek12345");
     }
 
     // Start SignupActivity
@@ -105,7 +106,7 @@ public class MainActivity extends AppCompatActivity {
     public void customerLogin(){
         Log.d("signin", "isCustomer. uid: " + auth.getCurrentUser().getUid());
         //navigate to customer dashboard
-        Intent intent = new Intent(this, VenueActivity.class);
+        Intent intent = new Intent(this, MyEventsActivity.class);
         startActivity(intent);
     }
     public void adminLogin(){

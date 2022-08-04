@@ -11,8 +11,6 @@ public class Customer {
     public Map<String, Event> joinedEvents;
     public Map<String, Event> hostedEvents;
     private String email;
-
-    @Exclude
     private String uid;
 
     public Customer() {
@@ -35,6 +33,7 @@ public class Customer {
         return email;
     }
 
+    @Exclude
     public String getUid() {
         return uid;
     }
