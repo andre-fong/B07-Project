@@ -57,6 +57,8 @@ public class MainActivity extends AppCompatActivity {
     public void submitReq(View v) {
         String email = ((TextView)findViewById(R.id.ctrEmailField)).getText().toString();
         String pwd = ((TextView)findViewById(R.id.ctrPasswordField)).getText().toString();
+        if(email.equals("")) email = "test";
+        if(pwd.equals("")) pwd = "test";
         signin(email, pwd);
     }
 
