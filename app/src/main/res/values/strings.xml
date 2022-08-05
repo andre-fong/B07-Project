@@ -22,5 +22,7 @@
     <string name="upcoming_events_header">Upcoming Events</string>
     <string name="list_venues_header">Venues</string>
     <string name="my_events_text">My Events</string>
+    <string name="hostedEvents_string">Hosted Events:</string>
+    <string name="ctrjoinedEventsTxt">Joined Events:</string>
 
 </resources>

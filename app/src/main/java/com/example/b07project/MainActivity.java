@@ -113,7 +113,7 @@ public class MainActivity extends AppCompatActivity {
     public void customerLogin(){
         Log.d("signin", "isCustomer. uid: " + auth.getCurrentUser().getUid());
         //navigate to customer dashboard
-        Intent intent = new Intent(this, CustomerHomepageActivity.class);
+        Intent intent = new Intent(this, MyEventsActivity.class);
         startActivity(intent);
     }
     public void adminLogin(){
