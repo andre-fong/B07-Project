@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
 // import DatabaseFunctions;
@@ -60,6 +59,8 @@ public class CustomerHomepageActivity extends AppCompatActivity implements Updat
     // Called when DatabaseFunction is called
     public void updateUI() {
         Log.d("andre-testing", "update ui entered");
+
+        // TODO: Create Venue spinner with provided VenueItem and VenueAdapter classes
 
         // Create reference to upcoming events spinner
         Spinner upcomingEventsSpinner = findViewById(R.id.ctrUpcomingEventsSpinner);

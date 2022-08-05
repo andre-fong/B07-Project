@@ -12,10 +12,10 @@ import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
 
-public class EventAdapter extends ArrayAdapter<EventItem> {
+public class VenueAdapter extends ArrayAdapter<VenueItem> {
 
-    public EventAdapter(Context context, ArrayList<EventItem> eventList) {
-        super(context, 0, eventList);
+    public VenueAdapter(Context context, ArrayList<VenueItem> venueList) {
+        super(context, 0, venueList);
 
         // Access values with getContext() or getItem(int pos)
     }
@@ -39,10 +39,10 @@ public class EventAdapter extends ArrayAdapter<EventItem> {
         TextView eventName = convertView.findViewById(R.id.spinnerNameRow);
 
         // get current EventItem row
-        EventItem currentItem = getItem(position);
+        VenueItem currentItem = getItem(position);
 
         if (currentItem !=  null)
-            eventName.setText(currentItem.getEventItemName());
+            eventName.setText(currentItem.getVenueName());
 
         return convertView;
     }
