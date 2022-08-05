@@ -79,11 +79,9 @@ public class MyEventsActivity extends AppCompatActivity implements UpdatesUI {
 
     private ArrayList<EventItem> getJoinedList() {
         ArrayList<EventItem> upcomingEventList = new ArrayList<>();
-        for (String e: c.joinedEvents.values()) {
-            String eventName = e.getName();
-            String venueName = e.getVenue().getName();
-            upcomingEventList.add(new EventItem(venueName + "-" + eventName));
-            Log.d("victortest", eventName + venueName);
+        for (String venueEventKey: c.joinedEvents.keySet()) {
+            upcomingEventList.add(new EventItem(venueEventKey));
+            Log.d("victortest", venueEventKey);
         }
         return upcomingEventList;
     }

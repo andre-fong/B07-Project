@@ -95,7 +95,7 @@ public class CustomerHomepageActivity extends AppCompatActivity implements Updat
     public void myEventsClicked(View v) {
         // TODO: Uncomment function once MyEventsActivity is implemented
 
-        // Intent intentToMyEvents = new Intent(this, MyEventsActivity.class);
-        // startActivity(intentToMyEvents);
+        Intent intentToMyEvents = new Intent(this, MyEventsActivity.class);
+        startActivity(intentToMyEvents);
     }
 }

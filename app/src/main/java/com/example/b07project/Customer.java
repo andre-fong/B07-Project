@@ -7,9 +7,11 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+// Note: Andre changed Map recently
+
 public class Customer {
-    public Map<String, Event> joinedEvents;
-    public Map<String, Event> hostedEvents;
+    public Map<String, String> joinedEvents;
+    public Map<String, String> hostedEvents;
     private String email;
     private String uid;
 
@@ -22,11 +24,11 @@ public class Customer {
         this.uid = uid;
     }
 
-    public Map<String, Event> getJoinedEvents() {
+    public Map<String, String> getJoinedEvents() {
         return joinedEvents;
     }
 
-    public Map<String, Event> getHostedEvents() {
+    public Map<String, String> getHostedEvents() {
         return hostedEvents;
     }
 
