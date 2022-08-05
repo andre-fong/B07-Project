@@ -17,6 +17,9 @@
             android:name=".CustomerHomepageActivity"
             android:exported="false" />
         <activity
+            android:name=".MyEventsActivity"
+            android:exported="false" />
+        <activity
             android:name=".VenueActivity"
             android:exported="false" />
         <activity

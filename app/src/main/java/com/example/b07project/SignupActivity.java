@@ -75,7 +75,7 @@ public class SignupActivity extends AppCompatActivity {
     public void customerLogin(){
         Log.d("signin", "isCustomer. uid: " + auth.getCurrentUser().getUid());
         //navigate to user dashboard
-        Intent intent = new Intent(this, VenueActivity.class);
+        Intent intent = new Intent(this, MyEventsActivity.class);
         startActivity(intent);
     }
 }
