@@ -79,7 +79,7 @@ public class MyEventsActivity extends AppCompatActivity implements UpdatesUI {
 
     private ArrayList<EventItem> getJoinedList() {
         ArrayList<EventItem> upcomingEventList = new ArrayList<>();
-        for (Str e: c.joinedEvents.values()) {
+        for (String e: c.joinedEvents.values()) {
             String eventName = e.getName();
             String venueName = e.getVenue().getName();
             upcomingEventList.add(new EventItem(venueName + "-" + eventName));

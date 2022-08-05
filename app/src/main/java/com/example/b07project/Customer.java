@@ -22,13 +22,14 @@ public class Customer {
         this.uid = uid;
     }
 
+    public Map<String, Event> getJoinedEvents() {
+        return joinedEvents;
+    }
 
-//    public Map<String, Event> getJoinedEvents() {
-//        return joinedEvents;
-//    }
-//    public Map<String, Event> getHostedEvents() {
-//        return hostedEvents;
-//    }
+    public Map<String, Event> getHostedEvents() {
+        return hostedEvents;
+    }
+
     public String getEmail() {
         return email;
     }
