@@ -40,7 +40,11 @@ public class SignupActivity extends AppCompatActivity {
     public void attemptSignup(View v) {
         String email = ((TextView)findViewById(R.id.ctrEmailSignup)).getText().toString();
         String pwd = ((TextView)findViewById(R.id.ctrPasswordSignup)).getText().toString();
-        signup(email, pwd);
+
+        if (email.matches("") || pwd.matches(""))
+            Toast.makeText(SignupActivity.this, "Cannot signup with empty fields", Toast.LENGTH_SHORT).show();
+        else
+            signup(email, pwd);
         //CANNOT ASSUME USER IS LOGGED IN HERE
     }
 

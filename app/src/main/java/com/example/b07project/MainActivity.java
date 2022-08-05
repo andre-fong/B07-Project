@@ -62,7 +62,12 @@ public class MainActivity extends AppCompatActivity {
     public void submitReq(View v) {
         String email = ((TextView)findViewById(R.id.ctrEmailField)).getText().toString();
         String pwd = ((TextView)findViewById(R.id.ctrPasswordField)).getText().toString();
-        signin(email, pwd);
+
+        // Handle empty editText field
+        if (email.matches("") || pwd.matches(""))
+            Toast.makeText(MainActivity.this, "Cannot login with empty fields", Toast.LENGTH_SHORT).show();
+        else
+            signin(email, pwd);
     }
 
     public void signin(String email, String pwd){

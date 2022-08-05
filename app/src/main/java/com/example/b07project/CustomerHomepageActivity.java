@@ -44,8 +44,6 @@ public class CustomerHomepageActivity extends AppCompatActivity implements Updat
 
     private void initList() {
 
-        Log.d("andre-testing", "Map created.");
-
         for (String venueEventKey : eventsMap.keySet()) {
             Log.d("andre-testing-eventname", venueEventKey);
         }
@@ -92,5 +90,12 @@ public class CustomerHomepageActivity extends AppCompatActivity implements Updat
                 // Do nothing
             }
         });
+    }
+
+    public void myEventsClicked(View v) {
+        // TODO: Uncomment function once MyEventsActivity is implemented
+
+        // Intent intentToMyEvents = new Intent(this, MyEventsActivity.class);
+        // startActivity(intentToMyEvents);
     }
 }
