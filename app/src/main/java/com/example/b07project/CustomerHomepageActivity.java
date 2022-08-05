@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
 // import DatabaseFunctions;
@@ -43,6 +44,8 @@ public class CustomerHomepageActivity extends AppCompatActivity implements Updat
 
     private void initList() {
 
+        upcomingEventList = new ArrayList<EventItem>();
+
         for (String venueEventKey : eventsMap.keySet()) {
             Log.d("andre-testing-eventname", venueEventKey);
         }
@@ -60,8 +63,6 @@ public class CustomerHomepageActivity extends AppCompatActivity implements Updat
     public void updateUI() {
         Log.d("andre-testing", "update ui entered");
 
-        // TODO: Create Venue spinner with provided VenueItem and VenueAdapter classes
-
         // Create reference to upcoming events spinner
         Spinner upcomingEventsSpinner = findViewById(R.id.ctrUpcomingEventsSpinner);
 
@@ -72,7 +73,7 @@ public class CustomerHomepageActivity extends AppCompatActivity implements Updat
         eventAdapter = new EventAdapter(this, upcomingEventList);
         upcomingEventsSpinner.setAdapter(eventAdapter);
 
-        upcomingEventsSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        /*upcomingEventsSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 EventItem clickedItem = (EventItem)adapterView.getItemAtPosition(i);
@@ -81,16 +82,17 @@ public class CustomerHomepageActivity extends AppCompatActivity implements Updat
 
                 // TODO: Uncomment out below once EventActivity class is created
 
-                // Intent intentToEventActivity = new Intent(this, EventActivity.class);
-                // intentToEventActivity.putExtra("venueEventLink", venueEventLink);
-                // startActivity(intentToEventActivity);
+                 Intent intentToEventActivity = new Intent(CustomerHomepageActivity.this, EventActivity.class);
+                 intentToEventActivity.putExtra("inter", venueEventLink);
+                 startActivity(intentToEventActivity);
+                 Log.d("zane", venueEventLink + "redirecting");
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
                 // Do nothing
             }
-        });
+        });*/
     }
 
     public void myEventsClicked(View v) {
@@ -98,5 +100,21 @@ public class CustomerHomepageActivity extends AppCompatActivity implements Updat
 
         Intent intentToMyEvents = new Intent(this, MyEventsActivity.class);
         startActivity(intentToMyEvents);
+    }
+
+    public void goToUpcoming(View v){
+
+        Spinner upcomingEventsSpinner = findViewById(R.id.ctrUpcomingEventsSpinner);
+
+        // Create ArrayList of upcoming events to show
+        initList();
+
+        // Create new EventAdapter to work with spinner
+        EventItem selectedItem = upcomingEventList.get(upcomingEventsSpinner.getSelectedItemPosition());
+        String venueEventLink = selectedItem.getVenueEventLink();
+        Intent intentToEventActivity = new Intent(this, EventActivity.class);
+        intentToEventActivity.putExtra("inter", venueEventLink);
+        startActivity(intentToEventActivity);
+
     }
 }
