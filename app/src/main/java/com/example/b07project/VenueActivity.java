@@ -27,7 +27,7 @@ public class VenueActivity extends AppCompatActivity implements AdapterView.OnIt
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         venue_spinner.setAdapter(adapter);
         venue_spinner.setOnItemSelectedListener(this);
-        DatabaseFunctions.readAllVenuesFromDatabase(FirebaseDatabase.getInstance(), new HashMap<String, Venue>(), this);
+        //DatabaseFunctions.readAllVenuesFromDatabase(FirebaseDatabase.getInstance(), new HashMap<String, Venue>(), this);
     }
 
     // Copy the following code onto the previous page to open Venues Page
