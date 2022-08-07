@@ -2,7 +2,7 @@ package com.example.b07project;
 
 import java.util.Map;
 
-public interface ReadsAllEvents {
-    void onAllEventsReadComplete(Map<String, Event> eventMap);
-    void onAllEventsReadError(String errorMessage);
+public interface ReadsAllVenues {
+    void onAllVenuesReadSuccess(Map<String, Venue> venueMap);
+    void onAllVenuesReadError(String errorMessage);
 }

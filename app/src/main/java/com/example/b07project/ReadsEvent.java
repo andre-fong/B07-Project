@@ -1,6 +1,6 @@
 package com.example.b07project;
 
-public interface ReadsEventListener {
-    void onEventReadComplete();
-    void onEventReadError();
+public interface ReadsEvent {
+    void onEventReadSuccess(Event event);
+    void onEventReadError(String message);
 }
