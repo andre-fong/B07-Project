@@ -31,7 +31,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
-public class MainActivity extends AppCompatActivity implements ChecksAdmin, CreatesVenue{
+public class MainActivity extends AppCompatActivity implements ChecksAdmin{
     private FirebaseDatabase db;
     private FirebaseAuth auth;
     @Override
@@ -47,8 +47,6 @@ public class MainActivity extends AppCompatActivity implements ChecksAdmin, Crea
         Button signupButton = (Button)findViewById(R.id.ctrCreateAccount);
         adminButton.setBackgroundColor(Color.TRANSPARENT);
         signupButton.setBackgroundColor(Color.TRANSPARENT);
-        Map<String, Customer> customerMap = new HashMap<String, Customer>();
-        signin("customer0@gmail.com", "password");
     }
 
     // Start SignupActivity
@@ -80,22 +78,15 @@ public class MainActivity extends AppCompatActivity implements ChecksAdmin, Crea
                             String errMsg = "signin failed:" + exceptionString.substring(exceptionString.indexOf(":"));
                             Toast.makeText(MainActivity.this, errMsg, Toast.LENGTH_SHORT).show();
                             Log.w("signin", "signinWithEmailAndPassword:failure", task.getException());
-                            //updateUI(null);
                         }
                     }
                 });
     }
     public void customerLogin(){
-//        DatabaseFunctions.readCustomerFromDatabase(db, auth.getCurrentUser().getUid(), this);
-//        DatabaseFunctions.joinEvent(db, auth.getCurrentUser().getUid(), "UTSC-coding", this);
-//        DatabaseFunctions.leaveEvent(db, auth.getCurrentUser().getUid(), "UTSC-coding", this);
         Intent intent = new Intent(this, VenueActivity.class);
         startActivity(intent);
     }
     public void adminLogin(){
-//        Log.d("signin", "isAdmin. uid: " + auth.getCurrentUser().getUid());
-        //navigate to admin dashboard
-        DatabaseFunctions.createVenue(db, new Venue("TPASCc", null), this);
 //        Intent intent = new Intent(this, AdminDashbaordActivity.class);
 //        startActivity(intent);
     }
@@ -104,25 +95,17 @@ public class MainActivity extends AppCompatActivity implements ChecksAdmin, Crea
     @Override
     public void onCheckAdminSuccess(Boolean isAdmin) {
         if(isAdmin) {
+            Log.d("signin", "signing in as admin. uid: " + auth.getCurrentUser().getUid());
             adminLogin();
         }
         else {
+            Log.d("signin", "signing in as customer. uid: " + auth.getCurrentUser().getUid());
             customerLogin();
         }
     }
 
     @Override
     public void onCheckAdminError(String errorMessage) {
-
-    }
-
-    @Override
-    public void onCreateVenueSuccess(Venue venue) {
-        Log.d("venueCreate", "success");
-    }
-
-    @Override
-    public void onCreateVenueError(String errorMessage) {
-        Log.d("venueCreate", "fail:" + errorMessage);
+        Log.d("signin error:", errorMessage);
     }
 }

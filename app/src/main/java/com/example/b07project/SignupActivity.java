@@ -20,7 +20,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 
-public class SignupActivity extends AppCompatActivity implements CreatesCustomer{
+public class SignupActivity extends AppCompatActivity implements CreatesCustomer {
     private FirebaseDatabase db;
     private FirebaseAuth auth;
 
@@ -66,7 +66,7 @@ public class SignupActivity extends AppCompatActivity implements CreatesCustomer
                 });
     }
     public void customerLogin(){
-        Log.d("signin", "isCustomer. uid: " + auth.getCurrentUser().getUid());
+        Log.d("signin", "signing in as customer. uid: " + auth.getCurrentUser().getUid());
         //navigate to user dashboard
         Intent intent = new Intent(this, VenueActivity.class);
         startActivity(intent);
@@ -74,11 +74,12 @@ public class SignupActivity extends AppCompatActivity implements CreatesCustomer
 
     @Override
     public void onCreateCustomerSuccess(Customer customer) {
+        Log.d("createCustomer", "customer created successfully. uid: " + customer.getUid());
         customerLogin();
     }
 
     @Override
     public void onCreateCustomerError(String errorMessage) {
-        Log.d("createCustomer", errorMessage);
+        Log.d("createCustomer", "error creating customer: " + errorMessage);
     }
 }
