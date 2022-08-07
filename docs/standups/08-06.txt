@@ -1,0 +1,95 @@
+﻿Name: Xing Yu (Joe) Zhou
+
+
+What have you done since yesterday?
+- Made a few attempts at implementing the display dialogue for the date and time pickers on ScheduleEventActivity (committed and pushed onto schedule-events branch with the attempts commented for reference)
+- Fixed the error where the login crashed due to Firebase changes (pushed onto schedule-events branch)
+- Modified the UI for ScheduleEventActivity to suit some of the new design changes
+
+
+What are you planning on doing today?
+- Implement AdminHomepage UI and connect it to the login for Admins
+- Implement some functions in Venue class from the new design
+
+
+Any impediments or stumbling blocks?
+- Many errors and unsuccessful attempts at implementing a functional display dialogue for the date and time pickers on ScheduleEventActivity (unresolved)
+- Errors from Firebase changes took some time to time to debug and fix (resolved)
+
+
+
+
+Name: Andre Fong
+
+
+What have you done since yesterday?
+* Design Admin UI
+* Plan Admin activities interaction
+* Troubleshoot teammate issues
+
+
+What are you planning on doing today?
+* Delete unused code
+* Apply database changes to rest of code
+* Continue troubleshooting teammate issues
+
+
+Any impediments or stumbling blocks?
+* Bricking progress from configuring database functions
+
+
+
+
+
+
+Name: Victor Hurst
+
+
+What have you done since yesterday?
+- Fixed up adding an event (transfering between fragments and activities)
+
+
+What are you planning on doing today?
+- Continue designing 
+-Applying new database code to functions
+
+
+Any impediments or stumbling blocks?
+- Getting fragments to work with activities
+
+
+
+
+
+
+Matthew Snelgrove: 
+
+
+What have you done since yesterday?
+ - Create firebase functions with validation
+
+
+What are you planning on doing today?
+- Move validation from client to database rules
+
+
+Any impediments or stumbling blocks?
+- Not enough planning
+
+
+
+
+Name: Jiakai Sun
+
+
+What have you done since yesterday?
+- Finished linking MyEventsActivity and EventActivity
+- Tested functionalities of several UI with null test
+
+
+What are you planning on doing today?
+- Start working on Admin UIs that manages Events and Venues
+
+
+Any impediments or stumbling blocks?
+- Firebase functions still has some issues

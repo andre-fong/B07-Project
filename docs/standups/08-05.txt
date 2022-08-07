@@ -1,0 +1,92 @@
+﻿Name: Xing Yu (Joe) Zhou
+
+
+What have you done since yesterday?
+- Decided on implementing pickers for the date and time.
+- Implemented both the date picker and the time picker for ScheduleEventActivity.
+
+
+What are you planning on doing today?
+- Try to implement the display for the date and time picker dialogue on ScheduleEventActivity.
+- Modify the UI for ScheduleEventActivity to fit the new design changes.
+
+
+Any impediments or stumbling blocks?
+- Firebase login did not work for a while due to changes, delaying testing and implementation.
+- Some errors with the original design that prompted a design change for ScheduleEventActivity
+
+
+
+
+Name: Andre Fong
+
+
+What have you done since yesterday?
+* Manage teammate tasks
+* Rewrite code based on database changes
+* Continue troubleshooting teammate issues
+
+
+What are you planning on doing today?
+* Continue troubleshooting teammate issues
+
+
+Any impediments or stumbling blocks?
+* Fragments
+
+
+
+
+
+
+Name: Victor Hurst
+
+
+What have you done since yesterday?
+- Finished up working on MyEvents activity except the clicker buttons
+
+
+What are you planning on doing today?
+- Working on the UI for the AdminHomepage activity
+
+
+Any impediments or stumbling blocks?
+- Working with the database
+
+
+
+
+
+
+Matthew Snelgrove: 
+
+
+What have you done since yesterday?
+ - Plan better firebase integration
+
+
+What are you planning on doing today?
+- implement better firebase integration
+
+
+Any impediments or stumbling blocks?
+- Not enough planning
+
+
+
+
+Name: Jiakai Sun
+
+
+What have you done since yesterday?
+- Implemented EventsActivity functionalities
+- Merged CustomerHomePage and EventActivity
+
+
+What are you planning on doing today?
+- Implement MyEventsActivity buttons and linked the UI to EventActivity
+- Start planning on Admin activity
+
+
+Any impediments or stumbling blocks?
+- Firebase database has some issues with database rules
