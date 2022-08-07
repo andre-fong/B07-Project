@@ -20,7 +20,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 
-public class SignupActivity extends AppCompatActivity {
+public class SignupActivity extends AppCompatActivity implements CreatesCustomer{
     private FirebaseDatabase db;
     private FirebaseAuth auth;
 
@@ -44,7 +44,8 @@ public class SignupActivity extends AppCompatActivity {
         //CANNOT ASSUME USER IS LOGGED IN HERE
     }
 
-    public void signup(String email, String pwd) {
+    public void signup(@NonNull String email, @NonNull String pwd) {
+        final CreatesCustomer ref = this;
         Log.d("test", "attempting signup");
         auth.createUserWithEmailAndPassword(email, pwd)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -53,11 +54,7 @@ public class SignupActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             //Success: create new customer
                             FirebaseUser user = auth.getCurrentUser();
-                            DatabaseReference customers = db.getReference("customers");
-                            customers.child(user.getUid()).setValue(new Customer(email, user.getUid()));
-                            Log.d("signup", "signup successful. uid: " + user.getUid());
-                            customerLogin();
-                            //go to customer dashboard
+                            DatabaseFunctions.createCustomer(db, new Customer(email, user.getUid()), ref);
                         } else {
                             //Failure: display error message
                             Log.w("signup", "signup failed", task.getException());
@@ -73,5 +70,15 @@ public class SignupActivity extends AppCompatActivity {
         //navigate to user dashboard
         Intent intent = new Intent(this, VenueActivity.class);
         startActivity(intent);
+    }
+
+    @Override
+    public void onCreateCustomerSuccess(Customer customer) {
+        customerLogin();
+    }
+
+    @Override
+    public void onCreateCustomerError(String errorMessage) {
+        Log.d("createCustomer", errorMessage);
     }
 }

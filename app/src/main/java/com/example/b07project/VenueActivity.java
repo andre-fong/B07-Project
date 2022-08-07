@@ -1,20 +1,28 @@
 package com.example.b07project;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
 import com.google.android.gms.common.data.DataBufferObserverSet;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.HashMap;
+import java.util.Map;
 
-public class VenueActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, UpdatesUI {
+public class VenueActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, ReadsCustomer {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,7 +34,7 @@ public class VenueActivity extends AppCompatActivity implements AdapterView.OnIt
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         venue_spinner.setAdapter(adapter);
         venue_spinner.setOnItemSelectedListener(this);
-        DatabaseFunctions.readAllVenuesFromDatabase(FirebaseDatabase.getInstance(), new HashMap<String, Venue>(), this);
+
     }
 
     // Copy the following code onto the previous page to open Venues Page
@@ -48,5 +56,16 @@ public class VenueActivity extends AppCompatActivity implements AdapterView.OnIt
     //Called by DatabaseFunctions
     public void updateUI(){
         //TODO update ui
+    }
+
+    @Override
+    public void onCustomerReadSuccess(Customer c) {
+//        Log.d("readCustomer", customerMap.toString());
+        Log.d("readCustomer", "uid: " + c.getUid() + "joinedEvents: " + c.getJoinedEvents().toString() + "hostedEvents: " + c.getHostedEvents().toString());
+    }
+
+    @Override
+    public void onCustomerReadError(String errorMessage) {
+
     }
 }

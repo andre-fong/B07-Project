@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.support.customtabs.ICustomTabsCallback;
 import android.util.Log;
 import android.view.View;
@@ -14,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -23,12 +25,13 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.okhttp.Call;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements ChecksAdmin, CreatesVenue{
     private FirebaseDatabase db;
     private FirebaseAuth auth;
     @Override
@@ -44,6 +47,8 @@ public class MainActivity extends AppCompatActivity {
         Button signupButton = (Button)findViewById(R.id.ctrCreateAccount);
         adminButton.setBackgroundColor(Color.TRANSPARENT);
         signupButton.setBackgroundColor(Color.TRANSPARENT);
+        Map<String, Customer> customerMap = new HashMap<String, Customer>();
+        signin("customer0@gmail.com", "password");
     }
 
     // Start SignupActivity
@@ -52,7 +57,6 @@ public class MainActivity extends AppCompatActivity {
         Intent i = new Intent(this, SignupActivity.class);
         i.putExtra("Email", email);
         startActivity(i);
-        Map<String, Customer> customer1 = new HashMap<String, Customer>();
     }
 
     // Authentication
@@ -63,34 +67,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void signin(String email, String pwd){
+        final ChecksAdmin ref = this;
         auth.signInWithEmailAndPassword(email, pwd)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            //Success
-                            FirebaseUser user = auth.getCurrentUser();
-                            Log.d("signin", "signin successful. uid: " + user.getUid());
-                            DatabaseReference admins = db.getReference("admins");
-                            admins.addListenerForSingleValueEvent(new ValueEventListener() {
-                                @Override
-                                public void onDataChange(DataSnapshot dataSnapshot) {
-                                    if(dataSnapshot.child(user.getUid()).exists()){
-                                        Log.d("signin", "isadmin. uid: " + user.getUid());
-                                        adminLogin();
-                                        Function<String, Boolean> f = s -> s.equals(user.getUid());
-                                    }
-                                    else{
-                                        Log.d("signin", "isnotadmin. uid: " + user.getUid());
-                                        customerLogin();
-                                    }
-                                }
-                                @Override
-                                public void onCancelled(DatabaseError databaseError) {
-                                    System.out.println("The read failed: " + databaseError.getCode());
-                                }
-                            });
-                            //updateUI(user)
+                            DatabaseFunctions.loggedInAsAdmin(db, auth, ref);
                         } else {
                             //Failure: display error message
                             String exceptionString = task.getException().toString();
@@ -103,15 +86,43 @@ public class MainActivity extends AppCompatActivity {
                 });
     }
     public void customerLogin(){
-        Log.d("signin", "isCustomer. uid: " + auth.getCurrentUser().getUid());
-        //navigate to customer dashboard
+//        DatabaseFunctions.readCustomerFromDatabase(db, auth.getCurrentUser().getUid(), this);
+//        DatabaseFunctions.joinEvent(db, auth.getCurrentUser().getUid(), "UTSC-coding", this);
+//        DatabaseFunctions.leaveEvent(db, auth.getCurrentUser().getUid(), "UTSC-coding", this);
         Intent intent = new Intent(this, VenueActivity.class);
         startActivity(intent);
     }
     public void adminLogin(){
-        Log.d("signin", "isAdmin. uid: " + auth.getCurrentUser().getUid());
+//        Log.d("signin", "isAdmin. uid: " + auth.getCurrentUser().getUid());
         //navigate to admin dashboard
+        DatabaseFunctions.createVenue(db, new Venue("TPASCc", null), this);
 //        Intent intent = new Intent(this, AdminDashbaordActivity.class);
 //        startActivity(intent);
+    }
+
+
+    @Override
+    public void onCheckAdminSuccess(Boolean isAdmin) {
+        if(isAdmin) {
+            adminLogin();
+        }
+        else {
+            customerLogin();
+        }
+    }
+
+    @Override
+    public void onCheckAdminError(String errorMessage) {
+
+    }
+
+    @Override
+    public void onCreateVenueSuccess(Venue venue) {
+        Log.d("venueCreate", "success");
+    }
+
+    @Override
+    public void onCreateVenueError(String errorMessage) {
+        Log.d("venueCreate", "fail:" + errorMessage);
     }
 }
