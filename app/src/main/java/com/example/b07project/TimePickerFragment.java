@@ -32,12 +32,11 @@ public class TimePickerFragment extends DialogFragment implements TimePickerDial
 
     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
         // Do something with the time chosen by the user
-
-        //String time = hourOfDay + ":" + minute;
-
-//        Intent intent = new Intent(getActivity(), ScheduleEventActivity.class);
-//        intent.putExtra("time_string", time);
-//        startActivity(intent);
+        String time = hourOfDay + ":" + minute;
+        Intent intent = new Intent(getActivity(), ScheduleEventActivity.class);
+        intent.putExtra("date_string",this.getArguments().getString("date_string"));
+        intent.putExtra("time_string", time);
+        startActivity(intent);
 
         //((ScheduleEventActivity)getActivity()).timeText.setText(time);
     }
