@@ -2,6 +2,7 @@ package com.example.b07project;
 
 import android.util.Log;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -22,7 +23,9 @@ public abstract class DatabaseFunctions {
      */
     public static void readCustomerFromDatabase(FirebaseDatabase db, String uid, Map<String, Customer> customerMap, UpdatesUI activity){
         //Reference to specific customer
-        DatabaseReference customerRef = db.getReference("/customer/" + uid);
+        Log.d("readcustomer", FirebaseAuth.getInstance().getCurrentUser().getUid());
+        DatabaseReference customerRef = db.getReference("/customers/" + uid);
+        Log.d("readcustomer", customerRef.getKey() + " ondatachange");
         customerRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -40,6 +43,8 @@ public abstract class DatabaseFunctions {
                 if(activity != null){
                     activity.updateUI();
                 }
+
+                Log.d("readcustomer", "ondatachangecrrcvvtgfcdxcfvtgvrcdxt");
             }
             @Override
             public void onCancelled(DatabaseError databaseError) {
@@ -254,7 +259,7 @@ public abstract class DatabaseFunctions {
      */
     public static void readAllEventsFromDatabase(FirebaseDatabase db, Map<String, Event> eventsMap, UpdatesUI activity){
         //Reference to events
-        DatabaseReference eventsRef = db.getReference("/venues/events");
+        DatabaseReference eventsRef = db.getReference("/events/");
         eventsRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {

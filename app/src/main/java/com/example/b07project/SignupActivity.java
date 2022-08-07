@@ -40,9 +40,11 @@ public class SignupActivity extends AppCompatActivity {
     public void attemptSignup(View v) {
         String email = ((TextView)findViewById(R.id.ctrEmailSignup)).getText().toString();
         String pwd = ((TextView)findViewById(R.id.ctrPasswordSignup)).getText().toString();
-        signup(email, pwd);
 
-
+        if (email.matches("") || pwd.matches(""))
+            Toast.makeText(SignupActivity.this, "Cannot signup with empty fields", Toast.LENGTH_SHORT).show();
+        else
+            signup(email, pwd);
         //CANNOT ASSUME USER IS LOGGED IN HERE
     }
 
@@ -73,7 +75,7 @@ public class SignupActivity extends AppCompatActivity {
     public void customerLogin(){
         Log.d("signin", "isCustomer. uid: " + auth.getCurrentUser().getUid());
         //navigate to user dashboard
-        Intent intent = new Intent(this, VenueActivity.class);
+        Intent intent = new Intent(this, CustomerHomepageActivity.class);
         startActivity(intent);
     }
 }

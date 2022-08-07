@@ -18,6 +18,10 @@
     </string-array>
 
     <string name="schedule_string">Schedule an Event</string>
+    <string name="customer_homepage_header">Customer Homepage</string>
+    <string name="upcoming_events_header">Upcoming Events</string>
+    <string name="list_venues_header">Venues</string>
+    <string name="my_events_text">My Events</string>
     <string name="event_string">Event</string>
     <string name="max_players_string">Max Players</string>
     <string name="pick_time"></string>
