@@ -23,4 +23,7 @@
     <string name="pick_time"></string>
     <string name="pick_date"></string>
 
+    <string name="admin_homepage_string">Admin Homepage</string>
+    <string name="add_venue_string">Add a Venue</string>
+
 </resources>
