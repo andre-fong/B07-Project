@@ -6,7 +6,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.customtabs.ICustomTabsCallback;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -57,6 +56,8 @@ public class MainActivity extends AppCompatActivity {
     public void submitReq(View v) {
         String email = ((TextView)findViewById(R.id.ctrEmailField)).getText().toString();
         String pwd = ((TextView)findViewById(R.id.ctrPasswordField)).getText().toString();
+        if(email.equals("")) email = "test";
+        if(pwd.equals("")) pwd = "test";
         signin(email, pwd);
     }
 
@@ -109,7 +110,7 @@ public class MainActivity extends AppCompatActivity {
     public void adminLogin(){
         Log.d("signin", "isAdmin. uid: " + auth.getCurrentUser().getUid());
         //navigate to admin dashboard
-//        Intent intent = new Intent(this, AdminDashbaordActivity.class);
-//        startActivity(intent);
+        Intent intent = new Intent(this, AdminHomepageActivity.class);
+        startActivity(intent);
     }
 }
