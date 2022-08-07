@@ -41,6 +41,8 @@ public class SignupActivity extends AppCompatActivity {
         String email = ((TextView)findViewById(R.id.ctrEmailSignup)).getText().toString();
         String pwd = ((TextView)findViewById(R.id.ctrPasswordSignup)).getText().toString();
         signup(email, pwd);
+
+
         //CANNOT ASSUME USER IS LOGGED IN HERE
     }
 

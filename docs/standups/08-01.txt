@@ -1,3 +1,4 @@
+﻿<<<<<<<<< Temporary merge branch 1
 ﻿Name: Xing Yu (Joe) Zhou
 
 
@@ -16,6 +17,8 @@ Any impediments or stumbling blocks?
         - The design changed so the Sport Object is now the Event Class (resolved)
 
 
+
+
 Name: Andre Fong
 
 
@@ -30,6 +33,10 @@ What are you planning on doing today?
 
 Any impediments or stumbling blocks?
 * Disorganization
+
+
+
+
 
 
 Name: Victor Hurst
@@ -49,7 +56,11 @@ Any impediments or stumbling blocks?
         - None
 
 
-Matthew Snelgrove: 
+
+
+
+
+Matthew Snelgrove:
 
 
 What have you done since yesterday?
@@ -62,6 +73,8 @@ What are you planning on doing today?
 
 Any impediments or stumbling blocks?
 - no
+
+
 
 
 Name: Jiakai Sun
