@@ -17,7 +17,16 @@
             android:name=".CustomerHomepageActivity"
             android:exported="false" />
         <activity
+            android:name=".EventActivity"
+            android:exported="false" />
+        <activity
             android:name=".MyEventsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AdminHomepageActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ScheduleEventActivity"
             android:exported="false" />
         <activity
             android:name=".VenueActivity"

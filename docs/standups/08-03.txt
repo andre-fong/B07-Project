@@ -1,0 +1,95 @@
+﻿Name: Xing Yu (Joe) Zhou
+
+
+What have you done since yesterday?
+- Created ScheduleEventsActivity
+- Designed some of the UI for ScheduleEventsActivity page
+- Linked VenueActivity button to ScheduleEventActivity
+- Modified the UI design for ScheduleEventsActivity page (on google docs)
+
+
+What are you planning on doing today?
+- Learn how to add a picker to the UI
+- Add the pickers and the button to finish ScheduleEventsActivity UI
+- Discuss some of the design changes to Venue, VenueActivity, Event, EventActivity, and ScheduleEventsActivity to be able to work on some of the functions
+
+
+Any impediments or stumbling blocks?
+- There were some design changes and I will need to discuss them to work on some of the functions (unresolved)
+
+
+
+
+Name: Andre Fong
+
+
+What have you done since yesterday?
+* Updated Venues and Events layout
+* Updated how database stores information
+* Lookup and create custom spinner to store Events
+
+
+What are you planning on doing today?
+* Troubleshoot custom spinner
+* Create custom spinner for listing venues
+* Clean up code
+
+
+Any impediments or stumbling blocks?
+* How to structure Firebase database properly
+
+
+
+
+Name: Victor Hurst
+
+
+What have you done since yesterday?
+- Implemented some functionality to the MyEvents activity (just some functions)
+
+
+
+
+What are you planning on doing today?
+- Implementing more functionality to the MyEvents Activity
+- Implementing UI to the MyEvents Activity
+Any impediments or stumbling blocks?
+- Trying to get the spinner in MyEvents to connect to the databases
+
+
+
+
+
+
+Matthew Snelgrove: 
+
+
+What have you done since yesterday?
+ - create read functions in firebase “library” for app
+
+
+What are you planning on doing today?
+- debug database read methods
+
+
+Any impediments or stumbling blocks?
+- javadoc html, Firebase @Exclude on private fields instead of public getter
+
+
+
+
+Name: Jiakai Sun
+
+
+What have you done since yesterday?
+- Designed UI for EventActivity
+- Renewed scheme for data storage and use new database functions
+
+
+What are you planning on doing today?
+- Code EventActivity details
+- Get information from Firebase database using database functions
+
+
+Any impediments or stumbling blocks?
+- Changes to the venues storage in database

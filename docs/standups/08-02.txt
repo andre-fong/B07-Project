@@ -1,0 +1,71 @@
+Name: Xing Yu (Joe) Zhou
+
+What have you done since yesterday?
+- Implemented new functions for Venue Class and pushed onto venues-events branch (from new design)
+- Designed the UI for the VenueActivity for the Venue page according to the new design
+- Created the Event Class
+
+What are you planning on doing today?
+- Create ScheduleEventActivity
+- Design the UI for ScheduleEventActivity
+- Link VenueActivity button to ScheduleEventActivity
+
+Any impediments or stumbling blocks?
+- The app design changed again, so I had to update Venue Class and VenueActivity to fit the new design (resolved)
+
+
+Name: Andre Fong
+
+What have you done since yesterday?
+Manage discussions and version control
+Finalize class design for Venues and Events
+Finalize layout design for Venues and Events
+
+What are you planning on doing today?
+Familiarize with spinners
+Familiarize with passing data from objects into spinners
+Likewise, returning data from objects from selecting spinner option
+
+Any impediments or stumbling blocks?
+Difficulty with Spinners and ArrayAdapters
+
+
+Name: Victor Hurst
+
+What have you done since yesterday?
+- Finished the UI design for 2nd sprint
+- Finished Class design diagram for the rest of the classes
+
+What are you planning on doing today?
+- Writing Skeleton for Customer Class 
+- Make Base UI for MyEvents Acitivty
+
+Any impediments or stumbling blocks?
+- None
+
+
+Matthew Snelgrove: 
+
+What have you done since yesterday?
+ - Update Firebase rules
+
+What are you planning on doing today?
+- Add methods for easily reading/writing to the database
+
+Any impediments or stumbling blocks?
+- Dealing with asynchronous functions/tasks
+
+
+Name: Jiakai Sun
+
+What have you done since yesterday?
+- Changed UI for login with current implementation
+- Tested Login features and UI linkings
+- Renewed changes to main branch and venue-branch
+
+What are you planning on doing today?
+- Design EventActivity UI and implement its functionality
+- Create link between VenueActivity and EventActivity
+
+Any impediments or stumbling blocks?
+	- Login UI exits unexpectedly with empty login fields

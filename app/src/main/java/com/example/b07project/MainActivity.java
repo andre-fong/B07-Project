@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.support.customtabs.ICustomTabsCallback;
 import android.util.Log;
 import android.view.View;
@@ -14,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -23,12 +25,13 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.okhttp.Call;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements ChecksAdmin{
     private FirebaseDatabase db;
     private FirebaseAuth auth;
     @Override
@@ -40,13 +43,8 @@ public class MainActivity extends AppCompatActivity {
         db = FirebaseDatabase.getInstance();
         auth = FirebaseAuth.getInstance();
         // Create invisible clickable buttons
-        Button adminButton = (Button)findViewById(R.id.ctrAdminLink);
         Button signupButton = (Button)findViewById(R.id.ctrCreateAccount);
-        adminButton.setBackgroundColor(Color.TRANSPARENT);
         signupButton.setBackgroundColor(Color.TRANSPARENT);
-
-        // Andre Testing
-        signin("andre@gay.com", "kek12345");
     }
 
     // Start SignupActivity
@@ -55,7 +53,6 @@ public class MainActivity extends AppCompatActivity {
         Intent i = new Intent(this, SignupActivity.class);
         i.putExtra("Email", email);
         startActivity(i);
-        Map<String, Customer> customer1 = new HashMap<String, Customer>();
     }
 
     // Authentication
@@ -71,41 +68,19 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void signin(String email, String pwd){
+        final ChecksAdmin ref = this;
         auth.signInWithEmailAndPassword(email, pwd)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            //Success
-                            FirebaseUser user = auth.getCurrentUser();
-                            Log.d("signin", "signin successful. uid: " + user.getUid());
-                            DatabaseReference admins = db.getReference("admins");
-                            admins.addListenerForSingleValueEvent(new ValueEventListener() {
-                                @Override
-                                public void onDataChange(DataSnapshot dataSnapshot) {
-                                    if(dataSnapshot.child(user.getUid()).exists()){
-                                        Log.d("signin", "isadmin. uid: " + user.getUid());
-                                        adminLogin();
-                                        Function<String, Boolean> f = s -> s.equals(user.getUid());
-                                    }
-                                    else{
-                                        Log.d("signin", "isnotadmin. uid: " + user.getUid());
-                                        customerLogin();
-                                    }
-                                }
-                                @Override
-                                public void onCancelled(DatabaseError databaseError) {
-                                    System.out.println("The read failed: " + databaseError.getCode());
-                                }
-                            });
-                            //updateUI(user)
+                            DatabaseFunctions.loggedInAsAdmin(db, auth, ref);
                         } else {
                             //Failure: display error message
                             String exceptionString = task.getException().toString();
                             String errMsg = "signin failed:" + exceptionString.substring(exceptionString.indexOf(":"));
                             Toast.makeText(MainActivity.this, errMsg, Toast.LENGTH_SHORT).show();
                             Log.w("signin", "signinWithEmailAndPassword:failure", task.getException());
-                            //updateUI(null);
                         }
                     }
                 });
@@ -119,7 +94,25 @@ public class MainActivity extends AppCompatActivity {
     public void adminLogin(){
         Log.d("signin", "isAdmin. uid: " + auth.getCurrentUser().getUid());
         //navigate to admin dashboard
-//        Intent intent = new Intent(this, AdminDashbaordActivity.class);
-//        startActivity(intent);
+        Intent intent = new Intent(this, AdminHomepageActivity.class);
+        startActivity(intent);
+    }
+
+
+    @Override
+    public void onCheckAdminSuccess(Boolean isAdmin) {
+        if(isAdmin) {
+            Log.d("signin", "signing in as admin. uid: " + auth.getCurrentUser().getUid());
+            adminLogin();
+        }
+        else {
+            Log.d("signin", "signing in as customer. uid: " + auth.getCurrentUser().getUid());
+            customerLogin();
+        }
+    }
+
+    @Override
+    public void onCheckAdminError(String errorMessage) {
+        Log.d("signin error:", errorMessage);
     }
 }

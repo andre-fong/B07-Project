@@ -8,60 +8,50 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 import com.google.firebase.database.Exclude;
 
 public class Venue {
-    @Exclude
     private String name;
-    private List<Event> events;
+    private Map<String, String> eventKeys;
 
     public Venue(){
+        eventKeys = new HashMap<String, String>();
     }
 
-    public Venue(String name, List<Event> events) {
+    public Venue(String name, Map<String, String> eventKeys) {
         this.name = name;
-        this.events = events;
+        this.eventKeys = eventKeys;
     }
 
     public String getName() {
         return name;
     }
 
-    public List<Event> getEvents() {
-        return events;
+    public Map<String, String> getEventKeys() {
+        return eventKeys;
     }
 
     public boolean addEvent(Event event){
-        if(this.events.contains(event)){
+        if(this.eventKeys.containsKey(event.getKey())){
             System.out.println("Event already exists");
             return false;
         }
-        return this.events.add(event);
+        eventKeys.put(event.getKey(), event.getHostKey());
+        return true;
     }
 
     public boolean removeEvent(Event event){
-        if(this.events.contains(event)){
-            return this.events.remove(event);
+        if(this.eventKeys.containsKey(event.getKey())){
+            this.eventKeys.remove(event.getKey());
+            return true;
         }
-
         System.out.println("Event does not exist");
         return false;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Venue venue = (Venue) o;
-        return Objects.equals(name, venue.name);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(name);
     }
 
     //For Venues created by reading from database
