@@ -22,11 +22,12 @@
     <string name="upcoming_events_header">Upcoming Events</string>
     <string name="list_venues_header">Venues</string>
     <string name="my_events_text">My Events</string>
+    <string name="hostedEvents_string">Hosted Events:</string>
+    <string name="ctrjoinedEventsTxt">Joined Events:</string>
     <string name="event_string">Event</string>
     <string name="max_players_string">Max Players</string>
     <string name="pick_time"></string>
     <string name="pick_date"></string>
-
     <string name="admin_homepage_string">Admin Homepage</string>
     <string name="add_venue_string">Add a Venue</string>
 

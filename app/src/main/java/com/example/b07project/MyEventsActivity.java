@@ -23,16 +23,45 @@ public class MyEventsActivity extends AppCompatActivity implements UpdatesUI {
 
     protected void createJoinedEventsSpinner() {
         // Create reference to upcoming events spinner
-        Spinner upcomingEventsSpinner = findViewById(R.id.CtrjoinedEvents);
+        Spinner upcomingEventsSpinner = findViewById(R.id.ctrjoinedEvents);
 
-        // Create ArrayList of upcoming events to show
+        // Create ArrayList of upcoming events to show and hosted events
         ArrayList<EventItem> upcomingEventList = getJoinedList();
-
         // Create new EventAdapter to work with spinner
         EventAdapter eventAdapter = new EventAdapter(this, upcomingEventList);
         upcomingEventsSpinner.setAdapter(eventAdapter);
 
         upcomingEventsSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                EventItem clickedItem = (EventItem)adapterView.getItemAtPosition(i);
+                String venueEventLink = clickedItem.getVenueEventLink();
+
+                // TODO: Uncomment out below once EventActivity class is created
+
+                // Intent intentToEventActivity = new Intent(this, EventActivity.class);
+                // intentToEventActivity.putExtra("venueEventLink", venueEventLink);
+                // startActivity(intentToEventActivity);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+                // Do nothing
+            }
+        });
+    };
+
+    protected void createHostedEventsSpinner() {
+        // Create reference to upcoming events spinner
+        Spinner hostedEventsSpinner = findViewById(R.id.ctrhostedEvents);
+
+        // Create ArrayList of upcoming events to show and hosted events
+        ArrayList<EventItem> hostList = getHostedList();
+        // Create new EventAdapter to work with spinner
+        EventAdapter eventAdapter = new EventAdapter(this, hostList);
+        hostedEventsSpinner.setAdapter(eventAdapter);
+
+        hostedEventsSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 EventItem clickedItem = (EventItem)adapterView.getItemAtPosition(i);
@@ -67,21 +96,29 @@ public class MyEventsActivity extends AppCompatActivity implements UpdatesUI {
 
     @Override
     public void updateUI() {
-        Log.d("victortest", "updateUI entered");
-        for (Customer c : CustomerMap.values()) {
-            Log.d("megajuice", c.getUid());
-        }
         c = CustomerMap.get(auth.getCurrentUser().getUid());
-        Log.d("victortest", c.getUid());
         createJoinedEventsSpinner();
+        createHostedEventsSpinner();
     }
 
+    private ArrayList<EventItem> getHostedList() {
+        if (c.hostedEvents == null) return new ArrayList<>();
+
+        ArrayList<EventItem> hostedEventList = new ArrayList<>();
+
+        for (String venueEventKey: c.hostedEvents.keySet()) {
+            Log.d("victortest", venueEventKey);
+            hostedEventList.add(new EventItem(venueEventKey));
+        }
+        return hostedEventList;
+    }
 
     private ArrayList<EventItem> getJoinedList() {
+        if (c.joinedEvents == null) return new ArrayList<>();
+
         ArrayList<EventItem> upcomingEventList = new ArrayList<>();
         for (String venueEventKey: c.joinedEvents.keySet()) {
             upcomingEventList.add(new EventItem(venueEventKey));
-            Log.d("victortest", venueEventKey);
         }
         return upcomingEventList;
     }
