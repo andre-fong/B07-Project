@@ -9,6 +9,7 @@ import java.util.Objects;
 public class Event {
     private String key;
     private String name;
+
     private String venueKey;
     private String hostKey;
     private int maxCustomers;

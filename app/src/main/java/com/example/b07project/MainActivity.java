@@ -43,9 +43,7 @@ public class MainActivity extends AppCompatActivity implements ChecksAdmin{
         db = FirebaseDatabase.getInstance();
         auth = FirebaseAuth.getInstance();
         // Create invisible clickable buttons
-        Button adminButton = (Button)findViewById(R.id.ctrAdminLink);
         Button signupButton = (Button)findViewById(R.id.ctrCreateAccount);
-        adminButton.setBackgroundColor(Color.TRANSPARENT);
         signupButton.setBackgroundColor(Color.TRANSPARENT);
     }
 
@@ -61,7 +59,12 @@ public class MainActivity extends AppCompatActivity implements ChecksAdmin{
     public void submitReq(View v) {
         String email = ((TextView)findViewById(R.id.ctrEmailField)).getText().toString();
         String pwd = ((TextView)findViewById(R.id.ctrPasswordField)).getText().toString();
-        signin(email, pwd);
+
+        // Handle empty editText field
+        if (email.matches("") || pwd.matches(""))
+            Toast.makeText(MainActivity.this, "Cannot login with empty fields", Toast.LENGTH_SHORT).show();
+        else
+            signin(email, pwd);
     }
 
     public void signin(String email, String pwd){
@@ -83,12 +86,16 @@ public class MainActivity extends AppCompatActivity implements ChecksAdmin{
                 });
     }
     public void customerLogin(){
-        Intent intent = new Intent(this, VenueActivity.class);
+        Log.d("signin", "isCustomer. uid: " + auth.getCurrentUser().getUid());
+        //navigate to customer dashboard
+        Intent intent = new Intent(this, CustomerHomepageActivity.class);
         startActivity(intent);
     }
     public void adminLogin(){
-//        Intent intent = new Intent(this, AdminDashbaordActivity.class);
-//        startActivity(intent);
+        Log.d("signin", "isAdmin. uid: " + auth.getCurrentUser().getUid());
+        //navigate to admin dashboard
+        Intent intent = new Intent(this, AdminHomepageActivity.class);
+        startActivity(intent);
     }
 
 

@@ -3,6 +3,7 @@ package com.example.b07project;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.util.Log;
@@ -34,7 +35,6 @@ public class VenueActivity extends AppCompatActivity implements AdapterView.OnIt
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         venue_spinner.setAdapter(adapter);
         venue_spinner.setOnItemSelectedListener(this);
-
     }
 
     // Copy the following code onto the previous page to open Venues Page
@@ -42,6 +42,11 @@ public class VenueActivity extends AppCompatActivity implements AdapterView.OnIt
 //        Intent intent = new Intent(this, VenueActivity.class);
 //        startActivity(intent);
 //    }
+
+    public void goToScheduleEventPage(View v){
+        Intent intent = new Intent(this, ScheduleEventActivity.class);
+        startActivity(intent);
+    }
 
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {

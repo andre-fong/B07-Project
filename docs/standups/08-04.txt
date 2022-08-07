@@ -1,0 +1,100 @@
+﻿Name: Xing Yu (Joe) Zhou
+
+
+What have you done since yesterday?
+- Discussed the design changes (including the schedule events).
+- Debugged and fixed signup null input error that caused the program to crash
+- Researched and gained a partial understanding of pickers.
+
+
+What are you planning on doing today?
+- Decided whether the time scheduling for events will be implemented using pickers or spinners
+- Finish implementing the UI for the time scheduling for events
+- Finish implementing some of the code for ScheduleEventActivity
+
+
+Any impediments or stumbling blocks?
+- Some questions about using code from outside sources (resolved)
+- Some errors with the signup-login (partially resolved)
+- Some design changes will require a change in implementation (partially resolved)
+
+
+
+
+Name: Andre Fong
+
+
+What have you done since yesterday?
+* Discuss changes to database
+* Fix some buggy paths in database functions code
+* Maintain design docs
+
+
+What are you planning on doing today?
+* Add skeleton and pseudocode for venues spinner
+* Plan Admin activities with design doc
+
+
+Any impediments or stumbling blocks?
+* None
+
+
+
+
+
+
+Name: Victor Hurst
+
+
+What have you done since yesterday?
+- Implemented UI for myevents activity
+- Worked on implementing functionality for myevents activity
+
+
+What are you planning on doing today?
+- Continue implementing my events activity
+- Make UI diagrams for admin dashboard
+
+
+Any impediments or stumbling blocks?
+- Attempting to make my activity work with the database
+
+
+
+
+
+
+Matthew Snelgrove: 
+
+
+What have you done since yesterday?
+ - Plan how to redo firebase functions
+
+
+What are you planning on doing today?
+- Modify database structure to store keys/identifiers instead of objects and make reading easier/more structured
+
+
+Any impediments or stumbling blocks?
+- Control over callbacks after completing call to database
+
+
+
+
+Name: Jiakai Sun
+
+
+What have you done since yesterday?
+- Go through some of the changes regarding data types and database method
+- Implemented EventActivity class
+- Linked EventActivity class to one of the parent UI
+- Solved login and signup issues
+
+
+What are you planning on doing today?
+- Add unjoined event for a user to the database
+- Implement joined events and hosted events UI
+
+
+Any impediments or stumbling blocks?
+- Spinner clicking not working as wanted

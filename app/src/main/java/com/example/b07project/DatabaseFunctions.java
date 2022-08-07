@@ -2,8 +2,8 @@ package com.example.b07project;
 
 import android.provider.ContactsContract;
 
-import androidx.annotation.NonNull;
 
+import androidx.annotation.NonNull;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -26,6 +26,7 @@ public abstract class DatabaseFunctions {
      * @param auth        instance of FirebaseAuth
      * @param callbackSrc class to callback to after database operation completion
      */
+
     public static void loggedInAsAdmin(FirebaseDatabase db, FirebaseAuth auth, ChecksAdmin callbackSrc){
         DatabaseReference adminRef = db.getReference("/admins/" + auth.getCurrentUser().getUid());
         adminRef.addListenerForSingleValueEvent(new ValueEventListener() {
