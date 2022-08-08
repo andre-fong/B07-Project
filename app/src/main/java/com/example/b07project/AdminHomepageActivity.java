@@ -8,7 +8,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
-
 import java.util.Map;
 
 public class AdminHomepageActivity extends AppCompatActivity implements ReadsAllVenues {
@@ -22,6 +21,9 @@ public class AdminHomepageActivity extends AppCompatActivity implements ReadsAll
         Spinner venue_spinner = findViewById(R.id.ctrEventsInVenueSpinner);
     }
 
+    public void goToAddVenueActivity(View view){
+        Intent intent = new Intent(this, AddVenueActivity.class);
+        startActivity(intent);
 
     @Override
     public void onAllVenuesReadSuccess(Map<String, Venue> venueMap) {
@@ -33,11 +35,9 @@ public class AdminHomepageActivity extends AppCompatActivity implements ReadsAll
     public void onAllVenuesReadError(String message) {
         Log.d("andre-testing-readallvenueserror", message);
     }
-
+    
 
     public void addVenue(View view){
         // TODO: Link to AddVenueActivity
     }
-
-
 }

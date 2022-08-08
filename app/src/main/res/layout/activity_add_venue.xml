@@ -4,44 +4,40 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AdminHomepageActivity">
+    tools:context=".AddVenueActivity">
 
     <TextView
-        android:id="@+id/ctrVenueName"
+        android:id="@+id/textView6"
         android:layout_width="0dp"
         android:layout_height="40dp"
         android:layout_marginStart="40dp"
         android:layout_marginTop="72dp"
         android:contentDescription="@string/admin_homepage_string"
-        android:text="@string/admin_homepage_string"
+        android:text="@string/add_venue_string"
         android:textSize="30sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Spinner
-        android:id="@+id/ctrEventsInVenueSpinner"
-        android:layout_width="0dp"
+    <EditText
+        android:id="@+id/editTextTextPersonName"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
         android:layout_marginTop="48dp"
-        android:layout_marginEnd="40dp"
-        android:contentDescription="@string/venue_spinner_description"
-        android:labelFor="@id/ctrEventsInVenueSpinner"
-        android:minHeight="48dp"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="@string/admin_venue_string"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ctrVenueName" />
+        app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
     <Button
-        android:id="@+id/add_venue_button"
+        android:id="@+id/button5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="109dp"
-        android:layout_marginTop="69dp"
-        android:layout_marginEnd="109dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="40dp"
         android:onClick="goToAddVenueActivity"
-        android:text="@string/add_venue_string"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:text="@string/add_string"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ctrEventsInVenueSpinner" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName" />
 </androidx.constraintlayout.widget.ConstraintLayout>
