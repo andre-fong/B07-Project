@@ -15,71 +15,38 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class MyEventsActivity extends AppCompatActivity implements UpdatesUI {
+public class MyEventsActivity extends AppCompatActivity implements ReadsCustomer, ReadsEvent {
     private FirebaseDatabase db;
     private FirebaseAuth auth;
     private Map<String, Customer> CustomerMap;
+
+    // Create ArrayList for joined events and hosted events
+    ArrayList<EventItem> joinList;
+    ArrayList<EventItem> hostList;
+
     private Customer c;
 
     protected void createJoinedEventsSpinner() {
         // Create reference to upcoming events spinner
-        Spinner upcomingEventsSpinner = findViewById(R.id.ctrjoinedEvents);
+        Spinner joinedEventsSpinner = findViewById(R.id.ctrjoinedEvents);
 
         // Create ArrayList of upcoming events to show and hosted events
-        ArrayList<EventItem> upcomingEventList = getJoinedList();
+        updateJoinList();
         // Create new EventAdapter to work with spinner
-        EventAdapter eventAdapter = new EventAdapter(this, upcomingEventList);
-        upcomingEventsSpinner.setAdapter(eventAdapter);
-
-        upcomingEventsSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                EventItem clickedItem = (EventItem)adapterView.getItemAtPosition(i);
-                String venueEventLink = clickedItem.getVenueEventLink();
-
-                // TODO: Uncomment out below once EventActivity class is created
-
-                // Intent intentToEventActivity = new Intent(this, EventActivity.class);
-                // intentToEventActivity.putExtra("venueEventLink", venueEventLink);
-                // startActivity(intentToEventActivity);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-                // Do nothing
-            }
-        });
-    };
+        EventAdapter eventAdapter = new EventAdapter(this, joinList);
+        joinedEventsSpinner.setAdapter(eventAdapter);
+    }
 
     protected void createHostedEventsSpinner() {
         // Create reference to upcoming events spinner
         Spinner hostedEventsSpinner = findViewById(R.id.ctrhostedEvents);
 
         // Create ArrayList of upcoming events to show and hosted events
-        ArrayList<EventItem> hostList = getHostedList();
+        updateHostList();
         // Create new EventAdapter to work with spinner
         EventAdapter eventAdapter = new EventAdapter(this, hostList);
         hostedEventsSpinner.setAdapter(eventAdapter);
-
-        hostedEventsSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                EventItem clickedItem = (EventItem)adapterView.getItemAtPosition(i);
-                String venueEventLink = clickedItem.getVenueEventLink();
-
-                // TODO: Uncomment out below once EventActivity class is created
-
-                // Intent intentToEventActivity = new Intent(this, EventActivity.class);
-                // intentToEventActivity.putExtra("venueEventLink", venueEventLink);
-                // startActivity(intentToEventActivity);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-                // Do nothing
-            }
-        });
-    };
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,35 +58,83 @@ public class MyEventsActivity extends AppCompatActivity implements UpdatesUI {
         auth = FirebaseAuth.getInstance();
 
         CustomerMap = new HashMap<String, Customer>();
-        DatabaseFunctions.readCustomerFromDatabase(db, auth.getCurrentUser().getUid(), CustomerMap, this);
+        c = CustomerMap.get(auth.getCurrentUser().getUid());
+
+        // Reset joinList and hostList
+        joinList = new ArrayList<EventItem>();
+        hostList = new ArrayList<EventItem>();
+
+        // IMPORTANT: Maintain order of creating joined events, then hosted events
+        createJoinedEventsSpinner();
+        createHostedEventsSpinner();
+        DatabaseFunctions.readCustomerFromDatabase(db, auth.getCurrentUser().getUid(), this);
+    }
+
+
+    private void updateJoinList() {
+        Map<String, String> joinMap = c.getHostedEventKeys();
+        if (joinMap == null) joinList = new ArrayList<EventItem>();     // may not needed
+
+//        ArrayList<EventItem> joinedEventList = new ArrayList<>();
+
+        for (String eventKey : joinMap.keySet()) {
+            Log.d("andre-testing-joinedevents", eventKey);
+            DatabaseFunctions.readEventFromDatabase(db, eventKey, this);
+        }
+//        return joinedEventList;
+    }
+
+
+    private void updateHostList() {
+        Map<String, String> hostMap = c.getJoinedEventKeys();
+        if (hostMap == null) hostList = new ArrayList<EventItem>();     // may not needed
+
+//        ArrayList<EventItem> hostedEventList = new ArrayList<>();
+
+        for (String eventKey : hostMap.keySet()) {
+            Log.d("andre-testing-hostedevents", eventKey);
+            DatabaseFunctions.readEventFromDatabase(db, eventKey, this);
+        }
+//        return hostedEventList;
     }
 
     @Override
-    public void updateUI() {
-        c = CustomerMap.get(auth.getCurrentUser().getUid());
-        createJoinedEventsSpinner();
-        createHostedEventsSpinner();
+    public void onCustomerReadSuccess(Customer c) {
+        //Everything already implemented no need to implement other things
     }
 
-    private ArrayList<EventItem> getHostedList() {
-        if (c.hostedEvents == null) return new ArrayList<>();
-
-        ArrayList<EventItem> hostedEventList = new ArrayList<>();
-
-        for (String venueEventKey: c.hostedEvents.keySet()) {
-            Log.d("victortest", venueEventKey);
-            hostedEventList.add(new EventItem(venueEventKey));
-        }
-        return hostedEventList;
+    @Override
+    public void onCustomerReadError(String errorMessage) {
+        Log.d("LOG ERROR", errorMessage);
     }
 
-    private ArrayList<EventItem> getJoinedList() {
-        if (c.joinedEvents == null) return new ArrayList<>();
+    @Override
+    public void onEventReadSuccess(Event event) {
 
-        ArrayList<EventItem> upcomingEventList = new ArrayList<>();
-        for (String venueEventKey: c.joinedEvents.keySet()) {
-            upcomingEventList.add(new EventItem(venueEventKey));
+        // IMPORTANT: Maintain order of adding to join list before host list
+        if (joinList.size() < c.getJoinedEventKeys().size()) {
+            addEventItemToList(event, joinList);
+            Log.d("andre-testing-addjoinedeventtolist", event.getKey());
         }
-        return upcomingEventList;
+        else if (hostList.size() < c.getHostedEventKeys().size()) {
+            addEventItemToList(event, hostList);
+            Log.d("andre-testing-addhostedeventtolist", event.getKey());
+        }
+        else {
+            Log.d("andre-testing", "FINISHED WRITING EVENT LISTS");
+        }
+    }
+
+
+    @Override
+    public void onEventReadError(String message) {
+        Log.d("LOG ERROR", message);
+    }
+
+
+    // Helper fcn. used in onEventReadSuccess
+    // Add EventItem to corresponding ArrayList
+    public void addEventItemToList(Event event, ArrayList<EventItem> eventList) {
+        eventList.add(new EventItem(event));
     }
 }
