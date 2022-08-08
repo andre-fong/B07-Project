@@ -2,6 +2,7 @@ package com.example.b07project;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -24,8 +25,9 @@ public class AdminHomepageActivity extends AppCompatActivity implements AdapterV
         venue_spinner.setOnItemSelectedListener((AdapterView.OnItemSelectedListener) this);
     }
 
-    public void addVenue(View view){
-        // Should go to AddVenue Activity
+    public void goToAddVenueActivity(View view){
+        Intent intent = new Intent(this, AddVenueActivity.class);
+        startActivity(intent);
     }
 
     @Override
