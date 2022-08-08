@@ -19,11 +19,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class CustomerHomepageActivity extends AppCompatActivity implements ReadsAllEvents {
+public class CustomerHomepageActivity extends AppCompatActivity implements ReadsAllEvents, ReadsAllVenues {
     private FirebaseDatabase db;
     private FirebaseAuth auth;
     private ArrayList<EventItem> upcomingEventList;
+    private ArrayList<VenueItem> venuesList;
     private EventAdapter eventAdapter;
+    private VenueAdapter venueAdapter;
 //    private Map<String, Event> eventsMap;
 
     @Override
@@ -36,7 +38,8 @@ public class CustomerHomepageActivity extends AppCompatActivity implements Reads
         auth = FirebaseAuth.getInstance();
 
         upcomingEventList = new ArrayList<EventItem>();
-//        eventsMap = new HashMap<String, Event>();
+        venuesList = new ArrayList<VenueItem>();
+
         DatabaseFunctions.readAllEventsFromDatabase(db, this);
 
         Log.d("andre-testing", "onCreate finished.");
@@ -45,18 +48,16 @@ public class CustomerHomepageActivity extends AppCompatActivity implements Reads
 
     // Executes when success with reading all events
     // Reads returned eventMap and updates spinner to display events
+    @Override
     public void onAllEventsReadSuccess(Map<String, Event> eventMap) {
-        upcomingEventList = new ArrayList<EventItem>();
-
-        for (Event event : eventMap.values()) {
-            Log.d("andre-testing-eventname", event.getKey());
-        }
+//        upcomingEventList = new ArrayList<EventItem>();               // may need after
 
         // TODO: Implement time for viewing upcoming events
 
         for (Event event : eventMap.values()) {
             // if event is upcoming:
             upcomingEventList.add(new EventItem(event));
+            Log.d("andre-testing", "EVENT read from db: " + event.getKey());
         }
 
         // Create new EventAdapter to work with spinner
@@ -65,17 +66,43 @@ public class CustomerHomepageActivity extends AppCompatActivity implements Reads
         // Get spinner obj
         Spinner upcomingEventsSpinner = findViewById(R.id.ctrUpcomingEventsSpinner);
 
+        // Update event spinner to display upcoming events
         upcomingEventsSpinner.setAdapter(eventAdapter);
     }
 
 
     // Executes when error with reading all events
+    @Override
     public void onAllEventsReadError(String errorMessage) {
-        Log.d("andre-testing", errorMessage);
+        Log.d("andre-testing-error", errorMessage);
     }
 
 
-    // Send customer to EventActivity given selected event after clicking button
+    @Override
+    public void onAllVenuesReadSuccess(Map<String, Venue> venueMap) {
+        for (Venue venue : venueMap.values()) {
+            venuesList.add(new VenueItem(venue));
+            Log.d("andre-testing", "VENUE read from db: " + venue.getName());
+        }
+
+        // Create new VenueAdapter to work with spinner
+        venueAdapter = new VenueAdapter(this, venuesList);
+
+        // Get spinner obj
+        Spinner venuesSpinner = findViewById(R.id.ctrVenuesSpinner);
+
+        // Update venue spinner to display venues
+        venuesSpinner.setAdapter(venueAdapter);
+    }
+
+
+    @Override
+    public void onAllVenuesReadError(String errorMessage) {
+        Log.d("andre-testing-error", errorMessage);
+    }
+
+
+    // Send customer to EventActivity given selected EVENT (after clicking go)
     public void goToUpcoming(View v){
 
         // Get spinner obj
@@ -89,6 +116,22 @@ public class CustomerHomepageActivity extends AppCompatActivity implements Reads
         startActivity(intentToEventActivity);
     }
 
+
+    // Send customer to VenueActivity given selected VENUE (after clicking go)
+    public void goToVenue(View v) {
+
+        // Get spinner obj
+        Spinner venuesSpinner = findViewById(R.id.ctrVenuesSpinner);
+
+        // Get VenueItem selected
+        VenueItem selectedItem = venuesList.get(venuesSpinner.getSelectedItemPosition());
+        String venueName = selectedItem.getVenueName();
+        Intent intentToVenueActivity = new Intent(this, VenueActivity.class);
+        intentToVenueActivity.putExtra("venueName", venueName);
+        startActivity(intentToVenueActivity);
+    }
+
+    
     // Sends customer to MyEventsActivity
     public void myEventsClicked(View v) {
         Intent intentToMyEvents = new Intent(this, MyEventsActivity.class);
