@@ -12,10 +12,6 @@
 
     <string name="venue_string">Venue Name</string>
     <string name="venue_spinner_description">Available Events:</string>
-    <string-array name="events">
-        <item>Sample_Sport1</item>
-        <item>Sample_Sport2</item>
-    </string-array>
 
     <string name="schedule_string">Schedule an Event</string>
     <string name="customer_homepage_header">Customer Homepage</string>
