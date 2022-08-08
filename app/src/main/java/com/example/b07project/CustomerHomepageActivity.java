@@ -41,6 +41,7 @@ public class CustomerHomepageActivity extends AppCompatActivity implements Reads
         venuesList = new ArrayList<VenueItem>();
 
         DatabaseFunctions.readAllEventsFromDatabase(db, this);
+        DatabaseFunctions.readAllVenuesFromDatabase(db, this);
     }
 
 
