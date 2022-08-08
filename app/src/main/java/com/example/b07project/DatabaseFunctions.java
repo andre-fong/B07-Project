@@ -67,6 +67,7 @@ public abstract class DatabaseFunctions {
                     callbackSrc.onCustomerReadError("must @Exclude getter for Uid in Customer class");
                     return;
                 }
+
                 callbackSrc.onCustomerReadSuccess(customer);
                 return;
             }
@@ -124,12 +125,31 @@ public abstract class DatabaseFunctions {
             public void onDataChange(DataSnapshot venueSnap) {
                 //Read from database
                 Venue venue = venueSnap.getValue(Venue.class);
-                callbackSrc.onVenueReadSuccess(venue);
-                return;
+                //For every event
+                for(String eventKey : venue.getEventKeys().keySet()){
+                    DatabaseReference eventRef = db.getReference("/events/" + eventKey);
+                    eventRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                        //Add Event object corresponding to eventKey to venue
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot eventSnap) {
+                            venue.addEvent(eventSnap.getValue(Event.class));
+                            //Done adding all events
+                            if(venue.getEvents().size() == venue.getEventKeys().size()){
+                                callbackSrc.onVenueReadSuccess(venue);
+                                return;
+                            }
+                        }
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+                            callbackSrc.onVenueReadError(error.getMessage());
+                            return;
+                        }
+                    });
+                }
             }
             @Override
-            public void onCancelled(DatabaseError databaseError) {
-                callbackSrc.onVenueReadError(databaseError.getMessage());
+            public void onCancelled(DatabaseError error) {
+                callbackSrc.onVenueReadError(error.getMessage());
                 return;
             }
         });
@@ -149,6 +169,7 @@ public abstract class DatabaseFunctions {
         eventsRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot eventsSnap) {
+                long size = eventsSnap.getChildrenCount();
                 //Read events from database
                 for (DataSnapshot eventSnap : eventsSnap.getChildren()) {
                     Event event = eventSnap.getValue(Event.class);
@@ -189,8 +210,32 @@ public abstract class DatabaseFunctions {
                 //Read venues from database
                 for (DataSnapshot venueSnap : venuesSnap.getChildren()) {
                     Venue venue = venueSnap.getValue(Venue.class);
-                    //Add venue to map
-                    venueMap.put(venue.getName(), venue);
+                    //For every event at venue
+                    for(String eventKey : venue.getEventKeys().keySet()){
+                        DatabaseReference eventRef = db.getReference("/events/" + eventKey);
+                        eventRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                            //Add Event object corresponding to eventKey to venue
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot eventSnap) {
+                                venue.addEvent(eventSnap.getValue(Event.class));
+                                //Done adding all events to specific venue
+                                if(venue.getEvents().size() == venue.getEventKeys().size()){
+                                    //Add venue to map
+                                    venueMap.put(venue.getName(), venue);
+                                    //Done adding all completed venues to venueMap
+                                    if(venueMap.size() == venuesSnap.getChildrenCount()){
+                                        callbackSrc.onAllVenuesReadSuccess(venueMap);
+                                        return;
+                                    }
+                                }
+                            }
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+                                callbackSrc.onAllVenuesReadError(error.getMessage());
+                                return;
+                            }
+                        });
+                    }
                 }
                 callbackSrc.onAllVenuesReadSuccess(venueMap);
                 return;

@@ -1,6 +1,9 @@
 package com.example.b07project;
 
+import android.provider.ContactsContract;
+
 import com.google.firebase.database.Exclude;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -8,7 +11,7 @@ import java.util.List;
 import java.util.Map;
 
 
-class Customer {
+class Customer implements ReadsEvent{
     private Map<String, Event> joinedEvents;
     private Map<String, Event> hostedEvents;
     private Map<String, String> joinedEventKeys;
@@ -71,5 +74,15 @@ class Customer {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public void onEventReadSuccess(Event event) {
+
+    }
+
+    @Override
+    public void onEventReadError(String message) {
+
     }
 }
