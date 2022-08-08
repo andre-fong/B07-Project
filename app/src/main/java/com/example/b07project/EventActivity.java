@@ -29,11 +29,10 @@ public class EventActivity extends AppCompatActivity implements ReadsCustomer{
         Bundle b = i.getExtras();
         eventKey = (String) b.get("inter");
         Log.d("zane", "displaying" + eventKey);
-
+        event_name.setText(eventKey); //set the event name to the selected event
         db = FirebaseDatabase.getInstance();
         auth = FirebaseAuth.getInstance();
         DatabaseFunctions.readCustomerFromDatabase(db, auth.getCurrentUser().getUid(), this);
-        event_name.setText(eventKey); //set the event name to the selected event
     }
 
     public void joinEvent(View view) {

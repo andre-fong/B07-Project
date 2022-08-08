@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Map;
 
 
-class Customer implements ReadsEvent{
+class Customer {
     private Map<String, Event> joinedEvents;
     private Map<String, Event> hostedEvents;
     private Map<String, String> joinedEventKeys;
@@ -67,6 +67,7 @@ class Customer implements ReadsEvent{
     public void addHostedEvent(Event event){
         hostedEvents.put(event.getName(), event);
     }
+
     //For Customers created by reading from database
     public boolean addUid(String uid){
         if(this.uid == null){
@@ -74,15 +75,5 @@ class Customer implements ReadsEvent{
             return true;
         }
         return false;
-    }
-
-    @Override
-    public void onEventReadSuccess(Event event) {
-
-    }
-
-    @Override
-    public void onEventReadError(String message) {
-
     }
 }
