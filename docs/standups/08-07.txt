@@ -1,0 +1,71 @@
+Name: Xing Yu (Joe) Zhou
+
+What have you done since yesterday?
+- Implemented the AdminHomepage UI and designed some of the functions and committed and pushed onto GitHub (schedule-events branch)
+- Communicated my design for Admins to the group and confirmed the design changes
+- reviewed pull request for merging CustomerHomepage branch with venues-events branch
+
+What are you planning on doing today?
+- Pull the branch after all the merging (presumably the main branch)
+- Completing all the UIs related to Admins (AddVenue UI and AdminVenue UI) and connect them
+
+Any impediments or stumbling blocks?
+- Some changes to the Firebase Authentifcaiton lead to the login to crash (unresolved)
+- Some merging conflicts in merging CustomerHomepage branch with venues-events branch
+
+
+Name: Andre Fong
+
+What have you done since yesterday?
+Merge all feature branches
+Resolve conflicts
+Continue troubleshooting issues
+
+What are you planning on doing today?
+Change UpdateUI implementation in several activities
+Add working Venue spinner to CustomerHomepageActivity
+Implement working code to VenueActivity
+Add working Event spinner to VenueActivity
+
+Any impediments or stumbling blocks?
+None
+
+
+
+Name: Victor Hurst
+
+What have you done since yesterday?
+- Fixed the click buttons on ScheduleEvents activity so that they show the correct display
+
+What are you planning on doing today?
+- Fixing up functions due to the change in database functions 
+
+Any impediments or stumbling blocks?
+- None
+
+
+
+Matthew Snelgrove: 
+
+What have you done since yesterday?
+ - implemented database functions, data validation in rules, callback interfaces for each database function
+
+What are you planning on doing today?
+- merge changes
+
+Any impediments or stumbling blocks?
+- long time since branching
+
+
+Name: Jiakai Sun
+
+What have you done since yesterday?
+- Merged EventsActivity, MyEventsActivity, ScheduleEvent,CustomerHomePage and VenueEvents
+- Solved some problems caused by merging
+
+What are you planning on doing today?
+- Keep working on Admin functionalities
+- Finish solving merging problems
+
+Any impediments or stumbling blocks?
+- Merging have some conflicts on Class redefinition
