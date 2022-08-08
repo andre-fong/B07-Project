@@ -1,15 +1,14 @@
 package com.example.b07project;
 
 public class VenueItem {
-    private String venueName;
+    private Venue venue;
 
-    public VenueItem(String venueName) {
-        // venueName is the key of the venue in the database, with the form "[venue name]"
-        this.venueName = venueName;
+    public VenueItem(Venue venue) {
+        this.venue = venue;
     }
 
     // Returns venue name
     public String getVenueName() {
-        return venueName;
+        return venue.getName();
     }
 }
