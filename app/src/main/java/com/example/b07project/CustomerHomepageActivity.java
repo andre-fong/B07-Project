@@ -41,8 +41,6 @@ public class CustomerHomepageActivity extends AppCompatActivity implements Reads
         venuesList = new ArrayList<VenueItem>();
 
         DatabaseFunctions.readAllEventsFromDatabase(db, this);
-
-        Log.d("andre-testing", "onCreate finished.");
     }
 
 
@@ -52,6 +50,9 @@ public class CustomerHomepageActivity extends AppCompatActivity implements Reads
     public void onAllEventsReadSuccess(Map<String, Event> eventMap) {
 //        upcomingEventList = new ArrayList<EventItem>();               // may need after
 
+        Log.d("andre-testing", "CALLBACK ENTERED");
+        if (eventMap.size()==0)
+            Log.d("andre-testing", "eventMpa empty");
         // TODO: Implement time for viewing upcoming events
 
         for (Event event : eventMap.values()) {

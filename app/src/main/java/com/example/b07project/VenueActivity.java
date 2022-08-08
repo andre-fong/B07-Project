@@ -47,10 +47,7 @@ public class VenueActivity extends AppCompatActivity implements ReadsVenue, Read
     @Override
     public void onVenueReadSuccess(Venue venue) {
         // Convert all eventKeys to Event objects
-        for (String eventKey : venue.getEventKeys().keySet()) {
-            Log.d("andre-testing-eventkeyfromvenueobj", eventKey);
-            DatabaseFunctions.readEventFromDatabase(db, eventKey, this);
-        }
+
     }
 
 

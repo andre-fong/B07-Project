@@ -18,7 +18,6 @@ import java.util.Map;
 public class MyEventsActivity extends AppCompatActivity implements ReadsCustomer, ReadsEvent {
     private FirebaseDatabase db;
     private FirebaseAuth auth;
-    private Map<String, Customer> CustomerMap;
 
     // Create ArrayList for joined events and hosted events
     ArrayList<EventItem> joinList;
@@ -57,16 +56,8 @@ public class MyEventsActivity extends AppCompatActivity implements ReadsCustomer
         db = FirebaseDatabase.getInstance();
         auth = FirebaseAuth.getInstance();
 
-        CustomerMap = new HashMap<String, Customer>();
-        c = CustomerMap.get(auth.getCurrentUser().getUid());
-
-        // Reset joinList and hostList
-        joinList = new ArrayList<EventItem>();
-        hostList = new ArrayList<EventItem>();
-
-        // IMPORTANT: Maintain order of creating joined events, then hosted events
-        createJoinedEventsSpinner();
-        createHostedEventsSpinner();
+//        CustomerMap = new HashMap<String, Customer>();
+//        c = CustomerMap.get(auth.getCurrentUser().getUid());
         DatabaseFunctions.readCustomerFromDatabase(db, auth.getCurrentUser().getUid(), this);
     }
 
@@ -77,10 +68,10 @@ public class MyEventsActivity extends AppCompatActivity implements ReadsCustomer
 
 //        ArrayList<EventItem> joinedEventList = new ArrayList<>();
 
-        for (String eventKey : joinMap.keySet()) {
-            Log.d("andre-testing-joinedevents", eventKey);
-            DatabaseFunctions.readEventFromDatabase(db, eventKey, this);
-        }
+//        for (String eventKey : joinMap.keySet()) {
+//            Log.d("andre-testing-joinedevents", eventKey);
+//            DatabaseFunctions.readEventFromDatabase(db, eventKey, this);
+//        }
 //        return joinedEventList;
     }
 
@@ -100,7 +91,14 @@ public class MyEventsActivity extends AppCompatActivity implements ReadsCustomer
 
     @Override
     public void onCustomerReadSuccess(Customer c) {
-        //Everything already implemented no need to implement other things
+        this.c = c;
+        // Reset joinList and hostList
+        joinList = new ArrayList<EventItem>();
+        hostList = new ArrayList<EventItem>();
+
+        // IMPORTANT: Maintain order of creating joined events, then hosted events
+        createJoinedEventsSpinner();
+        createHostedEventsSpinner();
     }
 
     @Override
