@@ -7,7 +7,7 @@
     tools:context=".VenueActivity">
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/ctrVenueName"
         android:layout_width="0dp"
         android:layout_height="40dp"
         android:layout_marginStart="40dp"
@@ -19,18 +19,18 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Spinner
-        android:id="@+id/adminEventSpinner"
+        android:id="@+id/ctrEventsInVenueSpinner"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
         android:layout_marginTop="48dp"
         android:layout_marginEnd="40dp"
         android:contentDescription="@string/venue_spinner_description"
-        android:labelFor="@id/adminEventSpinner"
+        android:labelFor="@id/ctrEventsInVenueSpinner"
         android:minHeight="48dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@+id/ctrVenueName" />
 
     <Button
         android:id="@+id/add_venue_button"
@@ -43,6 +43,6 @@
         android:text="@string/schedule_string"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/adminEventSpinner" />
+        app:layout_constraintTop_toBottomOf="@+id/ctrEventsInVenueSpinner" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
