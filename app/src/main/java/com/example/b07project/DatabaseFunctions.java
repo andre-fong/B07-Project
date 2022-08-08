@@ -68,6 +68,37 @@ public abstract class DatabaseFunctions {
                     callbackSrc.onCustomerReadError("must @Exclude getter for Uid in Customer class");
                     return;
                 }
+                if(customer.getJoinedEventKeys() == null){
+                    if(customer.getHostedEventKeys() == null){
+                        callbackSrc.onCustomerReadSuccess(customer);
+                        return;
+                    }
+                    for(String hostedEventKey : customer.getHostedEventKeys().keySet()){
+                        DatabaseReference hostedEventRef = db.getReference("/events/" + hostedEventKey);
+                        hostedEventRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                            //Add hosted Event object corresponding to eventKey to venue
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot hostedEventSnap) {
+                                Event hostedEvent = hostedEventSnap.getValue(Event.class);
+                                //Set key field in event
+                                if (!hostedEvent.addKey(hostedEventKey)) {
+                                    callbackSrc.onCustomerReadError("must @Exclude getter for eventKey in Event class");
+                                    return;
+                                }
+                                customer.addHostedEvent(hostedEvent);
+                                if(customer.getHostedEvents().size() == customer.getHostedEventKeys().size()){
+                                    callbackSrc.onCustomerReadSuccess(customer);
+                                    return;
+                                }
+                            }
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+                                callbackSrc.onCustomerReadError(error.getMessage());
+                                return;
+                            }
+                        });
+                    }
+                }
                 for(String joinedEventKey : customer.getJoinedEventKeys().keySet()){
                     DatabaseReference joinedEventRef = db.getReference("/events/" + joinedEventKey);
                     joinedEventRef.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -82,6 +113,10 @@ public abstract class DatabaseFunctions {
                             }
                             customer.addJoinedEvent(joinedEvent);
                             if(customer.getJoinedEvents().size() == customer.getJoinedEventKeys().size()){
+                                if(customer.getHostedEventKeys() == null){
+                                    callbackSrc.onCustomerReadSuccess(customer);
+                                    return;
+                                }
                                 for(String hostedEventKey : customer.getHostedEventKeys().keySet()){
                                     DatabaseReference hostedEventRef = db.getReference("/events/" + hostedEventKey);
                                     hostedEventRef.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -171,6 +206,11 @@ public abstract class DatabaseFunctions {
             public void onDataChange(DataSnapshot venueSnap) {
                 //Read from database
                 Venue venue = venueSnap.getValue(Venue.class);
+                //No events
+                if(venue.getEventKeys() == null){
+                    callbackSrc.onVenueReadSuccess(venue);
+                    return;
+                }
                 //For every event
                 for(String eventKey : venue.getEventKeys().keySet()){
                     DatabaseReference eventRef = db.getReference("/events/" + eventKey);
@@ -184,6 +224,7 @@ public abstract class DatabaseFunctions {
                                 callbackSrc.onVenueReadError("must @Exclude getter for eventKey in Event class");
                                 return;
                             }
+                            venue.addToEvents(event);
                             if(venue.getEvents().size() == venue.getEventKeys().size()){
                                 callbackSrc.onVenueReadSuccess(venue);
                                 return;
