@@ -19,14 +19,14 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Spinner
-        android:id="@+id/venue_spinner"
+        android:id="@+id/adminEventSpinner"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
         android:layout_marginTop="48dp"
         android:layout_marginEnd="40dp"
         android:contentDescription="@string/venue_spinner_description"
-        android:labelFor="@id/venue_spinner"
+        android:labelFor="@id/adminEventSpinner"
         android:minHeight="48dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -43,6 +43,6 @@
         android:text="@string/schedule_string"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/venue_spinner" />
+        app:layout_constraintTop_toBottomOf="@+id/adminEventSpinner" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

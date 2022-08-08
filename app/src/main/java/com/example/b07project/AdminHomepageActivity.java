@@ -2,14 +2,13 @@ package com.example.b07project;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
-public class AdminHomepageActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, UpdatesUI{
+public class AdminHomepageActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,7 +17,7 @@ public class AdminHomepageActivity extends AppCompatActivity implements AdapterV
 
         // This should be the same spinner as in VenueActivity (updates made to this spinner should transfer onto VenueActivity)
 
-        Spinner venue_spinner = findViewById(R.id.venue_spinner);
+        Spinner venue_spinner = findViewById(R.id.adminEventSpinner);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.events, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         venue_spinner.setAdapter(adapter);
@@ -36,11 +35,6 @@ public class AdminHomepageActivity extends AppCompatActivity implements AdapterV
 
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {
-
-    }
-
-    @Override
-    public void updateUI() {
 
     }
 }

@@ -4,19 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AdminHomepageActivity">
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="0dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="72dp"
-        android:contentDescription="@string/admin_homepage_string"
-        android:text="@string/admin_homepage_string"
-        android:textSize="30sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    tools:context=".AdminVenueActivity">
 
     <Spinner
         android:id="@+id/adminEventSpinner"
@@ -25,22 +13,33 @@
         android:layout_marginStart="40dp"
         android:layout_marginTop="48dp"
         android:layout_marginEnd="40dp"
-        android:contentDescription="@string/venue_spinner_description"
         android:labelFor="@id/adminEventSpinner"
         android:minHeight="48dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="72dp"
+        android:contentDescription="@string/admin_homepage_string"
+        android:text="@string/venue_string"
+        android:textSize="30sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/add_venue_button"
+        android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="109dp"
+        android:layout_marginStart="131dp"
         android:layout_marginTop="69dp"
-        android:layout_marginEnd="109dp"
-        android:onClick="addVenue"
-        android:text="@string/add_venue_string"
+        android:layout_marginEnd="131dp"
+        android:onClick="deleteEvent"
+        android:text="@string/delete_event_string"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/adminEventSpinner" />
