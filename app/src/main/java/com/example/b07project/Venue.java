@@ -19,14 +19,16 @@ public class Venue {
     // TODO: Update fields based on updated DB functions
     private String name;
     private Map<String, String> eventKeys;
+    private Map<String, Event> events;
 
     public Venue(){
-        eventKeys = new HashMap<String, String>();
+        events = new HashMap<String, Event>();
     }
 
-    public Venue(String name, Map<String, String> eventKeys) {
+    public Venue(String name) {
         this.name = name;
-        this.eventKeys = eventKeys;
+        eventKeys = new HashMap<String, String>();
+        events = new HashMap<String, Event>();
     }
 
     public String getName() {
@@ -35,6 +37,11 @@ public class Venue {
 
     public Map<String, String> getEventKeys() {
         return eventKeys;
+    }
+
+    @Exclude
+    public Map<String, Event> getEvents(){
+        return events;
     }
 
     public boolean addEvent(Event event){
@@ -46,6 +53,9 @@ public class Venue {
         return true;
     }
 
+    public void addToEvents(Event event){
+        events.put(event.getKey(), event);
+    }
     public boolean removeEvent(Event event){
         if(this.eventKeys.containsKey(event.getKey())){
             this.eventKeys.remove(event.getKey());
