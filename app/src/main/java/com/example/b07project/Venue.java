@@ -21,7 +21,6 @@ public class Venue {
     private Map<String, Event> events;
 
     public Venue(){
-        eventKeys = new HashMap<String, String>();
         events = new HashMap<String, Event>();
     }
 
@@ -53,6 +52,9 @@ public class Venue {
         return true;
     }
 
+    public void addToEvents(Event event){
+        events.put(event.getKey(), event);
+    }
     public boolean removeEvent(Event event){
         if(this.eventKeys.containsKey(event.getKey())){
             this.eventKeys.remove(event.getKey());

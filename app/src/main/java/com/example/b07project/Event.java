@@ -9,11 +9,13 @@ import java.util.Objects;
 public class Event {
     private String key;
     private String name;
-
     private String venueKey;
+    private Map<String, Boolean> customerKeys;
     private String hostKey;
     private int maxCustomers;
-    private Map<String, Boolean> customerKeys;
+    private int curCustomers;
+    private long startTime;
+    private long endTime;
 
     //for database
     public Event(){
@@ -78,5 +80,17 @@ public class Event {
             return true;
         }
         return false;
+    }
+
+    public int getCurCustomers() {
+        return curCustomers;
+    }
+
+    public long getStartTime() {
+        return startTime;
+    }
+
+    public long getEndTime() {
+        return endTime;
     }
 }
