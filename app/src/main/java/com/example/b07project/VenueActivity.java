@@ -1,76 +1,83 @@
 package com.example.b07project;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.TextView;
 
-import com.google.android.gms.common.data.DataBufferObserverSet;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
 
-public class VenueActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, ReadsCustomer {
+public class VenueActivity extends AppCompatActivity implements ReadsVenue, ReadsEvent {
+    private FirebaseDatabase db;
+    private FirebaseAuth auth;
+    private ArrayList<EventItem> eventsInVenueList;
+    private EventAdapter eventAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_venue);
 
-        Spinner venue_spinner = findViewById(R.id.venue_spinner);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.events, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        venue_spinner.setAdapter(adapter);
-        venue_spinner.setOnItemSelectedListener(this);
+        // Get venue name passed from CustomerHomepageActivity
+        Intent i = getIntent();
+        String venueName = i.getStringExtra("venueName");
+
+        // Set TextView header to venue name
+        TextView venueNameText = (TextView) findViewById(R.id.ctrVenueName);
+        venueNameText.setText(venueName);
+
+        eventsInVenueList = new ArrayList<EventItem>();
+
+        DatabaseFunctions.readVenueFromDatabase(db, venueName, this);
+
+        // Create spinner with events listed under current venue
+        Spinner eventsInVenueSpinner = (Spinner) findViewById(R.id.ctrEventsInVenueSpinner);
+        eventsInVenueSpinner.setAdapter(eventAdapter);
     }
 
-    // Copy the following code onto the previous page to open Venues Page
-//    public void goToVenuePage(){
-//        Intent intent = new Intent(this, VenueActivity.class);
-//        startActivity(intent);
-//    }
+    // TODO: Change below code based on updated DB functions
 
+    @Override
+    public void onVenueReadSuccess(Venue venue) {
+        // Convert all eventKeys to Event objects
+        for (String eventKey : venue.getEventKeys().keySet()) {
+            Log.d("andre-testing-eventkeyfromvenueobj", eventKey);
+            DatabaseFunctions.readEventFromDatabase(db, eventKey, this);
+        }
+    }
+
+
+    @Override
+    public void onVenueReadError(String message) {
+        Log.d("andre-testing-error", message);
+    }
+
+
+    @Override
+    public void onEventReadSuccess(Event event) {
+
+    }
+
+
+    @Override
+    public void onEventReadError(String message) {
+        Log.d("andre-testing-error", message);
+    }
+
+
+    // Send customer to schedule a new event
     public void goToScheduleEventPage(View v){
         Intent intent = new Intent(this, ScheduleEventActivity.class);
         startActivity(intent);
     }
 
-    @Override
-    public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
 
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> adapterView) {
-
-    }
-
-    //Called by DatabaseFunctions
-    public void updateUI(){
-        //TODO update ui
-    }
-
-    @Override
-    public void onCustomerReadSuccess(Customer c) {
-//        Log.d("readCustomer", customerMap.toString());
-        Log.d("readCustomer", "uid: " + c.getUid() + "joinedEvents: " + c.getJoinedEvents().toString() + "hostedEvents: " + c.getHostedEvents().toString());
-    }
-
-    @Override
-    public void onCustomerReadError(String errorMessage) {
-
-    }
+    // Add Event to
 }

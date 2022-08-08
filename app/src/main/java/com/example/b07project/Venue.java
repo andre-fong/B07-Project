@@ -16,6 +16,7 @@ import java.util.Objects;
 import com.google.firebase.database.Exclude;
 
 public class Venue {
+    // TODO: Update fields based on updated DB functions
     private String name;
     private Map<String, String> eventKeys;
 

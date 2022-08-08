@@ -9,8 +9,9 @@ import java.util.Map;
 
 
 class Customer {
-    private Map<String, Event> joinedEvents;
-    private Map<String, Event> hostedEvents;
+    // TODO: Update fields based on DB functions
+//    private Map<String, Event> joinedEvents;
+//    private Map<String, Event> hostedEvents;
     private Map<String, String> joinedEventKeys;
     private Map<String, String> hostedEventKeys;
     
@@ -19,25 +20,25 @@ class Customer {
 
     public Customer() {
         // Default constructor required for calls to DataSnapshot.getValue(User.class)
-        joinedEvents = new HashMap<String, Event>();
-        hostedEvents = new HashMap<String, Event>();
+        joinedEventKeys = new HashMap<String, String>();
+        hostedEventKeys = new HashMap<String, String>();
     }
 
     public Customer(String email, String uid) {
         this.email = email;
         this.uid = uid;
-        joinedEvents = new HashMap<String, Event>();
-        hostedEvents = new HashMap<String, Event>();
+        joinedEventKeys = new HashMap<String, String>();
+        hostedEventKeys = new HashMap<String, String>();
     }
 
-    @Exclude
-    public Map<String, Event> getJoinedEvents() {
-        return joinedEvents;
-    }
-    @Exclude
-    public Map<String, Event> getHostedEvents() {
-        return hostedEvents;
-    }
+//    @Exclude
+//    public Map<String, Event> getJoinedEvents() {
+//        return joinedEvents;
+//    }
+//    @Exclude
+//    public Map<String, Event> getHostedEvents() {
+//        return hostedEvents;
+//    }
 
     public Map<String, String> getJoinedEventKeys() { return joinedEventKeys; }
 
@@ -54,16 +55,17 @@ class Customer {
         return uid;
     }
 
-    public void setJoinedEvents(Map<String, Event> joinedEvents) {
-        this.joinedEvents = joinedEvents;
+    public void setJoinedEventKeys(Map<String, String> joinedEventKeys) {
+        this.joinedEventKeys = joinedEventKeys;
     }
 
-    public void addJoinedEvent(Event event){
-        joinedEvents.put(event.getName(), event);
+    public void addJoinedEvent(String eventKey){
+        joinedEventKeys.put(eventKey, eventKey);
     }
-    public void addHostedEvent(Event event){
-        hostedEvents.put(event.getName(), event);
+    public void addHostedEvent(String eventKey){
+        hostedEventKeys.put(eventKey, eventKey);
     }
+
     //For Customers created by reading from database
     public boolean addUid(String uid){
         if(this.uid == null){
