@@ -13,19 +13,12 @@ import android.widget.TextView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Map;
 
-public class EventActivity extends AppCompatActivity implements UpdatesUI{
+public class EventActivity extends AppCompatActivity implements ReadsCustomer{
     private FirebaseDatabase db;
     private FirebaseAuth auth;
-    private ArrayList<EventItem> upcomingEventList;
-    private EventAdapter eventAdapter;
-    private Map<String, Event> eventsMap;
-    private Map<String, Customer> CustomerMap;
-    private Customer c;
-    private String eventName;
+    private String eventKey;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,52 +27,41 @@ public class EventActivity extends AppCompatActivity implements UpdatesUI{
         TextView event_name = (TextView)findViewById(R.id.textView2);
         Intent i = getIntent();
         Bundle b = i.getExtras();
-        eventName = (String) b.get("inter");
-        Log.d("zane", "displaying" + eventName);
+        eventKey = (String) b.get("inter");
+        Log.d("zane", "displaying" + eventKey);
 
         db = FirebaseDatabase.getInstance();
         auth = FirebaseAuth.getInstance();
-        CustomerMap= new HashMap<String, Customer>();
-        DatabaseFunctions.readCustomerFromDatabase(db, auth.getCurrentUser().getUid(), CustomerMap, this);
-
-            /*if (venueEventKey == eventName){
-                bool = true;
-                break;
-            }/
-
-        }*/
-        event_name.setText(eventName); //set the event name to the selected event
+        DatabaseFunctions.readCustomerFromDatabase(db, auth.getCurrentUser().getUid(), this);
+        event_name.setText(eventKey); //set the event name to the selected event
     }
 
     public void joinEvent(View view) {
+        // TODO: Add customer to event (update customer fields and event fields)
         //triggers after onClick, update the user's joined events by adding this event
-
     }
 
-
     @Override
-    public void updateUI() {
+    public void onCustomerReadSuccess(Customer c) {
         Boolean bool = false;
-        c = CustomerMap.get(auth.getCurrentUser().getUid());
-        if (c.joinedEvents == null){
+        Map<String, String> keyMap = c.getJoinedEventKeys();
+
+        // Check if joined events contains current event
+        if (keyMap.containsKey(eventKey)) {
             bool = true;
         }
-        Button button = (Button)findViewById(R.id.button2);
+
+        Button button = (Button)findViewById(R.id.ctrJoinEventButton);
         ViewGroup layout = (ViewGroup) button.getParent();
+
         if (bool){ // inside if statement, add arguments that check if already joined
             //make the button disappear when event is already joined by the user
             layout.removeView(button);
-        } //this is a null test
-
-        /* //use this when functions for joined events is implemented
-
-        for (String venueEventKey: c.joinedEvents.keySet()) {
-            if (eventName == venueEventKey){
-                bool = true;
-                break;
-            }
         }
+    }
 
-         */
+    @Override
+    public void onCustomerReadError(String errorMessage) {
+        Log.d("error", errorMessage);
     }
 }
