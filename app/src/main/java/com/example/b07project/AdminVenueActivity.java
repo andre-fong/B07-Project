@@ -56,14 +56,14 @@ public class AdminVenueActivity extends AppCompatActivity implements ReadsVenue,
 
     @Override
     public void onVenueReadError(String message) {
-        Log.d("andre-testing-readallvenueserror", message);
+        Log.d("Joe-testing-readallvenueserror", message);
     }
 
     @Override
     public void onAllEventsReadSuccess(Map<String, Event> eventMap) {
         for (Event event : eventMap.values()) {
             eventsInVenueList.add(new EventItem(event));
-            Log.d("andre-testing", "EVENT read from db: " + event.getName());
+            Log.d("Joe-testing", "EVENT read from db: " + event.getName());
         }
 
         eventAdapter = new EventAdapter(this, eventsInVenueList);
@@ -73,6 +73,6 @@ public class AdminVenueActivity extends AppCompatActivity implements ReadsVenue,
 
     @Override
     public void onAllEventsReadError(String errorMessage) {
-        Log.d("andre-testing-readalleventserror", errorMessage);
+        Log.d("Joe-testing-readalleventserror", errorMessage);
     }
 }
