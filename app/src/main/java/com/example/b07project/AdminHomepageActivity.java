@@ -46,7 +46,7 @@ public class AdminHomepageActivity extends AppCompatActivity implements ReadsAll
     public void onAllVenuesReadSuccess(Map<String, Venue> venueMap) {
         for (Venue venue : venueMap.values()) {
             venuesList.add(new VenueItem(venue));
-            Log.d("andre-testing", "VENUE read from db: " + venue.getName());
+            Log.d("Joe-testing", "VENUE read from db: " + venue.getName());
         }
 
         // Create new VenueAdapter to work with spinner
@@ -61,7 +61,7 @@ public class AdminHomepageActivity extends AppCompatActivity implements ReadsAll
 
     @Override
     public void onAllVenuesReadError(String message) {
-        Log.d("andre-testing-readallvenueserror", message);
+        Log.d("Joe-testing-readallvenueserror", message);
     }
 
     // Send customer to VenueActivity given selected VENUE (after clicking go)
