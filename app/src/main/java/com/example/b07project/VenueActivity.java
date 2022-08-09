@@ -28,6 +28,9 @@ public class VenueActivity extends AppCompatActivity implements ReadsVenue {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_venue);
 
+        db = FirebaseDatabase.getInstance();
+        auth = FirebaseAuth.getInstance();
+
         // Get venue name passed from CustomerHomepageActivity
         Intent i = getIntent();
         String venueName = i.getStringExtra("venueName");
@@ -36,8 +39,8 @@ public class VenueActivity extends AppCompatActivity implements ReadsVenue {
         TextView venueNameText = (TextView) findViewById(R.id.ctrVenueName);
         venueNameText.setText(venueName);
 
-        eventsInVenueList = new ArrayList<EventItem>();
 
+        Log.d("lalala", "hahaha");
         DatabaseFunctions.readVenueFromDatabase(db, venueName, this);
     }
 
@@ -45,27 +48,28 @@ public class VenueActivity extends AppCompatActivity implements ReadsVenue {
 
     @Override
     public void onVenueReadSuccess(Venue venue) {
-        Log.d("andre-testing", "venuereadsuccess entered");
+        eventsInVenueList = new ArrayList<EventItem>();
+        Log.d("lalala", "venuereadsuccess entered");
         Map<String, Event> events = venue.getEvents();
-        if (events.size()==0)
-            Log.d("andre-testing", "no events in" + venue.getName());
+        if (events.size()!=0)
+            Log.d("lalala", "no events in" + venue.getName());
 
         for (Event event : events.values()) {
             eventsInVenueList.add(new EventItem(event));
             Log.d("andre-testing-addeventinvenue", event.getKey());
         }
+        Spinner eventsInVenueSpinner = (Spinner) findViewById(R.id.ctrEventsInVenueSpinner);
 
         eventAdapter = new EventAdapter(this, eventsInVenueList);
 
         // Create spinner with events listed under current venue
-        Spinner eventsInVenueSpinner = (Spinner) findViewById(R.id.ctrEventsInVenueSpinner);
         eventsInVenueSpinner.setAdapter(eventAdapter);
     }
 
 
     @Override
     public void onVenueReadError(String message) {
-        Log.d("andre-testing-error", message);
+        Log.d("error", message);
     }
 
 

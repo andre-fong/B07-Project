@@ -171,6 +171,11 @@ public abstract class DatabaseFunctions {
             public void onDataChange(DataSnapshot venueSnap) {
                 //Read from database
                 Venue venue = venueSnap.getValue(Venue.class);
+                //No events
+                if(venue.getEventKeys() == null){
+                    callbackSrc.onVenueReadSuccess(venue);
+                    return;
+                }
                 //For every event
                 for(String eventKey : venue.getEventKeys().keySet()){
                     DatabaseReference eventRef = db.getReference("/events/" + eventKey);
@@ -184,6 +189,7 @@ public abstract class DatabaseFunctions {
                                 callbackSrc.onVenueReadError("must @Exclude getter for eventKey in Event class");
                                 return;
                             }
+                            venue.addToEvents(event);
                             if(venue.getEvents().size() == venue.getEventKeys().size()){
                                 callbackSrc.onVenueReadSuccess(venue);
                                 return;
