@@ -35,10 +35,12 @@
             android:exported="false" />
         <activity
             android:name=".ScheduleEventActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".CustomerHomepageActivity"/>
         <activity
             android:name=".VenueActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".CustomerHomepageActivity" />
         <activity
             android:name=".SignupActivity"
             android:exported="false"
