@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -75,6 +76,11 @@ public class AdminVenueActivity extends AppCompatActivity implements ReadsVenue,
         if (venue.getEvents().size() == 0) {
             Toast.makeText(this, venue.getName() + " has no events!", Toast.LENGTH_SHORT).show();
             return;
+        }
+        else {
+            // Make remove event button visible if there exist events
+            Button deleteEventButton = (Button) findViewById(R.id.admRemoveEventButton);
+            deleteEventButton.setEnabled(true);
         }
 
         for (Event event : venue.getEvents().values()) {
