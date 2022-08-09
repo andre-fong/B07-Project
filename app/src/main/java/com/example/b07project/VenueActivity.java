@@ -14,11 +14,14 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
-public class VenueActivity extends AppCompatActivity implements ReadsVenue, ReadsEvent {
+public class VenueActivity extends AppCompatActivity implements ReadsVenue {
     private FirebaseDatabase db;
     private FirebaseAuth auth;
     private ArrayList<EventItem> eventsInVenueList;
+    private ArrayList<EventItem> venueEventsList;
     private EventAdapter eventAdapter;
 
     @Override
@@ -26,47 +29,50 @@ public class VenueActivity extends AppCompatActivity implements ReadsVenue, Read
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_venue);
 
+        db = FirebaseDatabase.getInstance();
+        auth = FirebaseAuth.getInstance();
+
         // Get venue name passed from CustomerHomepageActivity
         Intent i = getIntent();
         String venueName = i.getStringExtra("venueName");
+
+
 
         // Set TextView header to venue name
         TextView venueNameText = (TextView) findViewById(R.id.ctrVenueName);
         venueNameText.setText(venueName);
 
-        eventsInVenueList = new ArrayList<EventItem>();
 
+        Log.d("lalala", "hahaha");
         DatabaseFunctions.readVenueFromDatabase(db, venueName, this);
-
-        // Create spinner with events listed under current venue
-        Spinner eventsInVenueSpinner = (Spinner) findViewById(R.id.ctrEventsInVenueSpinner);
-        eventsInVenueSpinner.setAdapter(eventAdapter);
     }
 
     // TODO: Change below code based on updated DB functions
 
     @Override
     public void onVenueReadSuccess(Venue venue) {
-        // Convert all eventKeys to Event objects
+        eventsInVenueList = new ArrayList<EventItem>();
+        Log.d("lalala", "venuereadsuccess entered");
+        Map<String, Event> events = venue.getEvents();
+        if (events.size()!=0)
+            Log.d("lalala", "no events in" + venue.getName());
 
+        for (Event event : events.values()) {
+            eventsInVenueList.add(new EventItem(event));
+            Log.d("andre-testing-addeventinvenue", event.getKey());
+        }
+        Spinner eventsInVenueSpinner = (Spinner) findViewById(R.id.ctrEventsInVenueSpinner);
+
+        eventAdapter = new EventAdapter(this, eventsInVenueList);
+
+        // Create spinner with events listed under current venue
+        eventsInVenueSpinner.setAdapter(eventAdapter);
     }
 
 
     @Override
     public void onVenueReadError(String message) {
-        Log.d("andre-testing-error", message);
-    }
-
-
-    @Override
-    public void onEventReadSuccess(Event event) {
-
-    }
-
-
-    @Override
-    public void onEventReadError(String message) {
-        Log.d("andre-testing-error", message);
+        Log.d("error", message);
     }
 
 
@@ -76,6 +82,14 @@ public class VenueActivity extends AppCompatActivity implements ReadsVenue, Read
         startActivity(intent);
     }
 
+    public void goToVenueEvents(View view) {
+        Spinner venueEventsSpinner = findViewById(R.id.ctrEventsInVenueSpinner);
+        Log.d("lalala", "tatata");
 
-    // Add Event to
+        EventItem selectedItem = eventsInVenueList.get(venueEventsSpinner.getSelectedItemPosition());
+        String venueEventLink = selectedItem.getVenueEventLink();
+        Intent intentToEventActivity = new Intent(this, EventActivity.class);
+        intentToEventActivity.putExtra("inter", venueEventLink);
+        startActivity(intentToEventActivity);
+    }
 }

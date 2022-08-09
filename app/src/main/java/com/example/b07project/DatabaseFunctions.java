@@ -689,4 +689,3 @@ public abstract class DatabaseFunctions {
 //    }
 
 }
-

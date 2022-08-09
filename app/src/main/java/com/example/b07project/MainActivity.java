@@ -31,7 +31,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
-public class MainActivity extends AppCompatActivity implements ChecksAdmin{
+public class MainActivity extends AppCompatActivity implements ChecksAdmin, CreatesEvent, CreatesVenue{
     private FirebaseDatabase db;
     private FirebaseAuth auth;
     @Override
@@ -47,6 +47,10 @@ public class MainActivity extends AppCompatActivity implements ChecksAdmin{
         signupButton.setBackgroundColor(Color.TRANSPARENT);
 
         signin("customer0@gmail.com", "password");
+
+        /*Map<String, Boolean> map = new HashMap<>();
+        Event newevent = new Event("south park party", "UTSC", "MHdBxKtyXiMHjV5yuftEJihHK3c2",4,1660572684000l,1660572694000l);
+        DatabaseFunctions.createEvent(db, newevent,this);*/
     }
 
     // Start SignupActivity
@@ -116,5 +120,25 @@ public class MainActivity extends AppCompatActivity implements ChecksAdmin{
     @Override
     public void onCheckAdminError(String errorMessage) {
         Log.d("signin error:", errorMessage);
+    }
+
+    @Override
+    public void onCreateEventSuccess(Event event) {
+
+    }
+
+    @Override
+    public void onCreateEventError(String errorMessage) {
+
+    }
+
+    @Override
+    public void onCreateVenueSuccess(Venue venue) {
+
+    }
+
+    @Override
+    public void onCreateVenueError(String errorMessage) {
+        Log.d("lalala",errorMessage);
     }
 }

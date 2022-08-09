@@ -2,6 +2,7 @@ package com.example.b07project;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -21,10 +22,10 @@ public class AdminHomepageActivity extends AppCompatActivity implements ReadsAll
         Spinner venue_spinner = findViewById(R.id.ctrEventsInVenueSpinner);
     }
 
-    public void goToAddVenueActivity(View view){
+    public void goToAddVenueActivity(View view) {
         Intent intent = new Intent(this, AddVenueActivity.class);
         startActivity(intent);
-
+    }
     @Override
     public void onAllVenuesReadSuccess(Map<String, Venue> venueMap) {
 
