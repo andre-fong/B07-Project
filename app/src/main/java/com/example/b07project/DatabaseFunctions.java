@@ -373,7 +373,7 @@ public abstract class DatabaseFunctions {
                                 }).addOnFailureListener(new OnFailureListener() {
                                     @Override
                                     public void onFailure(@NonNull Exception e) {
-                                        callbackSrc.onJoinEventError(e.getMessage());
+                                        callbackSrc.onJoinEventError("1" + e.getMessage());
                                         return;
                                     }
                                 });
@@ -381,14 +381,14 @@ public abstract class DatabaseFunctions {
                         }).addOnFailureListener(new OnFailureListener() {
                             @Override
                             public void onFailure(@NonNull Exception e) {
-                                callbackSrc.onJoinEventError(e.getMessage());
+                                callbackSrc.onJoinEventError("2" + e.getMessage());
                                 return;
                             }
                         });
                     }
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
-                        callbackSrc.onJoinEventError(error.getMessage());
+                        callbackSrc.onJoinEventError("3" + error.getMessage());
                         return;
                     }
                 });
@@ -484,7 +484,7 @@ public abstract class DatabaseFunctions {
                                 }).addOnFailureListener(new OnFailureListener() {
                                     @Override
                                     public void onFailure(@NonNull Exception e) {
-                                        callbackSrc.onCreateEventError(e.getMessage());
+                                        callbackSrc.onCreateEventError("1" + e.getMessage());
                                         return;
                                     }
                                 });
@@ -492,7 +492,7 @@ public abstract class DatabaseFunctions {
                         }).addOnFailureListener(new OnFailureListener() {
                             @Override
                             public void onFailure(@NonNull Exception e) {
-                                callbackSrc.onCreateEventError(e.getMessage());
+                                callbackSrc.onCreateEventError("2" + e.getMessage());
                                 return;
                             }
                         });
@@ -500,7 +500,7 @@ public abstract class DatabaseFunctions {
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        callbackSrc.onCreateEventError(e.getMessage());
+                        callbackSrc.onCreateEventError("3" + e.getMessage());
                         return;
                     }
                 });
@@ -508,7 +508,7 @@ public abstract class DatabaseFunctions {
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                callbackSrc.onCreateEventError(e.getMessage());
+                callbackSrc.onCreateEventError("4" + e.getMessage());
                 return;
             }
         });
