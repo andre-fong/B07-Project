@@ -26,10 +26,12 @@
             android:exported="false" />
         <activity
             android:name=".EventActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".MyEventsActivity" />
         <activity
             android:name=".MyEventsActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".CustomerHomepageActivity"/>
         <activity
             android:name=".AdminHomepageActivity"
             android:exported="false" />
