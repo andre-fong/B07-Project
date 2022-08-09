@@ -42,6 +42,7 @@ public class AdminHomepageActivity extends AppCompatActivity implements ReadsAll
         startActivity(intent);
     }
 
+
     @Override
     public void onAllVenuesReadSuccess(Map<String, Venue> venueMap) {
         for (Venue venue : venueMap.values()) {
