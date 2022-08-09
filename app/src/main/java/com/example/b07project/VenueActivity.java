@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,7 +23,6 @@ public class VenueActivity extends AppCompatActivity implements ReadsVenue {
     private FirebaseDatabase db;
     private FirebaseAuth auth;
     private ArrayList<EventItem> eventsInVenueList;
-    private ArrayList<EventItem> venueEventsList;
     private EventAdapter eventAdapter;
 
     @Override
@@ -37,12 +37,11 @@ public class VenueActivity extends AppCompatActivity implements ReadsVenue {
         Intent i = getIntent();
         String venueName = i.getStringExtra("venueName");
 
-
-
         // Set TextView header to venue name
         TextView venueNameText = (TextView) findViewById(R.id.ctrVenueName);
         venueNameText.setText(venueName);
 
+        eventsInVenueList = new ArrayList<EventItem>();
 
         Log.d("lalala", "hahaha");
         DatabaseFunctions.readVenueFromDatabase(db, venueName, this);
@@ -54,8 +53,15 @@ public class VenueActivity extends AppCompatActivity implements ReadsVenue {
     public void onVenueReadSuccess(Venue venue) {
         Log.d("andre-testing", "venuereadsuccess entered");
         Map<String, Event> events = venue.getEvents();
-        if (events.size()==0)
-            Toast.makeText(this, "No events in venue", Toast.LENGTH_SHORT).show();
+
+        if (events == null || events.size() == 0) {
+            Toast.makeText(this, "No events in " + venue.getName(), Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        // Enable button if there exist events
+        Button toEvent = (Button) findViewById(R.id.ctrVenueEvent);
+        toEvent.setEnabled(true);
 
         for (Event event : events.values()) {
             eventsInVenueList.add(new EventItem(event));

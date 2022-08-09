@@ -52,23 +52,25 @@
         tools:text="@string/ctrjoinedEventsTxt" />
 
     <Button
-        android:id="@+id/ctrhostedEventsButton"
+        android:id="@+id/ctrJoinedEventsButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
-        android:text="go"
+        android:enabled="false"
         android:onClick="goToJoined"
+        android:text="go"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ctrjoinedEvents" />
 
     <Button
-        android:id="@+id/ctrjoinedEventsButton"
+        android:id="@+id/ctrHostedEventsButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
-        android:text="go"
+        android:enabled="false"
         android:onClick="goToHosted"
+        android:text="go"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ctrhostedEvents" />

@@ -6,14 +6,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.Spinner;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Map;
 
 public class MyEventsActivity extends AppCompatActivity implements ReadsCustomer {
@@ -40,8 +39,6 @@ public class MyEventsActivity extends AppCompatActivity implements ReadsCustomer
     }
 
 
-
-
     @Override
     public void onCustomerReadSuccess(Customer c) {
         // Reset joinList and hostList
@@ -50,14 +47,13 @@ public class MyEventsActivity extends AppCompatActivity implements ReadsCustomer
         Spinner joinedEventsSpinner = findViewById(R.id.ctrjoinedEvents);
         Spinner hostedEventsSpinner = findViewById(R.id.ctrhostedEvents);
 
-
-        Map<String, Event> joinMap = c.getHostedEvents();
+        Map<String, Event> joinMap = c.getJoinedEvents();
 
         for (Event event : joinMap.values()) {
             joinList.add(new EventItem(event));
         }
 
-        Map<String, Event> hostMap = c.getJoinedEvents();
+        Map<String, Event> hostMap = c.getHostedEvents();
 
         for (Event event : hostMap.values()) {
             hostList.add(new EventItem(event));
@@ -68,6 +64,14 @@ public class MyEventsActivity extends AppCompatActivity implements ReadsCustomer
         EventAdapter eventAdapter2 = new EventAdapter(this, hostList);
         hostedEventsSpinner.setAdapter(eventAdapter2);
 
+        // Reactivate button if list of events are not empty
+        Button goToHosted = (Button) findViewById(R.id.ctrHostedEventsButton);
+        Button goToJoined = (Button) findViewById(R.id.ctrJoinedEventsButton);
+
+        if (joinList.size() > 0)
+            goToJoined.setEnabled(true);
+        if (hostList.size() > 0)
+            goToHosted.setEnabled(true);
     }
 
     @Override
