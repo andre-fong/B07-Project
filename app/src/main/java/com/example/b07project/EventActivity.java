@@ -9,13 +9,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.Map;
 
-public class EventActivity extends AppCompatActivity implements ReadsCustomer{
+public class EventActivity extends AppCompatActivity implements ReadsCustomer, JoinsEvent{
     private FirebaseDatabase db;
     private FirebaseAuth auth;
     private String eventKey;
@@ -38,6 +39,7 @@ public class EventActivity extends AppCompatActivity implements ReadsCustomer{
     public void joinEvent(View view) {
         // TODO: Add customer to event (update customer fields and event fields)
         //triggers after onClick, update the user's joined events by adding this event
+        DatabaseFunctions.joinEvent(db, auth.getCurrentUser().getUid(),eventKey, this);
     }
 
     @Override
@@ -45,8 +47,10 @@ public class EventActivity extends AppCompatActivity implements ReadsCustomer{
         Boolean bool = false;
         Map<String, String> keyMap = c.getJoinedEventKeys();
 
-        // Check if joined events contains current event
-        if (keyMap.containsKey(eventKey)) {
+        if (keyMap == null){
+
+        }
+        else if (keyMap.containsKey(eventKey)) {
             bool = true;
         }
 
@@ -63,6 +67,21 @@ public class EventActivity extends AppCompatActivity implements ReadsCustomer{
 
     @Override
     public void onCustomerReadError(String errorMessage) {
+        Log.d("error", errorMessage);
+    }
+
+    @Override
+    public void onJoinEventSuccess(String uid, String eventKey) {
+        Toast.makeText(EventActivity.this, "Joined Successfully", Toast.LENGTH_SHORT).show();
+        Button button = (Button)findViewById(R.id.ctrJoinEventButton);
+        ViewGroup layout = (ViewGroup) button.getParent();
+        layout.removeView(button);
+        TextView msg = (TextView) findViewById(R.id.ctrJoined) ;
+        msg.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void onJoinEventError(String errorMessage) {
         Log.d("error", errorMessage);
     }
 }
