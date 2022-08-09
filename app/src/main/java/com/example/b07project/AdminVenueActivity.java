@@ -81,7 +81,7 @@ public class AdminVenueActivity extends AppCompatActivity implements ReadsVenue,
             eventsInVenueList.add(new EventItem(event));
         }
         eventAdapter = new EventAdapter(this, eventsInVenueList);
-        Spinner eventsInVenueSpinner = (Spinner) findViewById(R.id.ctrEventsInVenueSpinner);
+        Spinner eventsInVenueSpinner = (Spinner) findViewById(R.id.AdminEventSpinner);
         eventsInVenueSpinner.setAdapter(eventAdapter);
     }
 
