@@ -21,6 +21,7 @@ public class VenueActivity extends AppCompatActivity implements ReadsVenue {
     private FirebaseDatabase db;
     private FirebaseAuth auth;
     private ArrayList<EventItem> eventsInVenueList;
+    private ArrayList<EventItem> venueEventsList;
     private EventAdapter eventAdapter;
 
     @Override
@@ -34,6 +35,8 @@ public class VenueActivity extends AppCompatActivity implements ReadsVenue {
         // Get venue name passed from CustomerHomepageActivity
         Intent i = getIntent();
         String venueName = i.getStringExtra("venueName");
+
+
 
         // Set TextView header to venue name
         TextView venueNameText = (TextView) findViewById(R.id.ctrVenueName);
@@ -77,5 +80,16 @@ public class VenueActivity extends AppCompatActivity implements ReadsVenue {
     public void goToScheduleEventPage(View v){
         Intent intent = new Intent(this, ScheduleEventActivity.class);
         startActivity(intent);
+    }
+
+    public void goToVenueEvents(View view) {
+        Spinner venueEventsSpinner = findViewById(R.id.ctrEventsInVenueSpinner);
+        Log.d("lalala", "tatata");
+
+        EventItem selectedItem = eventsInVenueList.get(venueEventsSpinner.getSelectedItemPosition());
+        String venueEventLink = selectedItem.getVenueEventLink();
+        Intent intentToEventActivity = new Intent(this, EventActivity.class);
+        intentToEventActivity.putExtra("inter", venueEventLink);
+        startActivity(intentToEventActivity);
     }
 }
