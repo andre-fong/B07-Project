@@ -204,6 +204,7 @@ public abstract class DatabaseFunctions {
         venueRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot venueSnap) {
+                Log.d("venue", name);
                 //Read from database
                 Venue venue = venueSnap.getValue(Venue.class);
                 //No events

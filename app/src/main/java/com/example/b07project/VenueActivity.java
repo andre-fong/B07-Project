@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -51,21 +52,20 @@ public class VenueActivity extends AppCompatActivity implements ReadsVenue {
 
     @Override
     public void onVenueReadSuccess(Venue venue) {
-        eventsInVenueList = new ArrayList<EventItem>();
-        Log.d("lalala", "venuereadsuccess entered");
+        Log.d("andre-testing", "venuereadsuccess entered");
         Map<String, Event> events = venue.getEvents();
-        if (events.size()!=0)
-            Log.d("lalala", "no events in" + venue.getName());
+        if (events.size()==0)
+            Toast.makeText(this, "No events in venue", Toast.LENGTH_SHORT).show();
 
         for (Event event : events.values()) {
             eventsInVenueList.add(new EventItem(event));
             Log.d("andre-testing-addeventinvenue", event.getKey());
         }
-        Spinner eventsInVenueSpinner = (Spinner) findViewById(R.id.ctrEventsInVenueSpinner);
 
         eventAdapter = new EventAdapter(this, eventsInVenueList);
 
         // Create spinner with events listed under current venue
+        Spinner eventsInVenueSpinner = (Spinner) findViewById(R.id.ctrEventsInVenueSpinner);
         eventsInVenueSpinner.setAdapter(eventAdapter);
     }
 
@@ -81,7 +81,8 @@ public class VenueActivity extends AppCompatActivity implements ReadsVenue {
         Intent intent = new Intent(this, ScheduleEventActivity.class);
         startActivity(intent);
     }
-
+    
+    
     public void goToVenueEvents(View view) {
         Spinner venueEventsSpinner = findViewById(R.id.ctrEventsInVenueSpinner);
         Log.d("lalala", "tatata");

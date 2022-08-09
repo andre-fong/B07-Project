@@ -12,10 +12,6 @@
 
     <string name="venue_string">Venue Name</string>
     <string name="venue_spinner_description">Available Events:</string>
-    <string-array name="events">
-        <item>Sample_Sport1</item>
-        <item>Sample_Sport2</item>
-    </string-array>
 
     <string name="schedule_string">Schedule an Event</string>
     <string name="customer_homepage_header">Customer Homepage</string>
@@ -26,8 +22,8 @@
     <string name="ctrjoinedEventsTxt">Joined Events:</string>
     <string name="event_string">Event</string>
     <string name="max_players_string">Max Players</string>
-    <string name="pick_time"></string>
-    <string name="pick_date"></string>
+    <string name="pick_time">Pick a Time</string>
+    <string name="pick_date">Pick a Date</string>
     <string name="admin_homepage_string">Admin Homepage</string>
     <string name="admin_venue_string">Venue Name</string>
     <string name="add_venue_string">Add a Venue</string>

@@ -46,11 +46,7 @@ public class MainActivity extends AppCompatActivity implements ChecksAdmin, Crea
         Button signupButton = (Button)findViewById(R.id.ctrCreateAccount);
         signupButton.setBackgroundColor(Color.TRANSPARENT);
 
-        signin("customer0@gmail.com", "password");
-
-        /*Map<String, Boolean> map = new HashMap<>();
-        Event newevent = new Event("south park party", "UTSC", "MHdBxKtyXiMHjV5yuftEJihHK3c2",4,1660572684000l,1660572694000l);
-        DatabaseFunctions.createEvent(db, newevent,this);*/
+        //signin("customer0@gmail.com", "password");
     }
 
     // Start SignupActivity
