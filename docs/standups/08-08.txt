@@ -1,0 +1,107 @@
+﻿Name: Xing Yu (Joe) Zhou
+
+
+What have you done since yesterday?
+* Implemented UIs for AdminVenueActivity and AddVenueActivity
+* Implemented spinners and connections in AdminHomepage and AdminVenueActivity
+* Implemented connections for AdminHomepage to AddVenueActivity
+* Created admin_add_venue branch on GitHub and committed and pushed changes onto the branch
+
+
+What are you planning on doing today?
+* Learn how to write to Firebase
+* Implement addVenue method in AddVenueActivity and test all activities related to Admin
+
+
+Any impediments or stumbling blocks?
+* GitHub branch confusion due to merging from yesterday (resolved)
+* Firebase changes led to a delay in testing
+
+
+
+
+
+
+Name: Andre Fong
+
+
+What have you done since yesterday?
+* Added functional database functions in several activities and troubleshoot corresponding issues (ie. callbacks)
+* Added working Venue spinner that reads from Firebase to CustomerHomepageActivity
+* Added working Event spinner that reads from Firebase to VenueActivity
+* Maintained clean Git workflow in refactor-updateui branch
+
+
+What are you planning on doing today?
+* Delegate leftover tasks to all of group
+* Continue fixing and refactoring several activities to use updated DB functions
+* Implement removing events given Admin user
+
+
+Any impediments or stumbling blocks?
+* None
+
+
+
+
+
+
+Name: Victor Hurst
+
+
+What have you done since yesterday?
+- Fixed up the functions from the change in database functions
+
+
+What are you planning on doing today?
+
+
+-Implementing front-end part of ScheduleEvents Activity
+-Implementing database side of ScheduleEvents activity 
+
+
+Any impediments or stumbling blocks?
+- None
+
+
+
+
+
+
+Matthew Snelgrove: 
+
+
+What have you done since yesterday?
+- update database functions 
+
+
+What are you planning on doing today?
+- update rules
+- update database functions to conform to rules
+- debug
+
+
+
+
+Any impediments or stumbling blocks?
+- buggy database functions causing corrupt data in the database causing bugs causing corrupt data in the database causing bugs
+
+
+
+
+Name: Jiakai Sun
+
+
+What have you done since yesterday?
+* Merged databases and rewrite some of the functions related to classes
+* Added UI components for UI redirection
+* Implemented functions to interact buttons with database
+
+
+What are you planning on doing today?
+* Keep updating functionalities
+* Test through functionalities
+
+
+Any impediments or stumbling blocks?
+* Android studio shut down my computer automatically, emulator dysfunctioning.
