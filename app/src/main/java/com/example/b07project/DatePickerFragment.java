@@ -33,7 +33,7 @@ public class DatePickerFragment extends DialogFragment implements DatePickerDial
     public void onDateSet(DatePicker view, int year, int month, int day) {
         // Do something with the date chosen by the user
 
-        String date = month + "/" + day + "/" + year;
+        String date = (month+1) + "/" + day + "/" + year;
         Intent intent = new Intent(getActivity(), ScheduleEventActivity.class);
         intent.putExtra("date_string", date);
         intent.putExtra("time_string",this.getArguments().getString("time_string"));
