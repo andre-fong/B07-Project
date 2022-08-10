@@ -42,7 +42,8 @@ public abstract class DatabaseFunctions {
                     callbackSrc.onCheckAdminSuccess(false);
                     return;
                 }
-                callbackSrc.onCheckAdminError(error.getMessage());
+
+                callbackSrc.onCheckAdminError("request at " + adminRef.toString().substring(adminRef.getRoot().toString().length()) + " cancelled. " + error.getMessage());
                 return;
             }
         });
@@ -93,7 +94,7 @@ public abstract class DatabaseFunctions {
                             }
                             @Override
                             public void onCancelled(@NonNull DatabaseError error) {
-                                callbackSrc.onCustomerReadError(error.getMessage());
+                                callbackSrc.onCustomerReadError("request at " + hostedEventRef.toString().substring(hostedEventRef.getRoot().toString().length()) + " cancelled. " + error.getMessage());
                                 return;
                             }
                         });
@@ -137,7 +138,7 @@ public abstract class DatabaseFunctions {
                                         }
                                         @Override
                                         public void onCancelled(@NonNull DatabaseError error) {
-                                            callbackSrc.onCustomerReadError(error.getMessage());
+                                            callbackSrc.onCustomerReadError("request at " + hostedEventRef.toString().substring(hostedEventRef.getRoot().toString().length()) + " cancelled. " + error.getMessage());
                                             return;
                                         }
                                     });
@@ -146,15 +147,15 @@ public abstract class DatabaseFunctions {
                         }
                         @Override
                         public void onCancelled(@NonNull DatabaseError error) {
-                            callbackSrc.onCustomerReadError(error.getMessage());
+                            callbackSrc.onCustomerReadError("request at " + joinedEventRef.toString().substring(joinedEventRef.getRoot().toString().length()) + " cancelled. " + error.getMessage());
                             return;
                         }
                     });
                 }
             }
             @Override
-            public void onCancelled(DatabaseError databaseError) {
-                callbackSrc.onCustomerReadError(databaseError.getMessage());
+            public void onCancelled(DatabaseError error) {
+                callbackSrc.onCustomerReadError("request at " + customerRef.toString().substring(customerRef.getRoot().toString().length()) + " cancelled. " + error.getMessage());
                 return;
             }
         });
@@ -184,8 +185,8 @@ public abstract class DatabaseFunctions {
                 return;
             }
             @Override
-            public void onCancelled(DatabaseError databaseError) {
-                callbackSrc.onEventReadError(databaseError.getMessage());
+            public void onCancelled(DatabaseError error) {
+                callbackSrc.onEventReadError("request at " + eventRef.toString().substring(eventRef.getRoot().toString().length()) + " cancelled. " + error.getMessage());
                 return;
             }
         });
@@ -233,7 +234,7 @@ public abstract class DatabaseFunctions {
                         }
                         @Override
                         public void onCancelled(@NonNull DatabaseError error) {
-                            callbackSrc.onVenueReadError(error.getMessage());
+                            callbackSrc.onVenueReadError("request at " + eventRef.toString().substring(eventRef.getRoot().toString().length()) + " cancelled. " + error.getMessage());
                             return;
                         }
                     });
@@ -241,7 +242,7 @@ public abstract class DatabaseFunctions {
             }
             @Override
             public void onCancelled(DatabaseError error) {
-                callbackSrc.onVenueReadError(error.getMessage());
+                callbackSrc.onVenueReadError("request at " + venueRef.toString().substring(venueRef.getRoot().toString().length()) + " cancelled. " + error.getMessage());
                 return;
             }
         });
@@ -280,8 +281,8 @@ public abstract class DatabaseFunctions {
                 return;
             }
             @Override
-            public void onCancelled(DatabaseError databaseError) {
-                callbackSrc.onAllEventsReadError(databaseError.getMessage());
+            public void onCancelled(DatabaseError error) {
+                callbackSrc.onAllEventsReadError("request at " + eventsRef.toString().substring(eventsRef.getRoot().toString().length()) + " cancelled. " + error.getMessage());
                 return;
             }
         });
@@ -313,8 +314,8 @@ public abstract class DatabaseFunctions {
                 }
             }
             @Override
-            public void onCancelled(DatabaseError databaseError) {
-                callbackSrc.onAllVenuesReadError(databaseError.getMessage());
+            public void onCancelled(DatabaseError error) {
+                callbackSrc.onAllVenuesReadError("request at " + venuesRef.toString().substring(venuesRef.getRoot().toString().length()) + " cancelled. " + error.getMessage());
                 return;
             }
         });
@@ -338,7 +339,7 @@ public abstract class DatabaseFunctions {
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                callbackSrc.onCreateCustomerError(e.getMessage());
+                callbackSrc.onCreateCustomerError("failed to create customer with uid " + customer.getUid() + " at path " + customersRef.toString().substring(customersRef.getRoot().toString().length()) + ": " + e.getMessage());
                 return;
             }
         });
@@ -374,7 +375,7 @@ public abstract class DatabaseFunctions {
                                 }).addOnFailureListener(new OnFailureListener() {
                                     @Override
                                     public void onFailure(@NonNull Exception e) {
-                                        callbackSrc.onJoinEventError("1" + e.getMessage());
+                                        callbackSrc.onJoinEventError("failed to add event with eventKey " + eventKey + "to customer's joined events with uid " + uid + " at path " + customerJoinedEventsRef.toString().substring(customerJoinedEventsRef.getRoot().toString().length()) + ": " + e.getMessage());
                                         return;
                                     }
                                 });
@@ -382,14 +383,14 @@ public abstract class DatabaseFunctions {
                         }).addOnFailureListener(new OnFailureListener() {
                             @Override
                             public void onFailure(@NonNull Exception e) {
-                                callbackSrc.onJoinEventError("2" + e.getMessage());
+                                callbackSrc.onJoinEventError("failed to add customer with uid " + uid + " to event's customerKeys with eventKey " + eventKey +" at path " + eventRef.toString().substring(eventRef.getRoot().toString().length()) + ": " + e.getMessage());
                                 return;
                             }
                         });
                     }
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
-                        callbackSrc.onJoinEventError("3" + error.getMessage());
+                        callbackSrc.onJoinEventError("request at " + eventRef.toString().substring(eventRef.getRoot().toString().length()) + " cancelled. " + error.getMessage());
                         return;
                     }
                 });
@@ -427,7 +428,7 @@ public abstract class DatabaseFunctions {
                                 }).addOnFailureListener(new OnFailureListener() {
                                     @Override
                                     public void onFailure(@NonNull Exception e) {
-                                        callbackSrc.onLeaveEventError(e.getMessage());
+                                        callbackSrc.onLeaveEventError("failed to remove event with eventKey " + eventKey + "from customer's joined events with uid " + uid + " at path " + customerJoinedEventsRef.toString().substring(customerJoinedEventsRef.getRoot().toString().length()) + ": " + e.getMessage());
                                         return;
                                     }
                                 });
@@ -435,7 +436,7 @@ public abstract class DatabaseFunctions {
                         }).addOnFailureListener(new OnFailureListener() {
                             @Override
                             public void onFailure(@NonNull Exception e) {
-                                callbackSrc.onLeaveEventError(e.getMessage());
+                                callbackSrc.onLeaveEventError("failed to remove customer with uid " + uid + " from event's customerKeys with eventKey " + eventKey +" at path " + eventRef.toString().substring(eventRef.getRoot().toString().length()) + ": " + e.getMessage());
                                 return;
                             }
                         });
@@ -443,7 +444,7 @@ public abstract class DatabaseFunctions {
 
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
-                        callbackSrc.onLeaveEventError(error.getMessage());
+                        callbackSrc.onLeaveEventError("request at " + eventRef.toString().substring(eventRef.getRoot().toString().length()) + " cancelled. " + error.getMessage());
                         return;
                     }
                 });
@@ -485,7 +486,7 @@ public abstract class DatabaseFunctions {
                                 }).addOnFailureListener(new OnFailureListener() {
                                     @Override
                                     public void onFailure(@NonNull Exception e) {
-                                        callbackSrc.onCreateEventError("1" + e.getMessage());
+                                        callbackSrc.onCreateEventError("failed to add event with eventKey " + event.getKey() + "to venues's events with venueName " + event.getVenueKey() + " at path " + venueRef.toString().substring(venueRef.getRoot().toString().length()) + ": " + e.getMessage());
                                         return;
                                     }
                                 });
@@ -493,7 +494,7 @@ public abstract class DatabaseFunctions {
                         }).addOnFailureListener(new OnFailureListener() {
                             @Override
                             public void onFailure(@NonNull Exception e) {
-                                callbackSrc.onCreateEventError("2" + e.getMessage());
+                                callbackSrc.onCreateEventError("failed to add event with eventKey " + event.getKey() + "to customer's hosted events with uid " + event.getHostKey() + " at path " + hostRef.toString().substring(hostRef.getRoot().toString().length()) + ": " + e.getMessage());
                                 return;
                             }
                         });
@@ -501,7 +502,7 @@ public abstract class DatabaseFunctions {
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        callbackSrc.onCreateEventError("3" + e.getMessage());
+                        callbackSrc.onCreateEventError("failed to add event with eventKey " + event.getKey() + "to customer's joined events with uid " + event.getHostKey() + " at path " + hostRef.toString().substring(hostRef.getRoot().toString().length()) + ": " + e.getMessage());
                         return;
                     }
                 });
@@ -509,7 +510,7 @@ public abstract class DatabaseFunctions {
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                callbackSrc.onCreateEventError("4" + e.getMessage());
+                callbackSrc.onCreateEventError("failed to add event with eventKey " + event.getKey() + "to events at path " + eventRef.toString().substring(eventRef.getRoot().toString().length()) + ": " + e.getMessage());
                 return;
             }
         });
@@ -545,7 +546,6 @@ public abstract class DatabaseFunctions {
                                     @Override
                                     public void onSuccess(Void unused) {
                                         //Remove from host's hosted events
-                                        DatabaseReference customerRef = db.getReference("/customers/" + customerInEvent.getKey());
                                         customerRef.child("hostedEventKeys").child(eventKey).removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
                                             @Override
                                             public void onSuccess(Void unused) {
@@ -559,7 +559,7 @@ public abstract class DatabaseFunctions {
                                                 }).addOnFailureListener(new OnFailureListener() {
                                                     @Override
                                                     public void onFailure(@NonNull Exception e) {
-                                                        callbackSrc.onDeleteEventError(e.getMessage());
+                                                        callbackSrc.onDeleteEventError("failed to delete event with eventKey " + eventKey + "from events at path " + eventRef.toString().substring(eventRef.getRoot().toString().length()) + ": " + e.getMessage());
                                                         return;
                                                     }
                                                 });
@@ -567,7 +567,7 @@ public abstract class DatabaseFunctions {
                                         }).addOnFailureListener(new OnFailureListener() {
                                             @Override
                                             public void onFailure(@NonNull Exception e) {
-                                                callbackSrc.onDeleteEventError(e.getMessage());
+                                                callbackSrc.onDeleteEventError("failed to remove event with eventKey " + eventKey + "from customer's hosted events with uid " + hostKey + " at path " + customerRef.toString().substring(customerRef.getRoot().toString().length()) + ": " + e.getMessage());
                                                 return;
                                             }
                                         });
@@ -575,7 +575,7 @@ public abstract class DatabaseFunctions {
                                 }).addOnFailureListener(new OnFailureListener() {
                                     @Override
                                     public void onFailure(@NonNull Exception e) {
-                                        callbackSrc.onDeleteEventError(e.getMessage());
+                                        callbackSrc.onDeleteEventError("failed to remove venue with name " + venueKey + "from venues at path " + venueRef.toString().substring(venueRef.getRoot().toString().length()) + ": " + e.getMessage());
                                         return;
                                     }
                                 });
@@ -584,7 +584,7 @@ public abstract class DatabaseFunctions {
                     }).addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
-                            callbackSrc.onDeleteEventError(e.getMessage());
+                            callbackSrc.onDeleteEventError("failed to remove event with eventKey " + eventKey + "from customer's joined events with uid " + customerRef.getKey() + " at path " + customerRef.toString().substring(customerRef.getRoot().toString().length()) + ": " + e.getMessage());
                             return;
                         }
                     });
@@ -592,7 +592,7 @@ public abstract class DatabaseFunctions {
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                callbackSrc.onDeleteEventError(error.getMessage());
+                callbackSrc.onDeleteEventError("request at " + eventKey.toString().substring(eventRef.getRoot().toString().length()) + " cancelled. " + error.getMessage());
                 return;
             }
         });
@@ -606,8 +606,8 @@ public abstract class DatabaseFunctions {
      * @param callbackSrc class to callback to after database operation completion
      */
     public static void createVenue(FirebaseDatabase db, Venue venue, CreatesVenue callbackSrc) {
-        DatabaseReference customersRef = db.getReference("/venues/");
-        customersRef.child(venue.getName()).setValue(venue).addOnSuccessListener(new OnSuccessListener<Void>() {
+        DatabaseReference venueRef = db.getReference("/venues/");
+        venueRef.child(venue.getName()).setValue(venue).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void unused) {
                 callbackSrc.onCreateVenueSuccess(venue);
@@ -616,7 +616,7 @@ public abstract class DatabaseFunctions {
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                callbackSrc.onCreateVenueError(e.getMessage());
+                callbackSrc.onCreateVenueError("failed to remove venue with name " + venue.getName() + "to venues at path " + venueRef.toString().substring(venueRef.getRoot().toString().length()) + ": " + e.getMessage());
                 return;
             }
         });
