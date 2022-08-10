@@ -47,6 +47,11 @@ public class TimePickerFragment extends DialogFragment implements TimePickerDial
         intent.putExtra("date_string", date_string);
         intent.putExtra("time_string", time_string);
         intent.putExtra("venue_string", this.getArguments().getString("venue_string"));
+        intent.putExtra("minutes_string", this.getArguments().getString("minutes_string"));
+        intent.putExtra("hours_string", this.getArguments().getString("hours_string"));
+        intent.putExtra("days_string", this.getArguments().getString("days_string"));
+        intent.putExtra("event_string", this.getArguments().getString("event_string"));
+        intent.putExtra("max_string", this.getArguments().getString("max_string"));
         startActivity(intent);
     }
 

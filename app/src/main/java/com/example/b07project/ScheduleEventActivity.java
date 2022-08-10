@@ -41,8 +41,20 @@ public class ScheduleEventActivity extends AppCompatActivity implements CreatesE
         TextView timeText = (TextView) findViewById(R.id.time_text);
         TextView dateText = (TextView) findViewById(R.id.date_text);
 
-        setStringByName("time_string", timeText);
-        setStringByName("date_string", dateText);
+        setText("time_string", timeText);
+        setText("date_string", dateText);
+
+        EditText minutes_text = (EditText) findViewById(R.id.ctrMinutes);
+        EditText hours_text = (EditText) findViewById(R.id.ctrHours);
+        EditText days_text = (EditText) findViewById(R.id.ctrDays);
+        EditText event_text = (EditText) findViewById(R.id.eventNameSchedule);
+        EditText max_text = (EditText) findViewById(R.id.eventMaxPlayersSchedule);
+
+        setText("minutes_string", minutes_text);
+        setText("hours_string", hours_text);
+        setText("days_string", days_text);
+        setText("event_string", event_text);
+        setText("max_string", max_text);
 
         if (getIntent().getStringExtra("venue_string") != null) {
             venueName = getIntent().getStringExtra("venue_string");
@@ -51,18 +63,37 @@ public class ScheduleEventActivity extends AppCompatActivity implements CreatesE
 
     }
 
-    public void setStringByName(String s, TextView v) {
-        if (!(getIntent().getStringExtra(s) == null)) {
+    public void setText(String s, TextView v) {
+        if (getIntent().getStringExtra(s) != null) {
+            Log.d("megajuice", getIntent().getStringExtra(s));
             v.setText(getIntent().getStringExtra(s));
         }
     }
 
+    public Bundle getSaveBundle() {
+        EditText minutes_text = (EditText) findViewById(R.id.ctrMinutes);
+        EditText hours_text = (EditText) findViewById(R.id.ctrHours);
+        EditText days_text = (EditText) findViewById(R.id.ctrDays);
+        EditText event_text = (EditText) findViewById(R.id.eventNameSchedule);
+        EditText max_text = (EditText) findViewById(R.id.eventMaxPlayersSchedule);
+
+        Bundle bundle = new Bundle();
+        bundle.putString("venue_string", venueName);
+        bundle.putString("minutes_string", minutes_text.getText().toString());
+        bundle.putString("hours_string", hours_text.getText().toString());
+        bundle.putString("days_string", days_text.getText().toString());
+        bundle.putString("event_string", event_text.getText().toString());
+        bundle.putString("max_string", max_text.getText().toString());
+        return bundle;
+    }
+
+
     // Code below from https://developer.android.com/guide/topics/ui/controls/pickers#TimePicker
     public void showTimePickerDialog(View v) {
         TextView dateText = (TextView) findViewById(R.id.date_text);
-        Bundle bundle = new Bundle();
+
+        Bundle bundle = getSaveBundle();
         bundle.putString("date_string", dateText.getText().toString());
-        bundle.putString("venue_string", venueName);
         DialogFragment newFragment = new TimePickerFragment();
         newFragment.setArguments(bundle);
         newFragment.show(getSupportFragmentManager(), "timePicker");
@@ -78,13 +109,11 @@ public class ScheduleEventActivity extends AppCompatActivity implements CreatesE
         //newFragment.show(getSupportFragmentManager(), "datePicker");
 
         TextView timeText = (TextView) findViewById(R.id.time_text);
-        Bundle bundle = new Bundle();
+        Bundle bundle = getSaveBundle();
         bundle.putString("time_string", timeText.getText().toString());
-        bundle.putString("venue_string", venueName);
         DialogFragment newFragment = new DatePickerFragment();
         newFragment.setArguments(bundle);
         newFragment.show(getSupportFragmentManager(), "datePicker");
-
     }
 
     public int mapTime(String s) {

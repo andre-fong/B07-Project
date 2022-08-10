@@ -38,7 +38,8 @@
         <activity
             android:name=".ScheduleEventActivity"
             android:exported="false"
-            android:parentActivityName=".CustomerHomepageActivity"/>
+            android:parentActivityName=".CustomerHomepageActivity"
+            android:noHistory="true"/>
         <activity
             android:name=".VenueActivity"
             android:exported="false"
