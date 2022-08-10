@@ -6,11 +6,23 @@ import android.content.Intent;
 import android.icu.util.Calendar;
 import android.os.Bundle;
 import android.text.format.DateFormat;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
+
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentManager;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.DateTimeException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 
 // Code below from https://developer.android.com/guide/topics/ui/controls/pickers#TimePicker
 
@@ -32,9 +44,40 @@ public class TimePickerFragment extends DialogFragment implements TimePickerDial
 
     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
         // Do something with the time chosen by the user
-        String time = hourOfDay + ":" + minute;
+        String date_planned = this.getArguments().getString("date_string");
+
+        Date now = new Date();
+        SimpleDateFormat dtf = new SimpleDateFormat("MM/dd/yyyy");
+        boolean compare_flag = false;
+
+
+        try {
+            Date cur_time = dtf.parse(dtf.format(now));
+            Date date_time = dtf.parse(date_planned);
+            if (cur_time.compareTo(date_time) == 0) {
+                compare_flag = true;
+            }
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        if (compare_flag) {
+            LocalTime local_time =  LocalTime.now();
+            LocalTime attempt_time = LocalTime.of(hourOfDay, minute);
+            if (local_time.compareTo(attempt_time) == 1) {
+                Toast.makeText(getActivity(), "The time you input has already happened. Please enter an earlier time", Toast.LENGTH_SHORT).show();
+                return;
+            }
+        }
+
+        String minute_str = String.valueOf(minute);
+        if (minute <= 9) {
+            minute_str = "0" + minute;
+        }
+
+        String time = hourOfDay + ":" + minute_str;
         Intent intent = new Intent(getActivity(), ScheduleEventActivity.class);
-        intent.putExtra("date_string",this.getArguments().getString("date_string"));
+        intent.putExtra("date_string", date_planned);
         intent.putExtra("time_string", time);
         startActivity(intent);
 
