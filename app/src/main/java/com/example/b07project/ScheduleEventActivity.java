@@ -145,8 +145,8 @@ public class ScheduleEventActivity extends AppCompatActivity implements CreatesE
 
         int maxCustomers = mapTime(maxcustomers_text);
 
-        if (maxCustomers == 0)  {
-            Toast.makeText(ScheduleEventActivity.this, "Max customers must be greater than 0", Toast.LENGTH_SHORT).show();
+        if (maxCustomers <= 1) {
+            Toast.makeText(ScheduleEventActivity.this, "Max customers must be greater than 1", Toast.LENGTH_SHORT).show();
             return;
         }
 
