@@ -32,7 +32,6 @@ public class AddVenueActivity extends AppCompatActivity implements CreatesVenue{
     }
 
     public void addVenue(View v){
-        // TODO Implement this function
         // Adds a venue to the database (which should update on customer and admin homepages)
         TextView VenueName = (TextView) findViewById(R.id.editTextVenueName);
         String name = VenueName.getText().toString();
