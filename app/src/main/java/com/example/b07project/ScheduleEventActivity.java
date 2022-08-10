@@ -38,17 +38,23 @@ public class ScheduleEventActivity extends AppCompatActivity implements CreatesE
         db = FirebaseDatabase.getInstance();
         auth = FirebaseAuth.getInstance();
 
-        if (!(getIntent().getStringExtra("date_string") == null)) {
-            TextView dateText = (TextView) findViewById(R.id.date_text);
-            dateText.setText(getIntent().getStringExtra("date_string"));
+        TextView timeText = (TextView) findViewById(R.id.time_text);
+        TextView dateText = (TextView) findViewById(R.id.date_text);
+
+        setStringByName("time_string", timeText);
+        setStringByName("date_string", dateText);
+
+        if (getIntent().getStringExtra("venue_string") != null) {
+            venueName = getIntent().getStringExtra("venue_string");
+            Log.d("victortest", venueName);
         }
 
-        if (!(getIntent().getStringExtra("time_string") == null)) {
-            TextView timeText = (TextView) findViewById(R.id.time_text);
-            timeText.setText(getIntent().getStringExtra("time_string"));
-        }
+    }
 
-        venueName = getIntent().getStringExtra("venueName");
+    public void setStringByName(String s, TextView v) {
+        if (!(getIntent().getStringExtra(s) == null)) {
+            v.setText(getIntent().getStringExtra(s));
+        }
     }
 
     // Code below from https://developer.android.com/guide/topics/ui/controls/pickers#TimePicker
@@ -56,6 +62,7 @@ public class ScheduleEventActivity extends AppCompatActivity implements CreatesE
         TextView dateText = (TextView) findViewById(R.id.date_text);
         Bundle bundle = new Bundle();
         bundle.putString("date_string", dateText.getText().toString());
+        bundle.putString("venue_string", venueName);
         DialogFragment newFragment = new TimePickerFragment();
         newFragment.setArguments(bundle);
         newFragment.show(getSupportFragmentManager(), "timePicker");
@@ -73,6 +80,7 @@ public class ScheduleEventActivity extends AppCompatActivity implements CreatesE
         TextView timeText = (TextView) findViewById(R.id.time_text);
         Bundle bundle = new Bundle();
         bundle.putString("time_string", timeText.getText().toString());
+        bundle.putString("venue_string", venueName);
         DialogFragment newFragment = new DatePickerFragment();
         newFragment.setArguments(bundle);
         newFragment.show(getSupportFragmentManager(), "datePicker");
@@ -129,6 +137,7 @@ public class ScheduleEventActivity extends AppCompatActivity implements CreatesE
         long start_time = start_date.getTime();
         long end_time = cal.getTimeInMillis();
 
+        Log.d("victortest", venueName);
         if (start_time == end_time) {
             Toast.makeText(ScheduleEventActivity.this, "Your start and end time cannot be the same", Toast.LENGTH_SHORT).show();
             return;

@@ -42,6 +42,14 @@ public class TimePickerFragment extends DialogFragment implements TimePickerDial
                 DateFormat.is24HourFormat(getActivity()));
     }
 
+    public void startIntent(String date_string, String time_string) {
+        Intent intent = new Intent(getActivity(), ScheduleEventActivity.class);
+        intent.putExtra("date_string", date_string);
+        intent.putExtra("time_string", time_string);
+        intent.putExtra("venue_string", this.getArguments().getString("venue_string"));
+        startActivity(intent);
+    }
+
     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
         // Do something with the time chosen by the user
         String date_planned = this.getArguments().getString("date_string");
@@ -49,7 +57,6 @@ public class TimePickerFragment extends DialogFragment implements TimePickerDial
         Date now = new Date();
         SimpleDateFormat dtf = new SimpleDateFormat("MM/dd/yyyy");
         boolean compare_flag = false;
-
 
         try {
             Date cur_time = dtf.parse(dtf.format(now));
@@ -76,10 +83,7 @@ public class TimePickerFragment extends DialogFragment implements TimePickerDial
         }
 
         String time = hourOfDay + ":" + minute_str;
-        Intent intent = new Intent(getActivity(), ScheduleEventActivity.class);
-        intent.putExtra("date_string", date_planned);
-        intent.putExtra("time_string", time);
-        startActivity(intent);
+        startIntent(date_planned, time);
 
         //((ScheduleEventActivity)getActivity()).timeText.setText(time);
     }

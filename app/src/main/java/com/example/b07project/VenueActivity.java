@@ -89,7 +89,7 @@ public class VenueActivity extends AppCompatActivity implements ReadsVenue {
     // Send customer to schedule a new event
     public void goToScheduleEventPage(View v){
         Intent intent = new Intent(this, ScheduleEventActivity.class);
-        intent.putExtra("venueName", venueName);
+        intent.putExtra("venue_string", venueName);
         startActivity(intent);
     }
     

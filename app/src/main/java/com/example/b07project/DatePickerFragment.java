@@ -41,6 +41,8 @@ public class DatePickerFragment extends DialogFragment implements DatePickerDial
         Intent intent = new Intent(getActivity(), ScheduleEventActivity.class);
         intent.putExtra("date_string", date);
         intent.putExtra("time_string", time);
+        intent.putExtra("venue_string", this.getArguments().getString("venue_string"));
+        Log.d("victortest", this.getArguments().getString("venue_string"));
         startActivity(intent);
     }
 
