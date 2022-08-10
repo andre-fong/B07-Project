@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MyEventsActivity">
+
+    <Spinner
+        android:id="@+id/ctrjoinedEvents"
+        android:layout_width="409dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="72dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Spinner
+        android:id="@+id/ctrhostedEvents"
+        android:layout_width="409dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ctrjoinedEvents"
+        app:layout_constraintVertical_bias="0.381" />
+
+    <TextView
+        android:id="@+id/ctrHostedEventsTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="12dp"
+        android:text="@string/hostedEvents_string"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/ctrhostedEvents"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:text="@string/hostedEvents_string" />
+
+    <TextView
+        android:id="@+id/tvtrJoinedEventsText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="8dp"
+        android:text="@string/ctrjoinedEventsTxt"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/ctrjoinedEvents"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:text="@string/ctrjoinedEventsTxt" />
+
+    <Button
+        android:id="@+id/ctrJoinedEventsButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:enabled="false"
+        android:onClick="goToJoined"
+        android:text="go"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ctrjoinedEvents" />
+
+    <Button
+        android:id="@+id/ctrHostedEventsButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:enabled="false"
+        android:onClick="goToHosted"
+        android:text="go"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ctrhostedEvents" />
+</androidx.constraintlayout.widget.ConstraintLayout>

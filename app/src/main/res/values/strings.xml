@@ -6,14 +6,33 @@
     <string name="username_string">Username</string>
     <string name="signup_string">Signup</string>
     <string name="submit_string">Submit</string>
-    <string name="welcome_string">Welcome to App!</string>
+    <string name="welcome_string">Welcome to our app!</string>
     <string name="link_to_admin_login"><u>I\'m an admin</u></string>
     <string name="create_account_string"><u>Create a new account</u></string>
+    <string name="venue_string">Venue Name</string>
+    <string name="venue_spinner_description">Available Events:</string>
+    <string name="schedule_string">Schedule an Event</string>
+    <string name="customer_homepage_header">Customer Homepage</string>
+    <string name="upcoming_events_header">Upcoming Events</string>
+    <string name="list_venues_header">Venues</string>
+    <string name="my_events_text">My Events</string>
+    <string name="hostedEvents_string">Hosted Events:</string>
+    <string name="ctrjoinedEventsTxt">Joined Events:</string>
+    <string name="event_string">Event</string>
+    <string name="max_players_string">Max Players</string>
+    <string name="pick_time">Pick a Time</string>
+    <string name="pick_date">Pick a Date</string>
+    <string name="admin_homepage_string">Admin Homepage</string>
+    <string name="admin_venue_string">Venue Name</string>
+    <string name="add_venue_string">Add a Venue</string>
+    <string name="add_string">Add</string>
+    <string name="delete_event_string">Remove Event</string>
+    <string name="duration_string">Enter a duration DD:HH:MM</string>
+    <string name="ctrHours">Enter how many hours</string>
+    <string name="minutes_string">Enter how many minutes</string>
+    <string name="days_string">Enter how many days</string>
+    <string name="max_customers_string">Max Customers</string>
+    <string name="already_joined_string">Already joined</string>
+    <string name="join_event_string">Join event</string>
 
-    <string name="venue_string">Venues</string>
-    <string name="venue_spinner_description">Available Venues:</string>
-    <string-array name="venues">
-        <item>Sample_Sport1</item>
-        <item>Sample_Sport2</item>
-    </string-array>
 </resources>

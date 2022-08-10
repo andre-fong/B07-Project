@@ -51,7 +51,7 @@
         android:layout_marginTop="40dp"
         android:ems="10"
         android:hint="@string/password_string"
-        android:inputType="textPersonName"
+        android:inputType="textPassword"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ctrUsernameSignup" />

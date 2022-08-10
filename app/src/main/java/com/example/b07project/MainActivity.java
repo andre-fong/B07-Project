@@ -6,6 +6,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.provider.ContactsContract;
+import android.support.customtabs.ICustomTabsCallback;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -13,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -22,22 +25,28 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.okhttp.Call;
 
-public class MainActivity extends AppCompatActivity {
+import java.util.HashMap;
+import java.util.Map;
+import java.util.function.Function;
+
+public class MainActivity extends AppCompatActivity implements ChecksAdmin, CreatesEvent, CreatesVenue{
     private FirebaseDatabase db;
     private FirebaseAuth auth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        this.setTitle("Welcome to App!");
+        this.setTitle("Welcome to our app!");
         //Get database and authentication instances
         db = FirebaseDatabase.getInstance();
         auth = FirebaseAuth.getInstance();
-
         // Create invisible clickable buttons
         Button signupButton = (Button)findViewById(R.id.ctrCreateAccount);
         signupButton.setBackgroundColor(Color.TRANSPARENT);
+
+        signin("customer0@gmail.com", "password");
     }
 
     // Start SignupActivity
@@ -52,44 +61,28 @@ public class MainActivity extends AppCompatActivity {
     public void submitReq(View v) {
         String email = ((TextView)findViewById(R.id.ctrEmailField)).getText().toString();
         String pwd = ((TextView)findViewById(R.id.ctrPasswordField)).getText().toString();
-        signin(email, pwd);
+
+        // Handle empty editText field
+        if (email.matches("") || pwd.matches(""))
+            Toast.makeText(MainActivity.this, "Cannot login with empty fields", Toast.LENGTH_SHORT).show();
+        else
+            signin(email, pwd);
     }
 
     public void signin(String email, String pwd){
+        final ChecksAdmin ref = this;
         auth.signInWithEmailAndPassword(email, pwd)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            //Success
-                            FirebaseUser user = auth.getCurrentUser();
-                            Log.d("signin", "signin successful. uid: " + user.getUid());
-                            DatabaseReference admins = db.getReference("admins");
-                            admins.addListenerForSingleValueEvent(new ValueEventListener() {
-                                @Override
-                                public void onDataChange(DataSnapshot dataSnapshot) {
-                                    if(dataSnapshot.child(user.getUid()).exists()){
-                                        Log.d("signin", "isadmin. uid: " + user.getUid());
-                                        adminLogin();
-                                    }
-                                    else{
-                                        Log.d("signin", "isnotadmin. uid: " + user.getUid());
-                                        customerLogin();
-                                    }
-                                }
-                                @Override
-                                public void onCancelled(DatabaseError databaseError) {
-                                    System.out.println("The read failed: " + databaseError.getCode());
-                                }
-                            });
-                            //updateUI(user)
+                            DatabaseFunctions.loggedInAsAdmin(db, auth, ref);
                         } else {
                             //Failure: display error message
                             String exceptionString = task.getException().toString();
                             String errMsg = "signin failed:" + exceptionString.substring(exceptionString.indexOf(":"));
                             Toast.makeText(MainActivity.this, errMsg, Toast.LENGTH_SHORT).show();
                             Log.w("signin", "signinWithEmailAndPassword:failure", task.getException());
-                            //updateUI(null);
                         }
                     }
                 });
@@ -97,13 +90,51 @@ public class MainActivity extends AppCompatActivity {
     public void customerLogin(){
         Log.d("signin", "isCustomer. uid: " + auth.getCurrentUser().getUid());
         //navigate to customer dashboard
-        Intent intent = new Intent(this, VenueActivity.class);
+        Intent intent = new Intent(this, CustomerHomepageActivity.class);
         startActivity(intent);
     }
     public void adminLogin(){
         Log.d("signin", "isAdmin. uid: " + auth.getCurrentUser().getUid());
         //navigate to admin dashboard
-//        Intent intent = new Intent(this, AdminDashbaordActivity.class);
-//        startActivity(intent);
+        Intent intent = new Intent(this, AdminHomepageActivity.class);
+        startActivity(intent);
+    }
+
+
+    @Override
+    public void onCheckAdminSuccess(Boolean isAdmin) {
+        if(isAdmin) {
+            Log.d("signin", "signing in as admin. uid: " + auth.getCurrentUser().getUid());
+            adminLogin();
+        }
+        else {
+            Log.d("signin", "signing in as customer. uid: " + auth.getCurrentUser().getUid());
+            customerLogin();
+        }
+    }
+
+    @Override
+    public void onCheckAdminError(String errorMessage) {
+        Log.d("signin error:", errorMessage);
+    }
+
+    @Override
+    public void onCreateEventSuccess(Event event) {
+
+    }
+
+    @Override
+    public void onCreateEventError(String errorMessage) {
+
+    }
+
+    @Override
+    public void onCreateVenueSuccess(Venue venue) {
+
+    }
+
+    @Override
+    public void onCreateVenueError(String errorMessage) {
+        Log.d("lalala",errorMessage);
     }
 }

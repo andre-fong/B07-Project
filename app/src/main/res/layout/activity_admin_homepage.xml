@@ -4,33 +4,46 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".VenueActivity">
+    tools:context=".AdminHomepageActivity">
 
     <TextView
-        android:id="@+id/ctrVenueName"
+        android:id="@+id/AdminHomepage"
         android:layout_width="0dp"
         android:layout_height="40dp"
         android:layout_marginStart="40dp"
         android:layout_marginTop="72dp"
-        android:contentDescription="@string/venue_string"
-        android:text="@string/venue_string"
+        android:contentDescription="@string/admin_homepage_string"
+        android:text="@string/admin_homepage_string"
         android:textSize="30sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Spinner
-        android:id="@+id/ctrEventsInVenueSpinner"
+        android:id="@+id/AdminVenueSpinner"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
         android:layout_marginTop="48dp"
         android:layout_marginEnd="40dp"
+        android:layout_marginBottom="40dp"
         android:contentDescription="@string/venue_spinner_description"
-        android:labelFor="@id/ctrEventsInVenueSpinner"
+        android:labelFor="@id/AdminVenueSpinner"
         android:minHeight="48dp"
+        app:layout_constraintBottom_toTopOf="@+id/goToAdminVenue"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ctrVenueName" />
+        app:layout_constraintTop_toBottomOf="@+id/AdminHomepage" />
+
+    <Button
+        android:id="@+id/goToAdminVenue"
+        android:layout_width="61dp"
+        android:layout_height="43dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="40dp"
+        android:onClick="goToAdminVenue"
+        android:text="go"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/AdminVenueSpinner" />
 
     <Button
         android:id="@+id/add_venue_button"
@@ -39,22 +52,9 @@
         android:layout_marginStart="109dp"
         android:layout_marginTop="69dp"
         android:layout_marginEnd="109dp"
-        android:onClick="goToScheduleEventPage"
-        android:text="@string/schedule_string"
+        android:onClick="goToAddVenueActivity"
+        android:text="@string/add_venue_string"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ctrEventsInVenueSpinner" />
-
-    <Button
-        android:id="@+id/ctrVenueEvent"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:enabled="false"
-        android:onClick="goToVenueEvents"
-        android:text="Go"
-        app:layout_constraintBottom_toTopOf="@+id/add_venue_button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ctrEventsInVenueSpinner" />
-
+        app:layout_constraintTop_toBottomOf="@+id/goToAdminVenue" />
 </androidx.constraintlayout.widget.ConstraintLayout>

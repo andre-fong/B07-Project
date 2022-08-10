@@ -2,40 +2,106 @@ package com.example.b07project;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
-public class VenueActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
+public class VenueActivity extends AppCompatActivity implements ReadsVenue {
+    private FirebaseDatabase db;
+    private FirebaseAuth auth;
+    private ArrayList<EventItem> eventsInVenueList;
+    private EventAdapter eventAdapter;
+    private String venueName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_venue);
 
-        Spinner venue_spinner = findViewById(R.id.venue_spinner);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.venues, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        venue_spinner.setAdapter(adapter);
-        venue_spinner.setOnItemSelectedListener(this);
+        db = FirebaseDatabase.getInstance();
+        auth = FirebaseAuth.getInstance();
+
+        // Get venue name passed from CustomerHomepageActivity
+        Intent i = getIntent();
+        String venueName = i.getStringExtra("venueName");
+
+        // Set TextView header to venue name
+        TextView venueNameText = (TextView) findViewById(R.id.ctrVenueName);
+        venueNameText.setText(venueName);
+
+        eventsInVenueList = new ArrayList<EventItem>();
+
+        this.setTitle("Viewing venue: ");
+
+        DatabaseFunctions.readVenueFromDatabase(db, venueName, this);
     }
 
-    // Copy the following code onto the previous page to open Venues Page
-//    public void goToVenuePage(){
-//        Intent intent = new Intent(this, VenueActivity.class);
-//        startActivity(intent);
-//    }
+    // TODO: Change below code based on updated DB functions
 
     @Override
-    public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
+    public void onVenueReadSuccess(Venue venue) {
+        Log.d("andre-testing", "venuereadsuccess entered");
+        venueName = venue.getName();
 
+        Map<String, Event> events = venue.getEvents();
+
+        if (events == null || events.size() == 0) {
+            Toast.makeText(this, "No events in " + venue.getName(), Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        // Enable button if there exist events
+        Button toEvent = (Button) findViewById(R.id.ctrVenueEvent);
+        toEvent.setEnabled(true);
+
+        for (Event event : events.values()) {
+            eventsInVenueList.add(new EventItem(event));
+            Log.d("andre-testing-addeventinvenue", event.getKey());
+        }
+
+        eventAdapter = new EventAdapter(this, eventsInVenueList);
+
+        // Create spinner with events listed under current venue
+        Spinner eventsInVenueSpinner = (Spinner) findViewById(R.id.ctrEventsInVenueSpinner);
+        eventsInVenueSpinner.setAdapter(eventAdapter);
     }
 
-    @Override
-    public void onNothingSelected(AdapterView<?> adapterView) {
 
+    @Override
+    public void onVenueReadError(String message) {
+        Log.d("error", message);
+    }
+
+
+    // Send customer to schedule a new event
+    public void goToScheduleEventPage(View v){
+        Intent intent = new Intent(this, ScheduleEventActivity.class);
+        intent.putExtra("venue_string", venueName);
+        startActivity(intent);
+    }
+    
+    
+    public void goToVenueEvents(View view) {
+        Spinner venueEventsSpinner = findViewById(R.id.ctrEventsInVenueSpinner);
+        Log.d("lalala", "tatata");
+
+        EventItem selectedItem = eventsInVenueList.get(venueEventsSpinner.getSelectedItemPosition());
+        String venueEventLink = selectedItem.getVenueEventLink();
+        Intent intentToEventActivity = new Intent(this, EventActivity.class);
+        intentToEventActivity.putExtra("inter", venueEventLink);
+        startActivity(intentToEventActivity);
     }
 }
