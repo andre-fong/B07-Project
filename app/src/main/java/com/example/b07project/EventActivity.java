@@ -14,9 +14,14 @@ import android.widget.Toast;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 
+import org.w3c.dom.Text;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Map;
 
-public class EventActivity extends AppCompatActivity implements ReadsCustomer, JoinsEvent{
+public class EventActivity extends AppCompatActivity implements ReadsCustomer, JoinsEvent, ReadsEvent {
     private FirebaseDatabase db;
     private FirebaseAuth auth;
     private String eventKey;
@@ -35,16 +40,14 @@ public class EventActivity extends AppCompatActivity implements ReadsCustomer, J
         auth = FirebaseAuth.getInstance();
 
         this.setTitle("Viewing event: ");
-
-        DatabaseFunctions.readCustomerFromDatabase(db, auth.getCurrentUser().getUid(), this);
+        DatabaseFunctions.readEventFromDatabase(db, eventKey, this);
     }
 
     public void joinEvent(View view) {
-        // TODO: Add customer to event (update customer fields and event fields)
-        //triggers after onClick, update the user's joined events by adding this event
         DatabaseFunctions.joinEvent(db, auth.getCurrentUser().getUid(),eventKey, this);
     }
 
+    // Check if customer is already in event (does not run if event is already full)
     @Override
     public void onCustomerReadSuccess(Customer c) {
         Boolean inEvent = false;
@@ -82,6 +85,35 @@ public class EventActivity extends AppCompatActivity implements ReadsCustomer, J
 
     @Override
     public void onJoinEventError(String errorMessage) {
-        Log.d("error", errorMessage);
+        Toast.makeText(this, "Failed to join: " + errorMessage, Toast.LENGTH_SHORT).show();
+        Log.d("andre-testing-joinerror", errorMessage);
+    }
+
+
+    @Override
+    public void onEventReadSuccess(Event event) {
+        TextView venueName = (TextView) findViewById(R.id.ctrEventVenueName);
+        TextView eventCust = (TextView) findViewById(R.id.ctrNumCustomers);
+        TextView eventTime = (TextView) findViewById(R.id.ctrEventTime);
+
+        venueName.setText("Venue: " + event.getVenueKey());
+        eventCust.setText(event.getCurCustomers() + "   /   " + event.getMaxCustomers() + " customers");
+
+        Date date = new Date(event.getStartTime());
+        DateFormat format = new SimpleDateFormat("MM/dd/yy HH:mm");
+        String dateString = format.format(date);
+        Date date2 = new Date(event.getEndTime());
+        String dateString2 = format.format(date2);
+
+        eventTime.setText(dateString + " to " + dateString2);
+
+        if (event.getCurCustomers() < event.getMaxCustomers())
+            DatabaseFunctions.readCustomerFromDatabase(db, auth.getCurrentUser().getUid(), this);
+    }
+
+
+    @Override
+    public void onEventReadError(String errorMessage) {
+        Log.d("andre-testing-eventerror", errorMessage);
     }
 }
