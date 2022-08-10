@@ -47,24 +47,21 @@ public class EventActivity extends AppCompatActivity implements ReadsCustomer, J
 
     @Override
     public void onCustomerReadSuccess(Customer c) {
-        Boolean bool = false;
+        Boolean inEvent = false;
         Map<String, String> keyMap = c.getJoinedEventKeys();
 
-        if (keyMap == null){
-
-        }
-        else if (keyMap.containsKey(eventKey)) {
-            bool = true;
+        if (keyMap != null) {
+            if (keyMap.containsKey(eventKey))
+                inEvent = true;
         }
 
-        Button button = (Button)findViewById(R.id.ctrJoinEventButton);
-        ViewGroup layout = (ViewGroup) button.getParent();
-
-        if (bool){ // inside if statement, add arguments that check if already joined
-            //make the button disappear when event is already joined by the user
-            layout.removeView(button);
-            TextView msg = (TextView) findViewById(R.id.ctrJoined) ;
+        if (inEvent){ // inside if statement, add arguments that check if already joined
+            TextView msg = (TextView) findViewById(R.id.ctrJoined);
             msg.setVisibility(View.VISIBLE);
+        }
+        else {
+            Button button = (Button)findViewById(R.id.ctrJoinEventButton);
+            button.setVisibility(View.VISIBLE);
         }
     }
 
