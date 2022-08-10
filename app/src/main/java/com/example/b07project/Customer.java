@@ -62,10 +62,10 @@ class Customer {
     }
 
     public void addJoinedEvent(Event event){
-        joinedEvents.put(event.getName(), event);
+        joinedEvents.put(event.getKey(), event);
     }
     public void addHostedEvent(Event event){
-        hostedEvents.put(event.getName(), event);
+        hostedEvents.put(event.getKey(), event);
     }
 
     //For Customers created by reading from database
