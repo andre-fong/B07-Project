@@ -49,8 +49,6 @@ public class VenueActivity extends AppCompatActivity implements ReadsVenue {
         DatabaseFunctions.readVenueFromDatabase(db, venueName, this);
     }
 
-    // TODO: Change below code based on updated DB functions
-
     @Override
     public void onVenueReadSuccess(Venue venue) {
         Log.d("andre-testing", "venuereadsuccess entered");

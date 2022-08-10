@@ -45,8 +45,6 @@ public class MainActivity extends AppCompatActivity implements ChecksAdmin, Crea
         // Create invisible clickable buttons
         Button signupButton = (Button)findViewById(R.id.ctrCreateAccount);
         signupButton.setBackgroundColor(Color.TRANSPARENT);
-
-        signin("customer0@gmail.com", "password");
     }
 
     // Start SignupActivity
