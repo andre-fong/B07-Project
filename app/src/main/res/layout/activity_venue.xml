@@ -45,4 +45,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ctrEventsInVenueSpinner" />
 
+    <Button
+        android:id="@+id/ctrVenueEvent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:enabled="false"
+        android:onClick="goToVenueEvents"
+        android:text="Go"
+        app:layout_constraintBottom_toTopOf="@+id/add_venue_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ctrEventsInVenueSpinner" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

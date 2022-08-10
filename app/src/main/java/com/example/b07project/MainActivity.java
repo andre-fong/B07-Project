@@ -31,14 +31,14 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
-public class MainActivity extends AppCompatActivity implements ChecksAdmin{
+public class MainActivity extends AppCompatActivity implements ChecksAdmin, CreatesEvent, CreatesVenue{
     private FirebaseDatabase db;
     private FirebaseAuth auth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        this.setTitle("Welcome to App!");
+        this.setTitle("Welcome to our app!");
         //Get database and authentication instances
         db = FirebaseDatabase.getInstance();
         auth = FirebaseAuth.getInstance();
@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity implements ChecksAdmin{
         Button signupButton = (Button)findViewById(R.id.ctrCreateAccount);
         signupButton.setBackgroundColor(Color.TRANSPARENT);
 
-        signin("customer0@gmail.com", "password");
+        signin("customer1@gmail.com", "password");
     }
 
     // Start SignupActivity
@@ -116,5 +116,25 @@ public class MainActivity extends AppCompatActivity implements ChecksAdmin{
     @Override
     public void onCheckAdminError(String errorMessage) {
         Log.d("signin error:", errorMessage);
+    }
+
+    @Override
+    public void onCreateEventSuccess(Event event) {
+
+    }
+
+    @Override
+    public void onCreateEventError(String errorMessage) {
+
+    }
+
+    @Override
+    public void onCreateVenueSuccess(Venue venue) {
+
+    }
+
+    @Override
+    public void onCreateVenueError(String errorMessage) {
+        Log.d("lalala",errorMessage);
     }
 }

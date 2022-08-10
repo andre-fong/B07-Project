@@ -2,6 +2,7 @@ package com.example.b07project;
 
 import com.google.firebase.database.Exclude;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -22,12 +23,17 @@ public class Event {
 
     }
 
-    public Event(String name, String venueKey, String hostKey, int maxCustomers, Map<String, Boolean> customerKeys) {
+    public Event(String name, String venueKey, String hostKey, int maxCustomers, long startTime, long endTime) {
+        this.key = venueKey + "-" + name;
         this.name = name;
         this.venueKey = venueKey;
         this.hostKey = hostKey;
         this.maxCustomers = maxCustomers;
-        this.customerKeys = customerKeys;
+        this.customerKeys = new HashMap<String, Boolean>();
+        customerKeys.put(hostKey, true);
+        curCustomers = 1;
+        this.startTime = startTime;
+        this.endTime = endTime;
     }
 
     @Exclude

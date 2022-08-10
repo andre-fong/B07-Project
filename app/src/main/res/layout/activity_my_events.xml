@@ -50,4 +50,28 @@
         app:layout_constraintBottom_toTopOf="@+id/ctrjoinedEvents"
         app:layout_constraintStart_toStartOf="parent"
         tools:text="@string/ctrjoinedEventsTxt" />
+
+    <Button
+        android:id="@+id/ctrJoinedEventsButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:enabled="false"
+        android:onClick="goToJoined"
+        android:text="go"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ctrjoinedEvents" />
+
+    <Button
+        android:id="@+id/ctrHostedEventsButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:enabled="false"
+        android:onClick="goToHosted"
+        android:text="go"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ctrhostedEvents" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 // import DatabaseFunctions;
 
@@ -26,7 +27,6 @@ public class CustomerHomepageActivity extends AppCompatActivity implements Reads
     private ArrayList<VenueItem> venuesList;
     private EventAdapter eventAdapter;
     private VenueAdapter venueAdapter;
-//    private Map<String, Event> eventsMap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +39,8 @@ public class CustomerHomepageActivity extends AppCompatActivity implements Reads
 
         upcomingEventList = new ArrayList<EventItem>();
         venuesList = new ArrayList<VenueItem>();
+
+        this.setTitle("Welcome, customer!");
 
         DatabaseFunctions.readAllEventsFromDatabase(db, this);
         DatabaseFunctions.readAllVenuesFromDatabase(db, this);
