@@ -43,7 +43,8 @@ public class VenueActivity extends AppCompatActivity implements ReadsVenue {
 
         eventsInVenueList = new ArrayList<EventItem>();
 
-        Log.d("lalala", "hahaha");
+        this.setTitle("Viewing venue: ");
+
         DatabaseFunctions.readVenueFromDatabase(db, venueName, this);
     }
 

@@ -27,6 +27,8 @@ public class AddVenueActivity extends AppCompatActivity implements CreatesVenue{
 
         db = FirebaseDatabase.getInstance();
         auth = FirebaseAuth.getInstance();
+
+        this.setTitle("Adding venue (ADMIN): ");
     }
 
     public void addVenue(View v){

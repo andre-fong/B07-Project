@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity implements ChecksAdmin, Crea
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        this.setTitle("Welcome to App!");
+        this.setTitle("Welcome to our app!");
         //Get database and authentication instances
         db = FirebaseDatabase.getInstance();
         auth = FirebaseAuth.getInstance();
@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity implements ChecksAdmin, Crea
         Button signupButton = (Button)findViewById(R.id.ctrCreateAccount);
         signupButton.setBackgroundColor(Color.TRANSPARENT);
 
-        //signin("customer0@gmail.com", "password");
+        signin("customer1@gmail.com", "password");
     }
 
     // Start SignupActivity

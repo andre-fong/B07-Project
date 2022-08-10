@@ -33,8 +33,8 @@ public class MyEventsActivity extends AppCompatActivity implements ReadsCustomer
         db = FirebaseDatabase.getInstance();
         auth = FirebaseAuth.getInstance();
 
-//        CustomerMap = new HashMap<String, Customer>();
-//        c = CustomerMap.get(auth.getCurrentUser().getUid());
+        this.setTitle("Viewing joined and hosted events: ");
+
         DatabaseFunctions.readCustomerFromDatabase(db, auth.getCurrentUser().getUid(), this);
     }
 
