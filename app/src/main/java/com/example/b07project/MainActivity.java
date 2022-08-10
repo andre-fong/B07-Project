@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity implements ChecksAdmin, Crea
         Button signupButton = (Button)findViewById(R.id.ctrCreateAccount);
         signupButton.setBackgroundColor(Color.TRANSPARENT);
 
-        signin("customer1@gmail.com", "password");
+        signin("customer0@gmail.com", "password");
     }
 
     // Start SignupActivity
@@ -90,7 +90,7 @@ public class MainActivity extends AppCompatActivity implements ChecksAdmin, Crea
     public void customerLogin(){
         Log.d("signin", "isCustomer. uid: " + auth.getCurrentUser().getUid());
         //navigate to customer dashboard
-        Intent intent = new Intent(this, ScheduleEventActivity.class);
+        Intent intent = new Intent(this, CustomerHomepageActivity.class);
         startActivity(intent);
     }
     public void adminLogin(){

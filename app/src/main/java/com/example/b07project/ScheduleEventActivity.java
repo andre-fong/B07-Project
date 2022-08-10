@@ -22,12 +22,21 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.regex.Pattern;
 
-public class ScheduleEventActivity extends AppCompatActivity {
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.FirebaseDatabase;
+
+public class ScheduleEventActivity extends AppCompatActivity implements CreatesEvent {
+    private FirebaseDatabase db;
+    private FirebaseAuth auth;
+    private String venueName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_schedule_event);
+
+        db = FirebaseDatabase.getInstance();
+        auth = FirebaseAuth.getInstance();
 
         if (!(getIntent().getStringExtra("date_string") == null)) {
             TextView dateText = (TextView) findViewById(R.id.date_text);
@@ -39,6 +48,7 @@ public class ScheduleEventActivity extends AppCompatActivity {
             timeText.setText(getIntent().getStringExtra("time_string"));
         }
 
+        venueName = getIntent().getStringExtra("venueName");
     }
 
     // Code below from https://developer.android.com/guide/topics/ui/controls/pickers#TimePicker
@@ -78,7 +88,7 @@ public class ScheduleEventActivity extends AppCompatActivity {
 
     public void onSchedule(View v) throws ParseException {
 
-
+        // VALIDATE USER INPUT
         String event_text =  ((EditText) findViewById(R.id.eventNameSchedule)).getText().toString();
         String date_text = ((TextView) findViewById(R.id.date_text)).getText().toString();
         String time_text = ((TextView) findViewById(R.id.time_text)).getText().toString();
@@ -90,7 +100,7 @@ public class ScheduleEventActivity extends AppCompatActivity {
         }
 
         if (!Pattern.matches("^[A-Za-z0-9]+$", event_text)) {
-           Toast.makeText(ScheduleEventActivity.this, "Your event name field is incorrect. A valid event name is a string consisting of only alphanumeric characters", Toast.LENGTH_LONG).show();
+           Toast.makeText(ScheduleEventActivity.this, "Event name can only contain alphanumeric characters", Toast.LENGTH_LONG).show();
            return;
         }
 
@@ -98,7 +108,7 @@ public class ScheduleEventActivity extends AppCompatActivity {
         int maxCustomers = mapTime(maxcustomers_text);
 
         if (maxCustomers == 0) {
-            Toast.makeText(ScheduleEventActivity.this, "Max Customers must be greater than 0", Toast.LENGTH_SHORT).show();
+            Toast.makeText(ScheduleEventActivity.this, "Max customers must be greater than 0", Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -127,9 +137,25 @@ public class ScheduleEventActivity extends AppCompatActivity {
         Log.d("victortest", "End Time: " + String.valueOf(end_time));
         Log.d("victortest", "Start Time: " + String.valueOf(start_time));
 
+        // CREATE NEW EVENT OBJECT
+        if (venueName == null || venueName.matches("")) {
+            Log.d("andre-testing", "VENUE NULL");
+        }
+
+        Log.d("victortest", auth.getCurrentUser().getUid());
+        Event event = new Event(event_text, venueName, auth.getCurrentUser().getUid(), maxCustomers, start_time, end_time);
+        DatabaseFunctions.createEvent(db, event, this);
     }
 
-//    public void showUserUpdatedTime(String date){
-//        dateText.setText(date);
-//    }
+
+    @Override
+    public void onCreateEventSuccess(Event event) {
+        Toast.makeText(this, event.getName() + " at " + event.getVenueKey() + " successfully created", Toast.LENGTH_SHORT).show();
+    }
+
+
+    @Override
+    public void onCreateEventError(String errorMessage) {
+        Toast.makeText(this, "Event could not be created: " + errorMessage, Toast.LENGTH_SHORT).show();
+    }
 }

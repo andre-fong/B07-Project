@@ -24,6 +24,7 @@ public class VenueActivity extends AppCompatActivity implements ReadsVenue {
     private FirebaseAuth auth;
     private ArrayList<EventItem> eventsInVenueList;
     private EventAdapter eventAdapter;
+    private String venueName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +54,8 @@ public class VenueActivity extends AppCompatActivity implements ReadsVenue {
     @Override
     public void onVenueReadSuccess(Venue venue) {
         Log.d("andre-testing", "venuereadsuccess entered");
+        venueName = venue.getName();
+
         Map<String, Event> events = venue.getEvents();
 
         if (events == null || events.size() == 0) {
@@ -86,6 +89,7 @@ public class VenueActivity extends AppCompatActivity implements ReadsVenue {
     // Send customer to schedule a new event
     public void goToScheduleEventPage(View v){
         Intent intent = new Intent(this, ScheduleEventActivity.class);
+        intent.putExtra("venueName", venueName);
         startActivity(intent);
     }
     
