@@ -1,0 +1,85 @@
+Name: Xing Yu (Joe) Zhou
+
+What have you done since yesterday?
+Implemented the addVenue method in AddVenueActivity
+Test all activities related to Admin
+Debugged and found errors in CustomerHomepage connections
+Fixed some UI issues for ScheduleEventActivity
+Added the back button for VenueActivity and ScheduleEventActivity
+Made all passwords hidden
+
+What are you planning on doing today?
+Merge branches and debugging
+
+Any impediments or stumbling blocks?
+Merging confusions (resolved)
+Some errors in Customer usage led to crashes (resolved)
+
+
+
+Name: Andre Fong
+
+What have you done since yesterday?
+Implemented removing events from DB
+Finished refactoring code to use new DB functions
+Bug tested and identified app crashes
+Delegated leftover tasks (scheduling event with time)
+
+What are you planning on doing today?
+Merge all feature branches
+Resolved merge conflicts
+Implement DB writing to scheduling event
+Implement time checking to view UPCOMING events in spinner
+Add activity titles
+Disabling buttons to deal with nothing in spinner (produces crash)
+
+Any impediments or stumbling blocks?
+Crash-proofing app
+
+
+
+Name: Victor Hurst
+
+What have you done since yesterday?
+- Implemented front-end UI of ScheduleEvents activity except for end time
+- Implemented the functionality that goes along with it
+
+What are you planning on doing today?
+- Implementing front-end UI for end time
+- Implementing date checks and validation check for ScheduleEvents activity client side
+
+Any impediments or stumbling blocks?
+- None
+
+
+
+Matthew Snelgrove: 
+
+What have you done since yesterday?
+- debug database functions and rules
+
+What are you planning on doing today?
+- debug database functions and rules
+- add more information to error messages in database functions
+
+
+Any impediments or stumbling blocks?
+- None
+
+
+Name: Jiakai Sun
+
+What have you done since yesterday?
+Fixed UI dysfunctioning related to database and null
+Added Buttons for UI redirecting
+Finished Linking UIs for customers and done all the functionalities
+Thoroughly tests functionalities and error handling
+Added additional feature to admin login
+
+What are you planning on doing today?
+Merge all branches
+Test the overall software following SOLID design
+
+Any impediments or stumbling blocks?
+Databases crashes with uncareful handling(without using database functions)
+
