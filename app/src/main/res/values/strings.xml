@@ -33,5 +33,10 @@
     <string name="add_venue_string">Add a Venue</string>
     <string name="add_string">Add</string>
     <string name="delete_event_string">Remove Event</string>
+    <string name="duration_string">Enter a duration DD:HH:MM</string>
+    <string name="ctrHours">Enter how many Hours</string>
+    <string name="minutes_string">Enter how many minutes</string>
+    <string name="days_string">Enter how many days</string>
+    <string name="max_customers_string">Max Customers</string>
 
 </resources>

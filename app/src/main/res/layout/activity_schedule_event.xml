@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="28dp"
         android:onClick="showTimePickerDialog"
         android:text="@string/pick_time"
         app:layout_constraintStart_toEndOf="@+id/button3"
@@ -22,7 +22,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="28dp"
         android:onClick="showDatePickerDialog"
         android:text="@string/pick_date"
         app:layout_constraintStart_toStartOf="parent"
@@ -59,7 +59,7 @@
         android:layout_marginStart="40dp"
         android:layout_marginTop="40dp"
         android:ems="10"
-        android:hint="@string/max_players_string"
+        android:hint="@string/max_customers_string"
         android:inputType="number"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -70,10 +70,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="28dp"
         android:ems="10"
         android:inputType="date"
-        android:text = "Pick a date"
+        android:text="Pick a date"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ctrJoinEventButton" />
@@ -86,20 +86,57 @@
         android:layout_marginTop="20dp"
         android:ems="10"
         android:inputType="time"
-        android:text = "Pick a time"
+        android:text="Pick a time"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/date_text"
         tools:ignore="MissingConstraints" />
 
     <Button
-        android:id="@+id/button4"
+        android:id="@+id/btnSchedule"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="24dp"
+        android:onClick="onSchedule"
         android:text="@string/schedule_string"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ctrMinutes" />
+
+    <EditText
+        android:id="@+id/ctrDays"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="12dp"
+        android:ems="10"
+        android:hint="@string/days_string"
+        android:inputType="number"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/time_text" />
+
+    <EditText
+        android:id="@+id/ctrHours"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="12dp"
+        android:ems="10"
+        android:hint="@string/ctrHours"
+        android:inputType="number"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ctrDays" />
+
+    <EditText
+        android:id="@+id/ctrMinutes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:hint="@string/minutes_string"
+        android:inputType="number"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ctrHours" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

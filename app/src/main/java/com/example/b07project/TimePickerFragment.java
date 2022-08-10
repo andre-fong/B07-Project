@@ -50,6 +50,7 @@ public class TimePickerFragment extends DialogFragment implements TimePickerDial
         SimpleDateFormat dtf = new SimpleDateFormat("MM/dd/yyyy");
         boolean compare_flag = false;
 
+
         try {
             Date cur_time = dtf.parse(dtf.format(now));
             Date date_time = dtf.parse(date_planned);
@@ -64,12 +65,17 @@ public class TimePickerFragment extends DialogFragment implements TimePickerDial
             LocalTime local_time =  LocalTime.now();
             LocalTime attempt_time = LocalTime.of(hourOfDay, minute);
             if (local_time.compareTo(attempt_time) == 1) {
-                Toast.makeText(getActivity(), "The time you input already happened", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "The time you input has already happened. Please enter an earlier time", Toast.LENGTH_SHORT).show();
                 return;
             }
         }
 
-        String time = hourOfDay + ":" + minute;
+        String minute_str = String.valueOf(minute);
+        if (minute <= 9) {
+            minute_str = "0" + minute;
+        }
+
+        String time = hourOfDay + ":" + minute_str;
         Intent intent = new Intent(getActivity(), ScheduleEventActivity.class);
         intent.putExtra("date_string", date_planned);
         intent.putExtra("time_string", time);
