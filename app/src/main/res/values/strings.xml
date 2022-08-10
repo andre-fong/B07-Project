@@ -9,10 +9,8 @@
     <string name="welcome_string">Welcome to our app!</string>
     <string name="link_to_admin_login"><u>I\'m an admin</u></string>
     <string name="create_account_string"><u>Create a new account</u></string>
-
     <string name="venue_string">Venue Name</string>
     <string name="venue_spinner_description">Available Events:</string>
-
     <string name="schedule_string">Schedule an Event</string>
     <string name="customer_homepage_header">Customer Homepage</string>
     <string name="upcoming_events_header">Upcoming Events</string>
@@ -34,5 +32,7 @@
     <string name="minutes_string">Enter how many minutes</string>
     <string name="days_string">Enter how many days</string>
     <string name="max_customers_string">Max Customers</string>
+    <string name="already_joined_string">Already joined</string>
+    <string name="join_event_string">Join event</string>
 
 </resources>
