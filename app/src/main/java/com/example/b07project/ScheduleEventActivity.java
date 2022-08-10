@@ -22,29 +22,77 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.regex.Pattern;
 
-public class ScheduleEventActivity extends AppCompatActivity {
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.FirebaseDatabase;
+
+public class ScheduleEventActivity extends AppCompatActivity implements CreatesEvent {
+    private FirebaseDatabase db;
+    private FirebaseAuth auth;
+    private String venueName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_schedule_event);
 
-        if (!(getIntent().getStringExtra("date_string") == null)) {
-            TextView dateText = (TextView) findViewById(R.id.date_text);
-            dateText.setText(getIntent().getStringExtra("date_string"));
-        }
+        db = FirebaseDatabase.getInstance();
+        auth = FirebaseAuth.getInstance();
 
-        if (!(getIntent().getStringExtra("time_string") == null)) {
-            TextView timeText = (TextView) findViewById(R.id.time_text);
-            timeText.setText(getIntent().getStringExtra("time_string"));
+        TextView timeText = (TextView) findViewById(R.id.time_text);
+        TextView dateText = (TextView) findViewById(R.id.date_text);
+
+        setText("time_string", timeText);
+        setText("date_string", dateText);
+
+        EditText minutes_text = (EditText) findViewById(R.id.ctrMinutes);
+        EditText hours_text = (EditText) findViewById(R.id.ctrHours);
+        EditText days_text = (EditText) findViewById(R.id.ctrDays);
+        EditText event_text = (EditText) findViewById(R.id.eventNameSchedule);
+        EditText max_text = (EditText) findViewById(R.id.eventMaxPlayersSchedule);
+
+        setText("minutes_string", minutes_text);
+        setText("hours_string", hours_text);
+        setText("days_string", days_text);
+        setText("event_string", event_text);
+        setText("max_string", max_text);
+
+        if (getIntent().getStringExtra("venue_string") != null) {
+            venueName = getIntent().getStringExtra("venue_string");
+            Log.d("victortest", venueName);
         }
 
     }
 
+    public void setText(String s, TextView v) {
+        if (getIntent().getStringExtra(s) != null) {
+            Log.d("megajuice", getIntent().getStringExtra(s));
+            v.setText(getIntent().getStringExtra(s));
+        }
+    }
+
+    public Bundle getSaveBundle() {
+        EditText minutes_text = (EditText) findViewById(R.id.ctrMinutes);
+        EditText hours_text = (EditText) findViewById(R.id.ctrHours);
+        EditText days_text = (EditText) findViewById(R.id.ctrDays);
+        EditText event_text = (EditText) findViewById(R.id.eventNameSchedule);
+        EditText max_text = (EditText) findViewById(R.id.eventMaxPlayersSchedule);
+
+        Bundle bundle = new Bundle();
+        bundle.putString("venue_string", venueName);
+        bundle.putString("minutes_string", minutes_text.getText().toString());
+        bundle.putString("hours_string", hours_text.getText().toString());
+        bundle.putString("days_string", days_text.getText().toString());
+        bundle.putString("event_string", event_text.getText().toString());
+        bundle.putString("max_string", max_text.getText().toString());
+        return bundle;
+    }
+
+
     // Code below from https://developer.android.com/guide/topics/ui/controls/pickers#TimePicker
     public void showTimePickerDialog(View v) {
         TextView dateText = (TextView) findViewById(R.id.date_text);
-        Bundle bundle = new Bundle();
+
+        Bundle bundle = getSaveBundle();
         bundle.putString("date_string", dateText.getText().toString());
         DialogFragment newFragment = new TimePickerFragment();
         newFragment.setArguments(bundle);
@@ -61,12 +109,11 @@ public class ScheduleEventActivity extends AppCompatActivity {
         //newFragment.show(getSupportFragmentManager(), "datePicker");
 
         TextView timeText = (TextView) findViewById(R.id.time_text);
-        Bundle bundle = new Bundle();
+        Bundle bundle = getSaveBundle();
         bundle.putString("time_string", timeText.getText().toString());
         DialogFragment newFragment = new DatePickerFragment();
         newFragment.setArguments(bundle);
         newFragment.show(getSupportFragmentManager(), "datePicker");
-
     }
 
     public int mapTime(String s) {
@@ -78,7 +125,7 @@ public class ScheduleEventActivity extends AppCompatActivity {
 
     public void onSchedule(View v) throws ParseException {
 
-
+        // VALIDATE USER INPUT
         String event_text =  ((EditText) findViewById(R.id.eventNameSchedule)).getText().toString();
         String date_text = ((TextView) findViewById(R.id.date_text)).getText().toString();
         String time_text = ((TextView) findViewById(R.id.time_text)).getText().toString();
@@ -90,7 +137,7 @@ public class ScheduleEventActivity extends AppCompatActivity {
         }
 
         if (!Pattern.matches("^[A-Za-z0-9]+$", event_text)) {
-           Toast.makeText(ScheduleEventActivity.this, "Your event name field is incorrect. A valid event name is a string consisting of only alphanumeric characters", Toast.LENGTH_LONG).show();
+           Toast.makeText(ScheduleEventActivity.this, "Event name can only contain alphanumeric characters", Toast.LENGTH_LONG).show();
            return;
         }
 
@@ -98,7 +145,7 @@ public class ScheduleEventActivity extends AppCompatActivity {
         int maxCustomers = mapTime(maxcustomers_text);
 
         if (maxCustomers == 0) {
-            Toast.makeText(ScheduleEventActivity.this, "Max Customers must be greater than 0", Toast.LENGTH_SHORT).show();
+            Toast.makeText(ScheduleEventActivity.this, "Max customers must be greater than 0", Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -119,6 +166,7 @@ public class ScheduleEventActivity extends AppCompatActivity {
         long start_time = start_date.getTime();
         long end_time = cal.getTimeInMillis();
 
+        Log.d("victortest", venueName);
         if (start_time == end_time) {
             Toast.makeText(ScheduleEventActivity.this, "Your start and end time cannot be the same", Toast.LENGTH_SHORT).show();
             return;
@@ -127,9 +175,25 @@ public class ScheduleEventActivity extends AppCompatActivity {
         Log.d("victortest", "End Time: " + String.valueOf(end_time));
         Log.d("victortest", "Start Time: " + String.valueOf(start_time));
 
+        // CREATE NEW EVENT OBJECT
+        if (venueName == null || venueName.matches("")) {
+            Log.d("andre-testing", "VENUE NULL");
+        }
+
+        Log.d("victortest", auth.getCurrentUser().getUid());
+        Event event = new Event(event_text, venueName, auth.getCurrentUser().getUid(), maxCustomers, start_time, end_time);
+        DatabaseFunctions.createEvent(db, event, this);
     }
 
-//    public void showUserUpdatedTime(String date){
-//        dateText.setText(date);
-//    }
+
+    @Override
+    public void onCreateEventSuccess(Event event) {
+        Toast.makeText(this, event.getName() + " at " + event.getVenueKey() + " successfully created", Toast.LENGTH_SHORT).show();
+    }
+
+
+    @Override
+    public void onCreateEventError(String errorMessage) {
+        Toast.makeText(this, "Event could not be created: " + errorMessage, Toast.LENGTH_SHORT).show();
+    }
 }
