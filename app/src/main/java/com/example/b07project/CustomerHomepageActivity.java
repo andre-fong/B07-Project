@@ -56,12 +56,13 @@ public class CustomerHomepageActivity extends AppCompatActivity implements Reads
         Log.d("andre-testing", "CALLBACK ENTERED");
         if (eventMap.size()==0)
             Log.d("andre-testing", "eventMpa empty");
-        // TODO: Implement time for viewing upcoming events
 
         for (Event event : eventMap.values()) {
-            // if event is upcoming:
-            upcomingEventList.add(new EventItem(event));
-            Log.d("andre-testing", "EVENT read from db: " + event.getKey());
+            long currentMillis = System.currentTimeMillis();
+            if (event.getStartTime() > currentMillis) {
+                upcomingEventList.add(new EventItem(event));
+                Log.d("andre-testing-eventtime", "EVENT read from db: " + event.getKey());
+            }
         }
 
         // Create new EventAdapter to work with spinner
