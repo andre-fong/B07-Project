@@ -27,12 +27,12 @@ public class AdminHomepageActivity extends AppCompatActivity implements ReadsAll
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_homepage);
 
-        // TODO: Add working spinner
-//        Spinner venue_spinner = findViewById(R.id.ctrEventsInVenueSpinner);
         db = FirebaseDatabase.getInstance();
         auth = FirebaseAuth.getInstance();
 
         venuesList = new ArrayList<VenueItem>();
+
+        this.setTitle("Welcome, admin!");
 
         DatabaseFunctions.readAllVenuesFromDatabase(db, this);
     }

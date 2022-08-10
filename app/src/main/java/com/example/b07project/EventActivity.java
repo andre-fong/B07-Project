@@ -33,6 +33,9 @@ public class EventActivity extends AppCompatActivity implements ReadsCustomer, J
         event_name.setText(eventKey); //set the event name to the selected event
         db = FirebaseDatabase.getInstance();
         auth = FirebaseAuth.getInstance();
+
+        this.setTitle("Viewing event: ");
+
         DatabaseFunctions.readCustomerFromDatabase(db, auth.getCurrentUser().getUid(), this);
     }
 

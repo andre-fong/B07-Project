@@ -39,6 +39,8 @@ public class AdminVenueActivity extends AppCompatActivity implements ReadsVenue,
         TextView venueNameText = (TextView) findViewById(R.id.AdminVenueName);
         venueNameText.setText(venueName);
 
+        this.setTitle("Viewing venue (ADMIN): ");
+
         DatabaseFunctions.readVenueFromDatabase(db, venueName, this);
     }
 
@@ -74,7 +76,7 @@ public class AdminVenueActivity extends AppCompatActivity implements ReadsVenue,
 
         // Popup notif if venue has no events
         if (venue.getEvents().size() == 0) {
-            Toast.makeText(this, venue.getName() + " has no events!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "No events in " + venue.getName(), Toast.LENGTH_SHORT).show();
             return;
         }
         else {
