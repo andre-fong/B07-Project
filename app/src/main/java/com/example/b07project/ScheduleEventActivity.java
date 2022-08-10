@@ -136,12 +136,13 @@ public class ScheduleEventActivity extends AppCompatActivity implements CreatesE
            return;
         }
 
-        if (!Pattern.matches("^[A-Za-z0-9]+$", event_text)) {
+        if (!Pattern.matches("^([A-Za-z0-9]|[A-Za-z0-9][A-Za-z0-9\\s]*[A-Za-z0-9])$", event_text)) {
            Toast.makeText(ScheduleEventActivity.this, "Event name can only contain alphanumeric characters", Toast.LENGTH_LONG).show();
            return;
         }
 
         String maxcustomers_text = ((EditText) findViewById(R.id.eventMaxPlayersSchedule)).getText().toString();
+
         int maxCustomers = mapTime(maxcustomers_text);
 
         if (maxCustomers <= 1) {

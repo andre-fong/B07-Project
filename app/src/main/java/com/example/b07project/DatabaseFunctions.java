@@ -529,32 +529,45 @@ public abstract class DatabaseFunctions {
             @Override
             public void onDataChange(@NonNull DataSnapshot eventSnap) {
                 String hostKey = eventSnap.child("hostKey").getValue(String.class);
-                String venueKey = eventSnap.child("venueKey").getValue(String.class);
-                final int[] customerCount = {(int) eventSnap.child("customerKeys").getChildrenCount()};
-                //Remove events from customer's joined events
-                for (DataSnapshot customerInEvent : eventSnap.child("customerKeys").getChildren()) {
-                    DatabaseReference customerRef = db.getReference("/customers/" + customerInEvent.getKey());
-                    customerRef.child("joinedEventKeys").child(eventKey).removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
-                        @Override
-                        public void onSuccess(Void unused) {
-                            customerCount[0]--;
-                            //Done removing from customers' joined events
-                            if(customerCount[0] == 0){
-                                //Remove from venue's list of events
-                                DatabaseReference venueRef = db.getReference("/venues/" + venueKey + "/eventKeys");
-                                venueRef.child(eventKey).removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
-                                    @Override
-                                    public void onSuccess(Void unused) {
-                                        //Remove from host's hosted events
-                                        customerRef.child("hostedEventKeys").child(eventKey).removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
+                DatabaseReference hostRef = db.getReference("/customers/" + hostKey + "/hostedEventKeys/" + eventKey);
+                hostRef.removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        String venueKey = eventSnap.child("venueKey").getValue(String.class);
+                        final int[] customerCount = {(int) eventSnap.child("customerKeys").getChildrenCount()};
+                        //Remove events from customer's joined events
+                        for (DataSnapshot customerInEvent : eventSnap.child("customerKeys").getChildren()) {
+                            DatabaseReference customerRef = db.getReference("/customers/" + customerInEvent.getKey());
+                            customerRef.child("joinedEventKeys").child(eventKey).removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void unused) {
+                                    customerCount[0]--;
+                                    //Done removing from customers' joined events
+                                    if(customerCount[0] == 0){
+                                        //Remove from venue's list of events
+                                        DatabaseReference venueRef = db.getReference("/venues/" + venueKey + "/eventKeys");
+                                        venueRef.child(eventKey).removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
                                             @Override
                                             public void onSuccess(Void unused) {
-                                                //Remove event from database
-                                                eventRef.removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                //Remove from host's hosted events
+                                                DatabaseReference customerRef = db.getReference("/customers/" + customerInEvent.getKey());
+                                                customerRef.child("hostedEventKeys").child(eventKey).removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
                                                     @Override
                                                     public void onSuccess(Void unused) {
-                                                        callbackSrc.onDeleteEventSuccess(eventKey);
-                                                        return;
+                                                        //Remove event from database
+                                                        eventRef.removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                            @Override
+                                                            public void onSuccess(Void unused) {
+                                                                callbackSrc.onDeleteEventSuccess(eventKey);
+                                                                return;
+                                                            }
+                                                        }).addOnFailureListener(new OnFailureListener() {
+                                                            @Override
+                                                            public void onFailure(@NonNull Exception e) {
+                                                                callbackSrc.onDeleteEventError(e.getMessage());
+                                                                return;
+                                                            }
+                                                        });
                                                     }
                                                 }).addOnFailureListener(new OnFailureListener() {
                                                     @Override
@@ -572,23 +585,17 @@ public abstract class DatabaseFunctions {
                                             }
                                         });
                                     }
-                                }).addOnFailureListener(new OnFailureListener() {
-                                    @Override
-                                    public void onFailure(@NonNull Exception e) {
-                                        callbackSrc.onDeleteEventError("failed to remove venue with name " + venueKey + "from venues at path " + venueRef.toString().substring(venueRef.getRoot().toString().length()) + ": " + e.getMessage());
-                                        return;
-                                    }
-                                });
-                            }
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    callbackSrc.onDeleteEventError(e.getMessage());
+                                    return;
+                                }
+                            });
                         }
-                    }).addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            callbackSrc.onDeleteEventError("failed to remove event with eventKey " + eventKey + "from customer's joined events with uid " + customerRef.getKey() + " at path " + customerRef.toString().substring(customerRef.getRoot().toString().length()) + ": " + e.getMessage());
-                            return;
-                        }
-                    });
-                }
+                    }
+                });
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
