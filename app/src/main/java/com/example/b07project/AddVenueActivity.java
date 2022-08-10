@@ -14,6 +14,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
+import java.util.regex.Pattern;
 
 public class AddVenueActivity extends AppCompatActivity implements CreatesVenue{
     private FirebaseDatabase db;
@@ -36,10 +37,14 @@ public class AddVenueActivity extends AppCompatActivity implements CreatesVenue{
         TextView VenueName = (TextView) findViewById(R.id.editTextVenueName);
         String name = VenueName.getText().toString();
 
-        if (name.matches("")){
+        if (name.matches("")) {
             Toast.makeText(AddVenueActivity.this, "Cannot add empty Venue Name", Toast.LENGTH_SHORT).show();
         }
-        else{
+        else if (!Pattern.matches("^([A-Za-z0-9]|[A-Za-z0-9][A-Za-z0-9\\s]*[A-Za-z0-9])$", name)) {
+            Toast.makeText(this, "Venue name can only contain alphanumeric characters", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        else {
             Venue venue = new Venue(name);
             DatabaseFunctions.createVenue(db, venue, this);
         }

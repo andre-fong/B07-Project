@@ -35,5 +35,6 @@
     <string name="join_event_string">Join event</string>
     <string name="go_to_venue_string">Go to venue</string>
     <string name="go_to_event_string">Go to event</string>
+    <string name="show_string">Show</string>
 
 </resources>
