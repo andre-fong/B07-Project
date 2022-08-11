@@ -1,0 +1,74 @@
+Name: Xing Yu (Joe) Zhou
+
+What have you done?
+Added user stories to Jira and updated expected difficulty for each user story
+Helped Scrum Master (Andre) with standup docs and uploading
+Peer-reviewed code during GitHub merging (pull requests)
+Worked on Database and Page flow design
+Firebase Authentication Debugging (login null error)
+UI design, implementation, and debugging (AdminHomepage, AdminVenue, AddVenue, Venue, ScheduleEvent) and page connections (goTo functions, button OnClick, and AndroidManifest parent designation)
+Worked on Venue Class Implementation
+Made all passwords hidden
+addVenue() method implementation in AddVenueActivity
+Adding Date and Time pickers in ScheduleEvent from https://developer.android.com/guide/topics/ui/controls/pickers (cited in comments)
+Worked on Strings XML (for UI and testing purposes)
+Functional testing based on user stories
+
+
+
+Name: Andre Fong
+
+What have you done?
+Managed group version control (commiting, merging, branching, etc.) and Jira
+Organized standup meetings and tasks
+Manage project lifecycle through frequent testing and breaking down user stories
+Designed layout docs for rough Activity design (UI appearance, Activity purposes)
+Designed rough diagrams for class design (how Activities interact)
+Implemented functional spinners for viewing Events and Venues in several Activities using adapters
+Finished implementing skeleton UI code for several Activities
+Extensively bug tested app, identified crashes, and created issues on GitHub
+Added several QOL changes (e.g., disabling buttons, maintaining input through intents)
+
+
+
+Name: Victor Hurst
+
+What have you done?
+Helped in the diagram design of non-admin related activities (i.e how each of the activities interact with each other)
+Created some of the UI for ScheduleEvent’s Activity
+Created most of the functionality for ScheduleEvent’s Activity (All client side code)
+Created almost all of the functionality for ScheduleEvents (Almost all client side code and all of the backend for this activity)
+Helped with testing
+Made new branches every time I wanted to implement a new feature
+Helped in the diagram design of admin related activities and UI
+
+
+
+Name: Matthew Snelgrove
+
+What have you done?
+Database design
+Firebase authentication
+Signup/signin validation
+Firebase rules/data validation
+Library of functions to easily perform necessary database operations for high-level functionalities in our app (eg. delete an event)
+Callback interfaces for these “firebase functions”
+Debugging implementations of “firebase functions” in activities
+Class design/redesign to mirror database design
+
+
+
+Name: Jiakai Sun
+
+What have you done?
+Worked on EventActivity UI and functionalities
+Worked on CustomerHomepage UI and functionalities
+Worked on MyeventsActivity UI and functionalities
+Worked on VenueActivity UI and functionalities
+Worked on Login UI and functionalities
+Worked on linking UIs and functionality interactions(transferring data from one activityI to another activity and starting new activities)
+Implemented methods to serve Database functions
+Debugging and functionality testing
+Improved user’s experience
+Helped with Jira sprint management
+Helped merging the branches and version controlling
