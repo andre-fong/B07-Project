@@ -8,7 +8,11 @@
 
 An app that allows customers to securely schedule and join events at specific venues - made with Android Studio :bell:
 
-### Completed User Tasks
+## How to Use
+
+Simply create a user account upon launching the app and voila! - You are able to schedule an event and list information such as date/time, # of spots available, and much more! Other users can join your event by finding the venue and event name, and simply clicking join.
+
+## Completed User Stories
 
 - As a customer, I want to sign up and log in to my account, so that I can securely access my data.
 - As a customer, I want to see the list of venues and the sports activities available at each venue,
